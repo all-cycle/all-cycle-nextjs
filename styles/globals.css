@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --color-primary: #41CF58;
+  --color-black: #263338;
+  --color-gray: #C4C8CA;
+  --color-light-gray: #BFC7CC;
+  --color-gray-bg: #F8F9FA;
+}

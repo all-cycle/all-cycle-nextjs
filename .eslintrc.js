@@ -23,5 +23,12 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     indent: ["error", 2, { SwitchCase: 1, MemberExpression: 1 }],
+
+    "react/jsx-filename-extension": ["warn", { extensions: [".js", ".jsx"] }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/forbid-prop-types": "off",
+    "react/destructuring-assignment": "off",
   },
 };
