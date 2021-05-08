@@ -1,14 +1,12 @@
-import PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { useStore } from "../store";
 
-import "@/styles/globals.css";
+export default function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
-
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.any.isRequired,
-};
-
-export default MyApp;

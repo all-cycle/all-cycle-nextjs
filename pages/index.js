@@ -1,10 +1,15 @@
-import { Layout, Header } from "@/components";
+import { useSelector } from "react-redux";
+
+import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 export default function Main() {
+  const state = useSelector((state) => state);
+
   return (
     <Layout>
       <Header />
-      <div>hi?</div>
+      <div>{JSON.stringify(state, null, 4)}</div>
     </Layout>
   );
 }
