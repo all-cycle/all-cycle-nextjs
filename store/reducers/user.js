@@ -1,5 +1,4 @@
-import { combineReducers } from "redux";
-import * as types from "./types";
+import * as types from "../types";
 
 const initialUser = {
   name: "hi",
@@ -15,9 +14,4 @@ const userReducer = (state = initialUser, { type }) => {
   }
 }
 
-const rootReducer = combineReducers({
-  user: userReducer,
-  // review: reviewReducer,
-});
-
-export default rootReducer;
+export default userReducer;

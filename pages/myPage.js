@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Header from "../components/Header";
-import Layout from "../components/Layout";
 import { getUserInfo } from "../store/actions";
 
 export default function MyPage() {
@@ -14,11 +12,7 @@ export default function MyPage() {
   });
 
   return (
-    <Layout>
-      <Header />
-      <div>My Page</div>
-      <code>{JSON.stringify(state, null, 4)}</code>
-    </Layout>
+    <code>{JSON.stringify(state, null, 4)}</code>
   );
 }
 
