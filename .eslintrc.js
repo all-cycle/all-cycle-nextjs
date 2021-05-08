@@ -32,5 +32,6 @@ module.exports = {
     "react/destructuring-assignment": "off",
     "import/export": 0,
     "import/no-unresolved": "off",
+    "react/prop-types": "off",
   },
 };
