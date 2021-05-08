@@ -2,15 +2,14 @@
 import connectDB from "../../middleware/mongodb";
 import User from "../../models/User";
 
+// 회원가입
+// 로그인
+// 로그아웃
 const handler = async (req, res) => {
-  console.log("body", req.body.name);
-
   try {
     const newUser = await User.create({
       name: req.body.name,
     });
-
-    console.log(newUser, "----------");
 
     res.status(200).json({ result: "ok", data: newUser });
   } catch (err) {

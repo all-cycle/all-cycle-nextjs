@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
 
-import Layout from "../components/Layout/Layout";
-
-// import connectDB from "../middleware/mongodb";
+import { Layout, Header } from "@/components";
 
 export default function MyPage({ user }) {
   console.log(user);
 
   return (
     <Layout>
+      <Header />
       <div>My Page</div>
     </Layout>
   );

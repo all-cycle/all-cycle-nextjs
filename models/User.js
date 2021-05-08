@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+  reviewId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Review",
+  },
+  history: [String],
+  recycleScore: {
+    type: Number,
+    default: 0,
   },
 });
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-
-module.exports = User;
+export default mongoose.models.User || mongoose.model("User", userSchema);

@@ -1,22 +1,15 @@
 // import PropTypes from "prop-types";
 
-import Layout from "../components/Layout/Layout";
-import styles from "../styles/Home.module.css";
+import { Layout, Header } from "@/components";
+
+// import styles from "../styles/Home.module.css";
 
 export default function Main() {
   return (
-    <div className={styles.container}>
-      <Layout>
-        <div>Main입니다</div>
-      </Layout>
-
-      <main>
-        <div>
-          {" "}
-          상태입니다
-        </div>
-      </main>
-    </div>
+    <Layout>
+      <Header />
+      {/* 조건문을 통해서 페이지 분리 */}
+    </Layout>
   );
 }
 
