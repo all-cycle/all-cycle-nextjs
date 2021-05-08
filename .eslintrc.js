@@ -33,5 +33,6 @@ module.exports = {
     "import/export": 0,
     "import/no-unresolved": "off",
     "react/prop-types": "off",
+    "no-unused-vars": ["warn", { argsIgnorePattern: "err|req|res|next" }],
   },
 };
