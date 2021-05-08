@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 
 export default function Main() {
-  const state = useSelector((state) => state);
+  const mainState = useSelector((state) => state);
 
   return (
-    <div>{JSON.stringify(state, null, 4)}</div>
+    <div>{JSON.stringify(mainState, null, 4)}</div>
   );
 }
 

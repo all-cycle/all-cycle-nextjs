@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../store/actions";
 
 export default function MyPage() {
-  const state = useSelector((state) => state);
+  const userState = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function MyPage() {
   });
 
   return (
-    <code>{JSON.stringify(state, null, 4)}</code>
+    <code>{JSON.stringify(userState, null, 4)}</code>
   );
 }
 

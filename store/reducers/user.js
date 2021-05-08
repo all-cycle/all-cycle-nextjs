@@ -1,4 +1,4 @@
-import * as types from "../types";
+import * as types from "../actions/types";
 
 const initialUser = {
   name: "hi",
@@ -12,6 +12,6 @@ const userReducer = (state = initialUser, { type }) => {
     default:
       return state;
   }
-}
+};
 
 export default userReducer;
