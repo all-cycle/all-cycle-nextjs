@@ -1,4 +1,4 @@
-import { Layout, Header } from "@/components";
+import { Layout, Header } from "../components";
 
 export default function Main() {
   return (
