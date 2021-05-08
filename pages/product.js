@@ -1,4 +1,5 @@
-import { Layout, Header } from "@/components";
+import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 export default function Product() {
   return (

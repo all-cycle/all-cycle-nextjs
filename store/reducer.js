@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import * as types from "./types";
 
 const initialUser = {
-  user: { name: "hi" },
+  name: "hi",
 };
 
 const userReducer = (state = initialUser, { type }) => {

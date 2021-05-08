@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Layout, Header } from "@/components";
+import Header from "../components/Header";
+import Layout from "../components/Layout";
+import { getUserInfo } from "../store/actions";
 
 export default function MyPage() {
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserInfo());
+  });
 
   return (
     <Layout>
