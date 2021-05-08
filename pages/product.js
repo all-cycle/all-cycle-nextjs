@@ -1,11 +1,10 @@
-import Layout from "../components/Layout/Layout";
+import { Layout, Header } from "@/components";
 
-function Product() {
+export default function Product() {
   return (
     <Layout>
+      <Header />
       <div>Product</div>
     </Layout>
   );
 }
-
-export default Product;
