@@ -1,10 +1,6 @@
-import PropTypes from "prop-types";
-
 import { Layout, Header } from "@/components";
 
-export default function MyPage({ user }) {
-  console.log(user);
-
+export default function MyPage() {
   return (
     <Layout>
       <Header />
@@ -27,7 +23,7 @@ export async function getServerSideProps() {
 
   if (response.result === "ok") {
     return {
-      props: { user: response.data },
+      props: { user: "hi" },
     };
   }
 
@@ -35,7 +31,3 @@ export async function getServerSideProps() {
     props: { user: response.error },
   };
 }
-
-MyPage.propTypes = {
-  user: PropTypes.any.isRequired,
-};

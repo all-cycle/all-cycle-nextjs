@@ -1,14 +1,18 @@
-import PropTypes from "prop-types";
+import withRedux from "next-redux-wrapper";
+import { Provider } from "react-redux";
+import initStore from "../store";
 
-import "../styles/globals.css";
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({
+  Component,
+  pageProps,
+  store,
+  ...rest
+}) {
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.any.isRequired,
-};
-
-export default MyApp;
+export default withRedux(initStore)(MyApp);

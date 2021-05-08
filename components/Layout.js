@@ -1,5 +1,4 @@
 import Head from "next/head";
-import PropTypes from "prop-types";
 
 import styles from "./Layout.module.css";
 
@@ -15,9 +14,5 @@ function Layout({ children }) {
     </main>
   );
 }
-
-Layout.propTypes = {
-  children: PropTypes.element.isRequired,
-};
 
 export default Layout;
