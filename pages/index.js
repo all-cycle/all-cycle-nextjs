@@ -1,33 +1,24 @@
-import { useSelector } from "react-redux";
-import Link from "next/link";
+import styled from "styled-components";
+
+import Logo from "../components/Logo";
+import Slider from "../components/Slider";
+import useSlider from "../hooks/useSlider";
+
+const Container = styled.div``;
 
 export default function Main() {
-  const letters = useSelector((state) => state.letters);
+  const {
+    letters,
+    slideRef,
+  } = useSlider();
 
   return (
-    <div>
-      <h1>animation</h1>
-      <div>
-        {letters.map((letter) => {
-          const { href, src, title } = letter;
-          return (
-            <Link
-              key={href}
-              href={href}
-            >
-              <div>
-                <img
-                  src={src}
-                  alt={title.slice(13)}
-                />
-                <div>
-                  {title}
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+    <Container>
+      <Logo />
+      <Slider
+        list={letters}
+        slideRef={slideRef}
+      />
+    </Container>
   );
 }
