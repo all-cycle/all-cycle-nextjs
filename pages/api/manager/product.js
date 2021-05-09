@@ -49,33 +49,28 @@ export default async (req, res) => {
       const html = await axios.get(commonUrl + urls[i]);
       const $ = cheerio.load(html.data);
 
-      $(selector).each(async () => {
+      $(selector).each(function (i, elem) {
         const imgUrl = $(this).find(src.selector).attr(src.attr);
         const imgAlt = $(this).find(alt.selector).attr(alt.attr);
         const productName = $(this).find(name.selector).text();
-
-        console.log(imgUrl);
 
         data.push({ imgUrl, imgAlt, productName });
       });
     }
 
-    // console.log(data);
+    for (let j = 0; j < data.length; j++) {
+      const { imgUrl, imgAlt, productName } = data[j];
 
-    // for (let j = 0; j < data.length; j++) {
-    //   const { imgUrl, imgAlt, productName } = data[j];
+      const product = await Product.findOne({ productName });
 
-    //   const product = await Product.findOne({ productName });
-    //   console.log("ppppppp", product);
-
-    //   if (!product) {
-    //     await Product.create({
-    //       imgUrl,
-    //       imgAlt,
-    //       productName,
-    //     });
-    //   }
-    // }
+      if (!product && imgUrl) { // 주류의 경우 이미지가 나오지 않음
+        await Product.create({
+          imgUrl,
+          imgAlt,
+          productName,
+        });
+      }
+    }
 
     res.json({
       result: "ok",
