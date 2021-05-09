@@ -4,6 +4,7 @@ import dbConnect from "../../../middleware/mongodb";
 
 import Product from "../../../models/Product";
 
+// TODO constant로 관리
 const scrapOptions = {
   CHILSUNG: {
     commonUrl: "https://mmall.lottechilsung.co.kr/mobile/display/getGoodsListAjax.lecs?displayNo=CF2A01A02&allYn=Y&displayNos=CF2A01A02A01&viewType=img&currentPage=",
@@ -34,6 +35,7 @@ export default async (req, res) => {
   await dbConnect();
 
   try {
+    // TODO req.body.회사이름 으로 받아서 일괄처리하자
     const {
       commonUrl,
       urls,
@@ -44,6 +46,7 @@ export default async (req, res) => {
     } = scrapOptions.CHILSUNG;
 
     const data = [];
+    let count = 0;
 
     for (let i = 0; i < urls.length; i++) {
       const html = await axios.get(commonUrl + urls[i]);
@@ -69,11 +72,14 @@ export default async (req, res) => {
           imgAlt,
           productName,
         });
+
+        count++;
       }
     }
 
     res.json({
       result: "ok",
+      count,
       data,
     });
   } catch (err) {
