@@ -1,4 +1,4 @@
-import * as types from "../actions/types";
+import { GET_USER } from "../actions/types";
 
 const initialUser = {
   name: "hi",
@@ -6,7 +6,7 @@ const initialUser = {
 
 const userReducer = (state = initialUser, { type }) => {
   switch (type) {
-    case types.GET_USER:
+    case GET_USER:
       return { name: "who" };
 
     default:

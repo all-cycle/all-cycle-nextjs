@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 import cheerio from "cheerio";
 
+import { addLetter } from "../store/actions";
+
 export default function WebLetter({ letters }) {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(addLetter(letters.slice(0, 3))), []);
+
   return (
     <div>
       <h1>Letter</h1>
@@ -11,7 +18,6 @@ export default function WebLetter({ letters }) {
             href,
             title,
             src,
-            alt,
           } = letter;
 
           return (
@@ -22,7 +28,7 @@ export default function WebLetter({ letters }) {
               <div>
                 <img
                   src={src}
-                  alt={alt}
+                  alt={title.slice(13)}
                 />
                 <div>
                   {title}
@@ -39,7 +45,6 @@ export default function WebLetter({ letters }) {
 export async function getStaticProps(context) {
   const res = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
   const html = await res.text();
-
   const $ = cheerio.load(html);
   const $bodyList = $("ul.cat-list > li").children("a");
 
@@ -49,13 +54,11 @@ export async function getStaticProps(context) {
     const { title } = elem.attribs;
     const { href } = elem.attribs;
     const src = $(elem).find("img").attr("src");
-    const alt = $(elem).find("img").attr("alt");
 
     letters.push({
       href,
       title,
       src,
-      alt,
     });
   });
 

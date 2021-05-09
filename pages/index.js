@@ -1,20 +1,33 @@
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function Main() {
-  const mainState = useSelector((state) => state);
+  const letters = useSelector((state) => state.letters);
 
   return (
-    <div>{JSON.stringify(mainState, null, 4)}</div>
+    <div>
+      <h1>animation</h1>
+      <div>
+        {letters.map((letter) => {
+          const { href, src, title } = letter;
+          return (
+            <Link
+              key={href}
+              href={href}
+            >
+              <div>
+                <img
+                  src={src}
+                  alt={title.slice(13)}
+                />
+                <div>
+                  {title}
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
   );
 }
-
-// export async function getServerSideProps() {
-//   const { client } = await connectDB();
-//   console.log("dbdb", client[0].readyState);
-
-//   // const isConnected = await client.isConnected();
-//   const isConnected = client[0].readyState;
-//   return {
-//     props: { isConnected },
-//   };
-// }

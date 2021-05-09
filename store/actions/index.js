@@ -6,8 +6,9 @@ export const getUserInfo = () => (dispatch) => {
   });
 };
 
-export const scrapProducts = () => (dispatch) => {
+export const addLetter = (letter) => (dispatch) => {
   dispatch({
-    type: types.SCRAP_PRODUCTS,
+    type: types.ADD_LETTER,
+    payload: letter,
   });
 };
