@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-  name: {
+  productName: {
     type: String,
     required: true,
   },
@@ -9,7 +9,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  info: String,
+  imgAlt: {
+    type: String,
+    required: true,
+  },
   searchCount: {
     type: Number,
     default: 0,

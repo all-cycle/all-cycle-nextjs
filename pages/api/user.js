@@ -1,6 +1,6 @@
 // import { useRouter } from "next/router";
-import connectDB from "@/middleware/mongodb";
-import User from "@/models/User";
+import connectDB from "../../middleware/mongodb";
+import User from "../../models/User";
 
 // 회원가입
 // 로그인

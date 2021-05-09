@@ -9,7 +9,7 @@ export default function MyPage() {
 
   useEffect(() => {
     dispatch(getUserInfo());
-  });
+  }, []);
 
   return (
     <code>{JSON.stringify(userState, null, 4)}</code>
