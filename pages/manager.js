@@ -1,22 +1,20 @@
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-import Link from "next/link";
-
-import { scrapProducts } from "../store/actions";
+// import Image from "next/image";
 
 export default function Manager() {
   const [productList, setProductList] = useState([]);
   const [message, setMessage] = useState(null);
-  const dispatch = useDispatch();
 
   async function fetchData(e) {
     e.preventDefault();
 
     try {
-      const res = await fetch("api/manager/product");
+      let res = await fetch("api/manager/product");
+      res = await res.json();
+
+      console.log(res.data);
 
       if (res.result === "ok") {
-        dispatch(scrapProducts());
         setProductList((prev) => prev.concat(res.data));
         return;
       }
@@ -38,13 +36,19 @@ export default function Manager() {
       </button>
       <ul>
         {productList.length > 0 && (
-          productList.map((item) => {
-            const { name, url, alt } = item;
+          productList.map((item, index) => {
+            const { productName, imgUrl, imgAlt } = item;
 
             return (
-              <li key={name}>
-                {item.name}
-                <img src={url} alt={alt} />
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={imgUrl + index}>
+                {productName}
+                <div>
+                  <img
+                    src={imgUrl}
+                    alt={imgAlt}
+                  />
+                </div>
               </li>
             );
           })

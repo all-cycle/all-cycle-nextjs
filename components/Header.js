@@ -11,11 +11,11 @@ function Header() {
       <Link href="/product" passHref>
         <a>PRODUCT</a>
       </Link>
-      <Link href="/tip" passHref>
-        <a>TIP</a>
-      </Link>
       <Link href="/myPage" passHref>
         <a>MY PAGE</a>
+      </Link>
+      <Link href="/manager" passHref>
+        <a>MANAGER</a>
       </Link>
     </div>
   );
