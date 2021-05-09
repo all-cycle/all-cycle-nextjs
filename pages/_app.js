@@ -12,8 +12,8 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={THEME}>
+        <Header />
         <Layout>
-          <Header />
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
