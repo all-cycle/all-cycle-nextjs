@@ -1,8 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-import Button from "./shared/Button";
-
 const Container = styled.div`
   width: 80vw;
   max-width: 640px;
@@ -33,11 +31,6 @@ const ImgTitle = styled.div`
   padding: 0.5rem;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.lightGreen.color};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
 `;
 
 function Slider({
