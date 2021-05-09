@@ -17,6 +17,9 @@ function Header() {
       <Link href="/manager" passHref>
         <a>MANAGER</a>
       </Link>
+      <Link href="/webLetter" passHref>
+        <a>LETTER</a>
+      </Link>
     </div>
   );
 }

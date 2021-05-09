@@ -12,8 +12,6 @@ export default function Manager() {
       let res = await fetch("api/manager/product");
       res = await res.json();
 
-      console.log(res.data);
-
       if (res.result === "ok") {
         setProductList((prev) => prev.concat(res.data));
         return;
