@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import styles from "./Layout.module.css";
 
-function Layout({ children }) {
+function Layout(props) {
   return (
     <main className={styles.main}>
       <Head>
@@ -10,7 +10,7 @@ function Layout({ children }) {
         <meta name="description" content="Search first, Buy next!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {children}
+      {props.children}
     </main>
   );
 }
