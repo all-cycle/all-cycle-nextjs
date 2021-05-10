@@ -24,7 +24,7 @@ const GoogleLoginButton = styled.button`
     width: 34px;
     height: 100%;
     border-right: #BB3F30 1px solid;
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png") 6px 6px no-repeat;
   };
   &:hover,
   &:focus {

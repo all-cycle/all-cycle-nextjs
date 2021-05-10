@@ -32,8 +32,8 @@ function Header() {
     <Container>
       <Link href="/" passHref>
         <a>
-          <Image
-            isSelected
+          <SVG
+            isselected
             src="/home-solid.svg"
             alt="Link to home"
             width={50}
