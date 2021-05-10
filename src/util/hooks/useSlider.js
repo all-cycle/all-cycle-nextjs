@@ -20,6 +20,8 @@ function useSlider() {
   }, [currentSlide]);
 
   useEffect(() => {
+    if (!letters.length) return;
+
     slideRef.current.style.transition = "all 0.5s ease-in-out";
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
