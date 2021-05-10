@@ -1,7 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
+
+import GoogleButton from "../../common/GoogleButton";
+import GoogleAPI from "../../../core/api/socialLogin";
 
 const Container = styled.header`
   position: fixed;
@@ -16,6 +20,11 @@ const Container = styled.header`
 `;
 
 function Header() {
+  const dispatch = useDispatch();
+
+  function handleLogin(e) {
+    e.preventDefault();
+  }
   return (
     <Container>
       <Link href="/" passHref>
@@ -30,42 +39,27 @@ function Header() {
       </Link>
       <Link href="/product" passHref>
         <a>
-          <Image
-            src="/search.svg"
-            alt="Link to search"
-            width={50}
-            height={50}
-          />
+          SEARCH
         </a>
       </Link>
       <Link href="/myPage" passHref>
         <a>
-          <Image
-            src="/spa_black_24dp.svg"
-            alt="Link to my page"
-            width={50}
-            height={50}
-          />
+          MY PAGE
         </a>
       </Link>
       <Link href="/manager" passHref>
         <a>
-          <Image
-            src="/activity.svg"
-            alt="Link to manager"
-            width={50}
-            height={50}
-          />
+          MANAGER
         </a>
       </Link>
       <Link href="/webLetter" passHref>
         <a>
-          <Image
-            src="/bookmark.svg"
-            alt="Link to webLetter"
-            width={50}
-            height={50}
-          />
+          LETTER
+        </a>
+      </Link>
+      <Link href="/" passHref>
+        <a>
+          <GoogleButton onClick={handleLogin} />
         </a>
       </Link>
     </Container>

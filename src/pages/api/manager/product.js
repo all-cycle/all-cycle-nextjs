@@ -1,8 +1,8 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import dbConnect from "../../../middleware/mongodb";
+import dbConnect from "../../../core/api/mongodb";
 
-import Product from "../../../models/Product";
+import Product from "../../../core/models/Product";
 
 // TODO constant로 관리
 const scrapOptions = {
