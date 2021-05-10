@@ -28,6 +28,9 @@ const Container = styled.header`
   background-color: ${(props) => props.theme.white.color};
 `;
 
+const LinkTo = styled.div`
+`;
+
 const Button = styled.div`
   width: 50px;
   height: 50px;
@@ -45,30 +48,40 @@ function Header() {
 
   return (
     <Container>
-      <Link href="/" passHref>
-        <ActiveLink>
-          <FontAwesomeIcon icon={faHome} />
-        </ActiveLink>
+      <Link href="/">
+        <LinkTo>
+          <ActiveLink route="/">
+            <FontAwesomeIcon icon={faHome} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/product" passHref>
-        <ActiveLink>
-          <FontAwesomeIcon icon={faSearch} />
-        </ActiveLink>
+      <Link href="/product">
+        <LinkTo>
+          <ActiveLink route="/product">
+            <FontAwesomeIcon icon={faSearch} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/myPage" passHref>
-        <ActiveLink>
-          <FontAwesomeIcon icon={faUserCircle} />
-        </ActiveLink>
+      <Link href="/myPage">
+        <LinkTo>
+          <ActiveLink route="/myPage">
+            <FontAwesomeIcon icon={faUserCircle} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/manager" passHref>
-        <ActiveLink>
-          <FontAwesomeIcon icon={faCogs} />
-        </ActiveLink>
+      <Link href="/manager">
+        <LinkTo>
+          <ActiveLink route="/manager">
+            <FontAwesomeIcon icon={faCogs} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/webLetter" passHref>
-        <ActiveLink>
-          <FontAwesomeIcon icon={faNewspaper} />
-        </ActiveLink>
+      <Link href="/webLetter">
+        <LinkTo>
+          <ActiveLink route="/webLetter">
+            <FontAwesomeIcon icon={faNewspaper} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
       <Button>
         <FontAwesomeIcon icon={faSignInAlt} onClick={handleLogin} />
