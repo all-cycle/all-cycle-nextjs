@@ -17,32 +17,34 @@ import { userLogin } from "../../core/reducers/userSlice";
 import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
-  position: fixed;
-  top: 0px;
-  left: 0px;
   width: 100vw;
   height: 5vh;
   display: flex;
   justify-content: space-evenly;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   font-size: larger;
   background-color: ${(props) => props.theme.white.color};
 `;
 
 const LinkTo = styled.div`
+  width: 100%;
+  max-width: 10vw;
+  max-height: 5vh;
 `;
 
 const Button = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  max-width: 10vw;
+  max-height: 5vh;
   color: ${(props) => props.theme.gray.color};
 `;
 
+// TODO 로그인한 후에는 로그인버튼 안보이기
 function Header() {
   const dispatch = useDispatch();
 
-  function handleLogin(e) {
-    e.preventDefault();
-
+  function handleLogin() {
     dispatch(userLogin());
   }
 

@@ -12,7 +12,7 @@ API.onSocialLogin = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const googleUserData = await firebase.auth().signInWithPopup(provider);
 
-    const response = await fetchData("POST", "/user", {
+    const response = await fetchData("POST", "/api/user/login", {
       email: googleUserData.user.email,
       name: googleUserData.user.displayName,
       photoURL: googleUserData.user.photoURL,
