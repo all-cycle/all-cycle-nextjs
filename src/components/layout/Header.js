@@ -1,11 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import Image from "next/image";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import GoogleButton from "../common/GoogleButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faSearch,
+  faUserCircle,
+  faNewspaper,
+  faCogs,
+  faSignInAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { userLogin } from "../../core/reducers/userSlice";
+import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
   position: fixed;
@@ -16,7 +25,16 @@ const Container = styled.header`
   display: flex;
   justify-content: space-evenly;
   font-size: larger;
-  background-color: ${(props) => props.theme.lightGray.color};
+  background-color: ${(props) => props.theme.white.color};
+`;
+
+const LinkTo = styled.div`
+`;
+
+const Button = styled.div`
+  width: 50px;
+  height: 50px;
+  color: ${(props) => props.theme.gray.color};
 `;
 
 function Header() {
@@ -30,42 +48,44 @@ function Header() {
 
   return (
     <Container>
-      <Link href="/" passHref>
-        <a>
-          <SVG
-            isselected
-            src="/home-solid.svg"
-            alt="Link to home"
-            width={50}
-            height={50}
-          />
-        </a>
+      <Link href="/">
+        <LinkTo>
+          <ActiveLink route="/">
+            <FontAwesomeIcon icon={faHome} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/product" passHref>
-        <a>
-          SEARCH
-        </a>
+      <Link href="/product">
+        <LinkTo>
+          <ActiveLink route="/product">
+            <FontAwesomeIcon icon={faSearch} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/myPage" passHref>
-        <a>
-          MY PAGE
-        </a>
+      <Link href="/myPage">
+        <LinkTo>
+          <ActiveLink route="/myPage">
+            <FontAwesomeIcon icon={faUserCircle} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/manager" passHref>
-        <a>
-          MANAGER
-        </a>
+      <Link href="/manager">
+        <LinkTo>
+          <ActiveLink route="/manager">
+            <FontAwesomeIcon icon={faCogs} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/webLetter" passHref>
-        <a>
-          LETTER
-        </a>
+      <Link href="/webLetter">
+        <LinkTo>
+          <ActiveLink route="/webLetter">
+            <FontAwesomeIcon icon={faNewspaper} />
+          </ActiveLink>
+        </LinkTo>
       </Link>
-      <Link href="/" passHref>
-        <a>
-          <GoogleButton onClick={handleLogin} />
-        </a>
-      </Link>
+      <Button>
+        <FontAwesomeIcon icon={faSignInAlt} onClick={handleLogin} />
+      </Button>
     </Container>
   );
 }
