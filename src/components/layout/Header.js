@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import GoogleButton from "../common/GoogleButton";
 import { userLogin } from "../../core/reducers/userSlice";
@@ -11,7 +11,7 @@ const Container = styled.header`
   position: fixed;
   top: 0px;
   left: 0px;
-  width: 50vw;
+  width: 100vw;
   height: 5vh;
   display: flex;
   justify-content: space-evenly;
@@ -33,6 +33,7 @@ function Header() {
       <Link href="/" passHref>
         <a>
           <Image
+            isSelected
             src="/home-solid.svg"
             alt="Link to home"
             width={50}
