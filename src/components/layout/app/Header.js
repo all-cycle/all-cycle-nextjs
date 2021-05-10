@@ -5,7 +5,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 import GoogleButton from "../../common/GoogleButton";
-import GoogleAPI from "../../../core/api/socialLogin";
+import GoogleAPI from "../../../core/api/googleLogin";
 
 const Container = styled.header`
   position: fixed;
