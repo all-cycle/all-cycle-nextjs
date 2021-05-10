@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 
-import GoogleButton from "../../common/GoogleButton";
-import GoogleAPI from "../../../core/api/googleLogin";
+import GoogleButton from "../common/GoogleButton";
+import { userLogin } from "../../core/reducers/userSlice";
 
 const Container = styled.header`
   position: fixed;
@@ -24,7 +24,10 @@ function Header() {
 
   function handleLogin(e) {
     e.preventDefault();
+
+    dispatch(userLogin());
   }
+
   return (
     <Container>
       <Link href="/" passHref>

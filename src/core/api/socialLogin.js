@@ -1,13 +1,13 @@
 import firebase from "../config/firebase";
 import fetchData from "./fetchData";
 
-const Google = {};
+const API = {};
 
 /**
  * function to login with firebaseAuth google social id
  * @returns user data or throw error
  */
-Google.onSocialLogin = async () => {
+API.onSocialLogin = async () => {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const googleUserData = await firebase.auth().signInWithPopup(provider);
@@ -24,4 +24,4 @@ Google.onSocialLogin = async () => {
   }
 };
 
-export default Google;
+export default API;

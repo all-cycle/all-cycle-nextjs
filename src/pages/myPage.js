@@ -1,18 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getUserInfo } from "../core/store/actions";
-
 export default function MyPage() {
   const userState = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUserInfo());
-  }, []);
-
   return (
-    <code>{JSON.stringify(userState, null, 4)}</code>
+    <div>mypage</div>
   );
 }
 
