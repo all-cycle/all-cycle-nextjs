@@ -13,7 +13,7 @@ const SliderContainer = styled.div`
   display: flex;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
   width: 100%;
   cursor: pointer;
 `;
@@ -44,7 +44,7 @@ function Slider({
           const { href, src, title } = letter;
 
           return (
-            <Link key={href} href={href}>
+            <Link key={href} href={href} passHref>
               <Wrapper>
                 <IMG
                   src={src}
