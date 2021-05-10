@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 import styled from "styled-components";
 
 const Container = styled.header`
@@ -20,8 +20,8 @@ function Header() {
     <Container>
       <Link href="/" passHref>
         <a>
-          <img
-            src="/home.svg"
+          <Image
+            src="/home-solid.svg"
             alt="Link to home"
             width={50}
             height={50}
@@ -30,7 +30,7 @@ function Header() {
       </Link>
       <Link href="/product" passHref>
         <a>
-          <img
+          <Image
             src="/search.svg"
             alt="Link to search"
             width={50}
@@ -40,7 +40,7 @@ function Header() {
       </Link>
       <Link href="/myPage" passHref>
         <a>
-          <img
+          <Image
             src="/spa_black_24dp.svg"
             alt="Link to my page"
             width={50}
@@ -50,7 +50,7 @@ function Header() {
       </Link>
       <Link href="/manager" passHref>
         <a>
-          <img
+          <Image
             src="/activity.svg"
             alt="Link to manager"
             width={50}
@@ -60,7 +60,7 @@ function Header() {
       </Link>
       <Link href="/webLetter" passHref>
         <a>
-          <img
+          <Image
             src="/bookmark.svg"
             alt="Link to webLetter"
             width={50}

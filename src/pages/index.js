@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import Logo from "../components/Logo";
-import Slider from "../components/Slider";
-import useSlider from "../hooks/useSlider";
+import Logo from "../components/layout/Logo";
+import Slider from "../components/layout/app/Layout";
+import useSlider from "../util/hooks/useSlider";
 
 const Container = styled.div`
 `;
