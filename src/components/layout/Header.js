@@ -1,11 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import Image from "next/image";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import GoogleButton from "../common/GoogleButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faSearch,
+  faUserCircle,
+  faNewspaper,
+  faCogs,
+  faSignInAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { userLogin } from "../../core/reducers/userSlice";
+import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
   position: fixed;
@@ -16,7 +25,13 @@ const Container = styled.header`
   display: flex;
   justify-content: space-evenly;
   font-size: larger;
-  background-color: ${(props) => props.theme.lightGray.color};
+  background-color: ${(props) => props.theme.white.color};
+`;
+
+const Button = styled.div`
+  width: 50px;
+  height: 50px;
+  color: ${(props) => props.theme.gray.color};
 `;
 
 function Header() {
@@ -31,40 +46,33 @@ function Header() {
   return (
     <Container>
       <Link href="/" passHref>
-        <a>
-          <Image
-            src="/home-solid.svg"
-            alt="Link to home"
-            width={50}
-            height={50}
-          />
-        </a>
+        <ActiveLink>
+          <FontAwesomeIcon icon={faHome} />
+        </ActiveLink>
       </Link>
       <Link href="/product" passHref>
-        <a>
-          SEARCH
-        </a>
+        <ActiveLink>
+          <FontAwesomeIcon icon={faSearch} />
+        </ActiveLink>
       </Link>
       <Link href="/myPage" passHref>
-        <a>
-          MY PAGE
-        </a>
+        <ActiveLink>
+          <FontAwesomeIcon icon={faUserCircle} />
+        </ActiveLink>
       </Link>
       <Link href="/manager" passHref>
-        <a>
-          MANAGER
-        </a>
+        <ActiveLink>
+          <FontAwesomeIcon icon={faCogs} />
+        </ActiveLink>
       </Link>
       <Link href="/webLetter" passHref>
-        <a>
-          LETTER
-        </a>
+        <ActiveLink>
+          <FontAwesomeIcon icon={faNewspaper} />
+        </ActiveLink>
       </Link>
-      <Link href="/" passHref>
-        <a>
-          <GoogleButton onClick={handleLogin} />
-        </a>
-      </Link>
+      <Button>
+        <FontAwesomeIcon icon={faSignInAlt} onClick={handleLogin} />
+      </Button>
     </Container>
   );
 }
