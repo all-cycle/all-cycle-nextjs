@@ -1,17 +1,19 @@
-// import { useRouter } from "next/router";
-import connectDB from "../../middleware/mongodb";
-import User from "../../models/User";
+import connectDB from "@/core/api/connectDB";
+import User from "@/core/models/User";
 
 // 회원가입
 // 로그인
 // 로그아웃
 const handler = async (req, res) => {
-  try {
-    const newUser = await User.create({
-      name: req.body.name,
-    });
+  const db = await connectDB();
 
-    res.status(200).json({ result: "ok", data: newUser });
+  try {
+    // db.collection("users", (err, usersCollection) => usersCollection
+    //   .find({})
+    //   .toArray((err, users) => {
+    //     res.status(200).json(users);
+    //   }));
+    res.status(200).json({ result: "ok" });
   } catch (err) {
     res.status(400).json({ result: "error", error: err.message });
   }

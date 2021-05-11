@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch } from "react-redux";
+import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -11,6 +12,7 @@ import {
   faNewspaper,
   faCogs,
   faSignInAlt,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { userLogin } from "../../core/reducers/userSlice";
@@ -29,22 +31,22 @@ const Container = styled.header`
 `;
 
 const LinkTo = styled.div`
+  width: 100%;
+  max-width: 10vw;
+  max-height: 5vh;
 `;
 
 const Button = styled.div`
-  width: 50px;
-  height: 50px;
+  all: unset;
+  width: 100%;
+  max-width: 10vw;
+  max-height: 5vh;
   color: ${(props) => props.theme.gray.color};
 `;
 
 function Header() {
   const dispatch = useDispatch();
-
-  function handleLogin(e) {
-    e.preventDefault();
-
-    dispatch(userLogin());
-  }
+  const [session, loading] = useSession();
 
   return (
     <Container>
@@ -83,8 +85,11 @@ function Header() {
           </ActiveLink>
         </LinkTo>
       </Link>
-      <Button>
-        <FontAwesomeIcon icon={faSignInAlt} onClick={handleLogin} />
+      <Button type="button" onClick={() => signIn()}>
+        <FontAwesomeIcon icon={faSignInAlt} />
+      </Button>
+      <Button type="button" onClick={() => signOut()}>
+        <FontAwesomeIcon icon={faSignOutAlt} />
       </Button>
     </Container>
   );
