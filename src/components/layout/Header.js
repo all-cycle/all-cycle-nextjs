@@ -86,12 +86,13 @@ function Header() {
           </ActiveLink>
         </LinkTo>
       </Link>
-      <Button onClick={handleLogin}>
-        <FontAwesomeIcon icon={faSignInAlt} />
-      </Button>
-      <button type="button" onClick={handleLogin}>
-        google
-      </button>
+      <Link href="/auth/signin">
+        <LinkTo>
+          <ActiveLink route="/auth/signin">
+            <FontAwesomeIcon icon={faSignInAlt} />
+          </ActiveLink>
+        </LinkTo>
+      </Link>
     </Container>
   );
 }
