@@ -1,7 +1,6 @@
-import axios from "axios";
 import cheerio from "cheerio";
-import dbConnect from "../../../core/api/mongodb";
 
+import connectDB from "../../../core/api/connectDB";
 import Product from "../../../core/models/Product";
 
 // TODO constant로 관리
@@ -32,7 +31,7 @@ const scrapOptions = {
 
 // 여기로 api 요청을 쏘면 바로 크롤링해서 DB로 보낸다
 export default async (req, res) => {
-  await dbConnect();
+  await connectDB();
 
   try {
     // TODO req.body.회사이름 으로 받아서 일괄처리하자
@@ -49,7 +48,7 @@ export default async (req, res) => {
     let count = 0;
 
     for (let i = 0; i < urls.length; i++) {
-      const html = await axios.get(commonUrl + urls[i]);
+      const html = await fetch(commonUrl + urls[i]);
       const $ = cheerio.load(html.data);
 
       $(selector).each(function (i, elem) {

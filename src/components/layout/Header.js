@@ -34,6 +34,7 @@ const LinkTo = styled.div`
 `;
 
 const Button = styled.div`
+  all: unset;
   width: 100%;
   max-width: 10vw;
   max-height: 5vh;
@@ -85,9 +86,12 @@ function Header() {
           </ActiveLink>
         </LinkTo>
       </Link>
-      <Button>
-        <FontAwesomeIcon icon={faSignInAlt} onClick={handleLogin} />
+      <Button onClick={handleLogin}>
+        <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
+      <button type="button" onClick={handleLogin}>
+        google
+      </button>
     </Container>
   );
 }

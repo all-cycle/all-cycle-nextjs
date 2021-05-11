@@ -11,6 +11,7 @@ API.onSocialLogin = async () => {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     const googleUserData = await firebase.auth().signInWithPopup(provider);
+    console.log("왜 안뜨는거니");
 
     const response = await fetchData("POST", "/api/user/login", {
       email: googleUserData.user.email,
