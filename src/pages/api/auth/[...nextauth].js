@@ -27,14 +27,15 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  adapter: MyAdapter(
-    process.env.MONGODB_URI,
-    {
-      models: {
-        User: { model: User.model, schema: User.schema },
-      },
-    },
-  ),
+  database: process.env.MONGODB_URI,
+  // adapter: MyAdapter(
+  //   process.env.MONGODB_URI,
+  //   {
+  //     models: {
+  //       User: { model: User.model, schema: User.schema },
+  //     },
+  //   },
+  // ),
   debug: true,
   secret: process.env.SALT,
   session: {
