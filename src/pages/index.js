@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Logo from "../components/layout/Logo";
-import Slider from "../components/layout/app/Layout";
+import Slider from "../components/layout/Layout";
 import useSlider from "../util/hooks/useSlider";
 
 const Container = styled.div`

@@ -3,11 +3,9 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 import cheerio from "cheerio";
 
-import { addLetter } from "../core/store/actions";
-
 export default function WebLetter({ letters }) {
   const dispatch = useDispatch();
-  useEffect(() => dispatch(addLetter(letters.slice(0, 3))), []);
+  // useEffect(() => dispatch(addLetter(letters.slice(0, 3))), []);
 
   return (
     <div>

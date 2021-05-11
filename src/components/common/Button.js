@@ -11,7 +11,7 @@ const Button = styled.button`
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: ${(props) => props.theme.primary.color};
-    color: #fff;
+    color: ${(props) => props.theme.white.color};
   }
 `;
 

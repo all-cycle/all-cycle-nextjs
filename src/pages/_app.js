@@ -1,22 +1,23 @@
+import React from "react";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import { useStore } from "../core/store";
+import store from "../core/store";
 
-import Header from "../components/layout/app/Header";
-import Layout from "../components/layout/app/Layout";
+import Header from "../components/layout/Header";
+import Layout from "../components/layout/Layout";
 import THEME from "../util/constants/theme";
 
 export default function App({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState);
-
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={THEME}>
-        <Header />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-    </Provider>
+    <React.StrictMode>
+      <Provider store={store}>
+        <ThemeProvider theme={THEME}>
+          <Header />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </Provider>
+    </React.StrictMode>
   );
 }
