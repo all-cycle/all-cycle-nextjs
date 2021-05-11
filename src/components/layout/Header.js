@@ -4,6 +4,8 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/client";
 import styled from "styled-components";
 
+import Adapters from "next-auth/adapters";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -97,9 +99,9 @@ function Header() {
         //     </ActiveLink>
         //   </LinkTo>
         // </Link>
-        <button type="button" onClick={() => signIn()}>
+        <Button type="button" onClick={() => signIn()}>
           <FontAwesomeIcon icon={faSignInAlt} />
-        </button>
+        </Button>
       ) : (
         // <Link href="/auth/signout">
         //   <LinkTo>
@@ -109,9 +111,9 @@ function Header() {
         //     </ActiveLink>
         //   </LinkTo>
         // </Link>
-        <button type="button" onClick={() => signOut()}>
+        <Button type="button" onClick={() => signOut()}>
           <FontAwesomeIcon icon={faSignOutAlt} />
-        </button>
+        </Button>
       )}
     </Container>
   );

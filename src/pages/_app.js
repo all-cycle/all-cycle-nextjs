@@ -1,5 +1,5 @@
-import { AuthProvider } from "next-auth/client";
-import { Provider } from "react-redux";
+import { Provider } from "next-auth/client";
+import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import store from "../core/store";
 
@@ -9,8 +9,8 @@ import THEME from "../util/constants/theme";
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthProvider session={pageProps.session}>
-      <Provider store={store}>
+    <ReduxProvider store={store}>
+      <Provider session={pageProps.session}>
         <ThemeProvider theme={THEME}>
           <Header />
           <Layout>
@@ -18,6 +18,6 @@ export default function App({ Component, pageProps }) {
           </Layout>
         </ThemeProvider>
       </Provider>
-    </AuthProvider>
+    </ReduxProvider>
   );
 }
