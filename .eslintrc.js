@@ -40,5 +40,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-param-reassign": ["error", { props: false }],
+    "react/jsx-one-expression-per-line": "off",
   },
 };
