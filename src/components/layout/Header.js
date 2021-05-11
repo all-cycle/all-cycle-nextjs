@@ -15,7 +15,6 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { userLogin } from "../../core/reducers/userSlice";
 import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
