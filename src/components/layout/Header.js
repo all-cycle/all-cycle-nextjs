@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/client";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +12,7 @@ import {
   faNewspaper,
   faCogs,
   faSignInAlt,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { userLogin } from "../../core/reducers/userSlice";
@@ -44,6 +46,7 @@ const Button = styled.div`
 // TODO 로그인한 후에는 로그인버튼 안보이기
 function Header() {
   const dispatch = useDispatch();
+  const [session, loading] = useSession();
 
   function handleLogin() {
     dispatch(userLogin());
@@ -86,13 +89,30 @@ function Header() {
           </ActiveLink>
         </LinkTo>
       </Link>
-      <Link href="/auth/signin">
-        <LinkTo>
-          <ActiveLink route="/auth/signin">
-            <FontAwesomeIcon icon={faSignInAlt} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
+      {!session ? (
+        // <Link href="/auth/signin">
+        //   <LinkTo>
+        //     <ActiveLink route="/auth/signin">
+        //       <FontAwesomeIcon icon={faSignInAlt} />
+        //     </ActiveLink>
+        //   </LinkTo>
+        // </Link>
+        <button type="button" onClick={() => signIn()}>
+          <FontAwesomeIcon icon={faSignInAlt} />
+        </button>
+      ) : (
+        // <Link href="/auth/signout">
+        //   <LinkTo>
+        //     <ActiveLink route="/auth/signout">
+        //       <div>{session.user.email}</div>
+        //       <FontAwesomeIcon icon={faSignInAlt} />
+        //     </ActiveLink>
+        //   </LinkTo>
+        // </Link>
+        <button type="button" onClick={() => signOut()}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+        </button>
+      )}
     </Container>
   );
 }

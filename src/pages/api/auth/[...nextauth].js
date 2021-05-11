@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
 export default NextAuth({
-  // Configure one or more authentication providers
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -10,19 +9,12 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async signIn(user) {
+    async signIn(user, account, profile) {
       const { name, email, image } = user;
-
-      const isAllowedToSignIn = true;
-
-      if (isAllowedToSignIn) {
-        return true;
-      }
-
-      return "/unauthorized";
     },
   },
 
-  // A database is optional, but required to persist accounts in a database
   database: process.env.MONGODB_URI,
+  debug: true,
+  secret: process.env.SALT,
 });
