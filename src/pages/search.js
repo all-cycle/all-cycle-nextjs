@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 import SearchBar from "@/components/common/SearchBar";
@@ -8,9 +7,6 @@ const Container = styled.div`
 `;
 
 const ProductList = styled.div`
-`;
-
-const Product = styled.div`
 `;
 
 function Search() {

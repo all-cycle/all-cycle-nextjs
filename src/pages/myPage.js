@@ -1,10 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 export default function MyPage() {
-  const userState = useSelector((state) => state);
-  const dispatch = useDispatch();
-
   return (
     <div>mypage</div>
   );
