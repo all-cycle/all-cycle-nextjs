@@ -1,25 +1,27 @@
 import React from "react";
-import { Provider as AuthProvider } from "next-auth/client";
-import { Provider } from "react-redux";
+import { Provider } from "next-auth/client";
 import { ThemeProvider } from "styled-components";
-import store from "@/core/store";
 
 import Header from "@/components/layout/Header";
 import Layout from "@/components/layout/Layout";
 import THEME from "@/util/constants/theme";
 
+import "./globals.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+
+config.autoAddCss = false; /* eslint-disable import/first */
+
 export default function App({ Component, pageProps }) {
   return (
     <React.StrictMode>
-      <Provider store={store}>
-        <AuthProvider session={pageProps.session}>
-          <ThemeProvider theme={THEME}>
+      <Provider session={pageProps.session}>
+        <ThemeProvider theme={THEME}>
+          <Layout>
             <Header />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </AuthProvider>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </Provider>
     </React.StrictMode>
   );

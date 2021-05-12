@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useDispatch } from "react-redux";
 import { signIn, signOut, useSession } from "next-auth/client";
-import Link from "next/link";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,77 +16,35 @@ import {
 import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
-  width: 100vw;
-  height: 5vh;
+  width: 100%;
+  height: 10vh;
   display: flex;
   justify-content: space-evenly;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  align-items: center;
   font-size: larger;
   background-color: ${(props) => props.theme.white.color};
 `;
 
-const LinkTo = styled.div`
+const StyledIcon = styled(FontAwesomeIcon)`
   width: 100%;
-  max-width: 10vw;
-  max-height: 5vh;
-`;
-
-const Button = styled.div`
-  all: unset;
-  width: 100%;
-  max-width: 10vw;
-  max-height: 5vh;
-  color: ${(props) => props.theme.gray.color};
+  font-size: 8vw;
 `;
 
 function Header() {
-  const dispatch = useDispatch();
   const [session, loading] = useSession();
 
   return (
     <Container>
-      <Link href="/">
-        <LinkTo>
-          <ActiveLink route="/">
-            <FontAwesomeIcon icon={faHome} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/product">
-        <LinkTo>
-          <ActiveLink route="/product">
-            <FontAwesomeIcon icon={faSearch} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/myPage">
-        <LinkTo>
-          <ActiveLink route="/myPage">
-            <FontAwesomeIcon icon={faUserCircle} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/manager">
-        <LinkTo>
-          <ActiveLink route="/manager">
-            <FontAwesomeIcon icon={faCogs} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/webLetter">
-        <LinkTo>
-          <ActiveLink route="/webLetter">
-            <FontAwesomeIcon icon={faNewspaper} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Button type="button" onClick={() => signIn()}>
-        <FontAwesomeIcon icon={faSignInAlt} />
-      </Button>
-      <Button type="button" onClick={() => signOut()}>
-        <FontAwesomeIcon icon={faSignOutAlt} />
-      </Button>
+      <ActiveLink iconName={faHome} route="/" />
+      <ActiveLink iconName={faSearch} route="/search" />
+      <ActiveLink iconName={faUserCircle} route="/myPage" />
+      <ActiveLink iconName={faCogs} route="/manager" />
+      <ActiveLink iconName={faNewspaper} route="/webLetter" />
+      {!session ? (
+        <StyledIcon icon={faSignInAlt} onClick={() => signIn()} />
+      ) : (
+        <StyledIcon icon={faSignOutAlt} onClick={() => signOut()} />
+      )}
     </Container>
   );
 }
