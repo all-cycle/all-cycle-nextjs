@@ -28,6 +28,7 @@ const Container = styled.header`
 const StyledIcon = styled(FontAwesomeIcon)`
   width: 100%;
   font-size: 8vw;
+  color: ${(props) => props.theme.gray.color};
 `;
 
 function Header() {
@@ -35,15 +36,15 @@ function Header() {
 
   return (
     <Container>
-      <ActiveLink iconName={faHome} route="/" />
-      <ActiveLink iconName={faSearch} route="/search" />
-      <ActiveLink iconName={faUserCircle} route="/myPage" />
-      <ActiveLink iconName={faCogs} route="/manager" />
-      <ActiveLink iconName={faNewspaper} route="/webLetter" />
+      <ActiveLink iconName={faHome} apiRoute="/" />
+      <ActiveLink iconName={faSearch} apiRoute="/search" />
+      <ActiveLink iconName={faUserCircle} apiRoute="/myPage" />
+      <ActiveLink iconName={faCogs} apiRoute="/manager" />
+      <ActiveLink iconName={faNewspaper} apiRoute="/webLetter" />
       {!session ? (
-        <StyledIcon icon={faSignInAlt} onClick={() => signIn()} />
+        <StyledIcon icon={faSignInAlt} onClick={signIn} />
       ) : (
-        <StyledIcon icon={faSignOutAlt} onClick={() => signOut()} />
+        <StyledIcon icon={faSignOutAlt} onClick={signOut} />
       )}
     </Container>
   );

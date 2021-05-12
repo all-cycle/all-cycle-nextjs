@@ -11,11 +11,9 @@ const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 8vw;
 `;
 
-function ActiveLink({ iconName, route }) {
+function ActiveLink({ iconName, apiRoute }) {
   const router = useRouter();
-  const style = {
-    color: router.asPath === route ? "#3DD97E" : "#A69E9E",
-  };
+  const color = router.asPath === apiRoute ? "#3DD97E" : "#A69E9E";
 
   // const handleClick = (e) => {
   //   e.preventDefault();
@@ -23,9 +21,9 @@ function ActiveLink({ iconName, route }) {
   // };
 
   return (
-    <Link href={route}>
-      <NextLink style={style}>
-        <StyledIcon icon={iconName} />
+    <Link href={apiRoute}>
+      <NextLink>
+        <StyledIcon icon={iconName} color={color} />
       </NextLink>
     </Link>
   );
