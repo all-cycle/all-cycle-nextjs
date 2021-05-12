@@ -38,9 +38,9 @@ function Header() {
     <Container>
       <LinkIcon iconName={faHome} apiRoute="/" />
       <LinkIcon iconName={faSearch} apiRoute="/search" />
+      <LinkIcon iconName={faNewspaper} apiRoute="/webLetter" />
       <LinkIcon iconName={faUserCircle} apiRoute="/myPage" />
       <LinkIcon iconName={faCogs} apiRoute="/manager" />
-      <LinkIcon iconName={faNewspaper} apiRoute="/webLetter" />
       {!session ? (
         <StyledIcon icon={faSignInAlt} onClick={signIn} />
       ) : (

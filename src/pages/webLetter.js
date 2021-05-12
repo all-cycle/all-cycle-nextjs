@@ -1,11 +1,89 @@
 import Link from "next/link";
 import cheerio from "cheerio";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const EcoSeoulLogo = styled.div`
+  padding: 2vw;
+  border-radius: 2vw;
+  background-color: ${(props) => props.theme.green.color};
+`;
+
+const LogoImage = styled.img`
+  width: 20%;
+`;
+
+const LetterContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3vh;
+`;
+
+const LetterBox = styled.div`
+  width: 90%;
+  display: flex;
+  border-radius: 5vw;
+  background-color: ${(props) => props.theme.lightGray.color};
+
+  & + & {
+    margin-top: 10px;
+  }
+`;
+
+const ImageContainer = styled.div`
+  flex-basis: 50%;
+  height: 20vh;
+  object-fit: cover;
+  border-top-left-radius: 5vw;
+  border-bottom-left-radius: 5vw;
+`;
+
+const Image = styled.img`
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 5vw;
+  border-bottom-left-radius: 5vw;
+`;
+
+const LetterTitle = styled.div`
+  flex-basis: 50%;
+  padding: 1em;
+  overflow: hidden;
+`;
+
+const Strong = styled.div`
+  font-size: 2vw;
+  padding: 1em;
+`;
+
+const Plain = styled.div`
+  border-radius: 2vw;
+  padding: 0.5em;
+  font-size: 3vw;
+  background-color: ${(props) => props.theme.white.color};
+`;
 
 export default function WebLetter({ letters }) {
   return (
-    <div>
-      <h1>Letter</h1>
-      <ul>
+    <Container>
+      {/* 환경연합 링크 */}
+      <Link href="http://ecoseoul.or.kr/">
+        <EcoSeoulLogo>
+          <LogoImage
+            src="http://ecoseoul.or.kr/wp/wp-content/themes/ecoseoul/images/ecoseoul.png"
+            alt="ecoSeoul"
+          />
+        </EcoSeoulLogo>
+      </Link>
+
+      <LetterContainer>
         {letters.map((letter) => {
           const {
             href,
@@ -14,24 +92,21 @@ export default function WebLetter({ letters }) {
           } = letter;
 
           return (
-            <Link
-              key={href}
-              href={href}
-            >
-              <div>
-                <img
-                  src={src}
-                  alt={title.slice(13)}
-                />
-                <div>
-                  {title}
-                </div>
-              </div>
+            <Link key={href} href={href}>
+              <LetterBox>
+                <ImageContainer>
+                  <Image src={src} alt={title.slice(13)} />
+                </ImageContainer>
+                <LetterTitle>
+                  <Strong>{title.slice(0, 13)}</Strong>
+                  <Plain>{title.slice(13)}</Plain>
+                </LetterTitle>
+              </LetterBox>
             </Link>
           );
         })}
-      </ul>
-    </div>
+      </LetterContainer>
+    </Container>
   );
 }
 
