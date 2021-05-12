@@ -18,13 +18,12 @@ import {
 import ActiveLink from "../common/ActiveLink";
 
 const Container = styled.header`
-  position: fixed;
-  top: 0px;
-  left: 0px;
   width: 100vw;
   height: 5vh;
   display: flex;
   justify-content: space-evenly;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   font-size: larger;
   background-color: ${(props) => props.theme.white.color};
 `;
