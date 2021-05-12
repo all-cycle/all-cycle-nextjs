@@ -1,6 +1,24 @@
+import { useSession } from "next-auth/client";
+import styled from "styled-components";
+
+const Container = styled.div`
+`;
+
 export default function MyPage() {
+  const [session] = useSession();
+
+  if (session) {
+    return (
+      <Container>
+        <h1>{session.user.email}</h1>
+      </Container>
+    );
+  }
+
   return (
-    <div>mypage</div>
+    <Container>
+      <a href="/">HOME</a>
+    </Container>
   );
 }
 

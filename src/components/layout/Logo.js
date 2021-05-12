@@ -9,11 +9,12 @@ const LogoContainer = styled.div`
   background-color: ${(props) => props.theme.lightGray.color};
 `;
 
-function Logo() {
+function Logo({ children }) {
   return (
     <Container>
       <LogoContainer>
         Animation~
+        {children}
       </LogoContainer>
     </Container>
   );

@@ -1,10 +1,18 @@
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
-const Post = () => {
+const Container = styled.div`
+`;
+
+const ProductItem = () => {
   const router = useRouter();
   const { productId } = router.query;
 
-  return <p>Product: {productId}</p>;
+  return (
+    <Container>
+      <div>{productId}</div>
+    </Container>
+  );
 };
 
-export default Post;
+export default ProductItem;

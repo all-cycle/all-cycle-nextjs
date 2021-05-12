@@ -38,13 +38,21 @@ function Header() {
     <Container>
       <LinkIcon iconName={faHome} apiRoute="/" />
       <LinkIcon iconName={faSearch} apiRoute="/search" />
+
+      {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
       <LinkIcon iconName={faNewspaper} apiRoute="/webLetter" />
-      <LinkIcon iconName={faUserCircle} apiRoute="/myPage" />
-      <LinkIcon iconName={faCogs} apiRoute="/manager" />
-      {!session ? (
+
+      {!session && (
         <StyledIcon icon={faSignInAlt} onClick={signIn} />
-      ) : (
-        <StyledIcon icon={faSignOutAlt} onClick={signOut} />
+      )}
+      {session
+        && session?.user.email === "maudlinsy@gmail.com"
+        && <LinkIcon iconName={faCogs} apiRoute="/manager" />}
+      {session && (
+        <>
+          <LinkIcon iconName={faUserCircle} apiRoute="/myPage" />
+          <StyledIcon icon={faSignOutAlt} onClick={signOut} />
+        </>
       )}
     </Container>
   );
