@@ -1,6 +1,8 @@
+import axios from "axios";
 import cheerio from "cheerio";
-import connectDB from "../../../core/api/connectDB";
-import Product from "../../../core/models/Product";
+import connectDB from "@/core/api/connectDB";
+
+import Product from "@/core/models/Product";
 
 // TODO constant로 관리
 const scrapOptions = {
@@ -32,7 +34,6 @@ const scrapOptions = {
 export default async (req, res) => {
   await connectDB();
 
-
   try {
     // TODO req.body.회사이름 으로 받아서 일괄처리하자
     const {
@@ -48,7 +49,8 @@ export default async (req, res) => {
     let count = 0;
 
     for (let i = 0; i < urls.length; i++) {
-      const html = await fetch(commonUrl + urls[i]);
+      // TODO fetch로 하면 왜 스트링으로 반환되지 않을까 뉴스레터는 되는데
+      const html = await axios.get(commonUrl + urls[i]);
       const $ = cheerio.load(html.data);
 
       $(selector).each(function (i, elem) {

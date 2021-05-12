@@ -2,22 +2,7 @@ import NextAuth from "next-auth";
 import Adapters from "next-auth/adapters";
 import Providers from "next-auth/providers";
 
-import User from "../../../core/models";
-import connectDB from "../../../core/api/connectDB";
-
-/** @type { import("next-auth/adapters").Adapter } */
-export function MyAdapter(config, options = {}) {
-  return {
-    async getAdapter() {
-      return {
-        async createUser(profile) {
-          console.log(profile);
-          return profile;
-        },
-      };
-    },
-  };
-}
+import Models from "@/core/models";
 
 export default NextAuth({
   site: process.env.NEXTAUTH_URL,
@@ -27,15 +12,14 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  database: process.env.MONGODB_URI,
-  // adapter: MyAdapter(
-  //   process.env.MONGODB_URI,
-  //   {
-  //     models: {
-  //       User: { model: User.model, schema: User.schema },
-  //     },
-  //   },
-  // ),
+  adapter: Adapters.TypeORM.Adapter(
+    process.env.MONGODB_URI,
+    {
+      models: {
+        User: Models.User,
+      },
+    },
+  ),
   debug: true,
   secret: process.env.SALT,
   session: {

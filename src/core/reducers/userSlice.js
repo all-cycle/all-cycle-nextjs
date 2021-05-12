@@ -1,21 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import API from "../api/socialLogin";
-import fetchData from "../api/fetchData";
+import fetchData from "@/core/api/fetchData";
 
 export const getUserByToken = createAsyncThunk(
   "user/getUserByToken",
   async () => {
     const response = await fetchData("GET", "/user");
-
-    return response;
-  },
-);
-
-export const userLogin = createAsyncThunk(
-  "user/login",
-  async () => {
-    const response = await API.onSocialLogin();
 
     return response;
   },
@@ -37,24 +27,6 @@ const userSlice = createSlice({
     // },
   },
   extraReducers: {
-    [userLogin.pending]: (state) => {
-      if (state.status === "idle") {
-        state.status = "pending";
-      }
-    },
-    [userLogin.fulfilled]: (state, action) => {
-      if (state.status === "pending") {
-        state.status = "idle";
-        state.data = action.payload;
-        state.error = null;
-      }
-    },
-    [userLogin.rejected]: (state, action) => {
-      if (state.status === "pending") {
-        state.status = "idle";
-        state.error = action.error.message || null;
-      }
-    },
     [getUserByToken.pending]: (state) => {
       if (state.status === "idle") {
         state.status = "pending";

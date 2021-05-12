@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 import Adapters from "next-auth/adapters";
 
-// Extend the built-in models using class inheritance
 export default class User extends Adapters.TypeORM.Models.User.model {
   // eslint-disable-next-line no-useless-constructor
-  constructor(name, email, image, emailVerified) {
+  constructor(name, email, image, emailVerified, reviews, history, recycleScore) {
     super(name, email, image, emailVerified);
+
+    this.reviews = reviews || [];
+    this.history = history || [];
+    this.recycleScore = recycleScore || 0;
   }
 }
 
@@ -14,10 +17,12 @@ export const UserSchema = {
   target: User,
   columns: {
     ...Adapters.TypeORM.Models.User.schema.columns,
-    reviewId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
-    },
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
     history: [String],
     recycleScore: {
       type: Number,
