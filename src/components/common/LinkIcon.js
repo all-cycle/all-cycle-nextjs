@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const NextLink = styled.a`
+const LinkTo = styled.a`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -11,22 +11,17 @@ const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 8vw;
 `;
 
-function ActiveLink({ iconName, apiRoute }) {
+function LinkIcon({ iconName, apiRoute }) {
   const router = useRouter();
   const color = router.asPath === apiRoute ? "#3DD97E" : "#A69E9E";
 
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   router.push(route);
-  // };
-
   return (
     <Link href={apiRoute}>
-      <NextLink>
+      <LinkTo>
         <StyledIcon icon={iconName} color={color} />
-      </NextLink>
+      </LinkTo>
     </Link>
   );
 }
 
-export default ActiveLink;
+export default LinkIcon;

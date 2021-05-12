@@ -13,7 +13,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import ActiveLink from "../common/ActiveLink";
+import LinkIcon from "@/components/common/LinkIcon";
 
 const Container = styled.header`
   width: 100%;
@@ -36,11 +36,11 @@ function Header() {
 
   return (
     <Container>
-      <ActiveLink iconName={faHome} apiRoute="/" />
-      <ActiveLink iconName={faSearch} apiRoute="/search" />
-      <ActiveLink iconName={faUserCircle} apiRoute="/myPage" />
-      <ActiveLink iconName={faCogs} apiRoute="/manager" />
-      <ActiveLink iconName={faNewspaper} apiRoute="/webLetter" />
+      <LinkIcon iconName={faHome} apiRoute="/" />
+      <LinkIcon iconName={faSearch} apiRoute="/search" />
+      <LinkIcon iconName={faUserCircle} apiRoute="/myPage" />
+      <LinkIcon iconName={faCogs} apiRoute="/manager" />
+      <LinkIcon iconName={faNewspaper} apiRoute="/webLetter" />
       {!session ? (
         <StyledIcon icon={faSignInAlt} onClick={signIn} />
       ) : (
