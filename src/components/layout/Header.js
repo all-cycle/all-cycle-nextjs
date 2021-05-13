@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useDispatch } from "react-redux";
 import { signIn, signOut, useSession } from "next-auth/client";
-import Link from "next/link";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,80 +13,47 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import ActiveLink from "../common/ActiveLink";
+import LinkIcon from "@/components/common/LinkIcon";
 
 const Container = styled.header`
-  width: 100vw;
-  height: 5vh;
+  width: 100%;
+  height: 10vh;
   display: flex;
   justify-content: space-evenly;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  align-items: center;
   font-size: larger;
   background-color: ${(props) => props.theme.white.color};
 `;
 
-const LinkTo = styled.div`
+const StyledIcon = styled(FontAwesomeIcon)`
   width: 100%;
-  max-width: 10vw;
-  max-height: 5vh;
-`;
-
-const Button = styled.div`
-  all: unset;
-  width: 100%;
-  max-width: 10vw;
-  max-height: 5vh;
+  font-size: 8vw;
   color: ${(props) => props.theme.gray.color};
 `;
 
 function Header() {
-  const dispatch = useDispatch();
   const [session, loading] = useSession();
 
   return (
     <Container>
-      <Link href="/">
-        <LinkTo>
-          <ActiveLink route="/">
-            <FontAwesomeIcon icon={faHome} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/product">
-        <LinkTo>
-          <ActiveLink route="/product">
-            <FontAwesomeIcon icon={faSearch} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/myPage">
-        <LinkTo>
-          <ActiveLink route="/myPage">
-            <FontAwesomeIcon icon={faUserCircle} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/manager">
-        <LinkTo>
-          <ActiveLink route="/manager">
-            <FontAwesomeIcon icon={faCogs} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Link href="/webLetter">
-        <LinkTo>
-          <ActiveLink route="/webLetter">
-            <FontAwesomeIcon icon={faNewspaper} />
-          </ActiveLink>
-        </LinkTo>
-      </Link>
-      <Button type="button" onClick={() => signIn()}>
-        <FontAwesomeIcon icon={faSignInAlt} />
-      </Button>
-      <Button type="button" onClick={() => signOut()}>
-        <FontAwesomeIcon icon={faSignOutAlt} />
-      </Button>
+      <LinkIcon iconName={faHome} apiRoute="/" />
+      <LinkIcon iconName={faSearch} apiRoute="/search" />
+
+      {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
+      <LinkIcon iconName={faNewspaper} apiRoute="/webLetter" />
+
+      {!session && (
+        <StyledIcon icon={faSignInAlt} onClick={signIn} />
+      )}
+      {session
+        && session?.user.email === "maudlinsy@gmail.com"
+        && <LinkIcon iconName={faCogs} apiRoute="/manager" />}
+      {session && (
+        <>
+          <LinkIcon iconName={faUserCircle} apiRoute="/myPage" />
+          <StyledIcon icon={faSignOutAlt} onClick={signOut} />
+        </>
+      )}
     </Container>
   );
 }

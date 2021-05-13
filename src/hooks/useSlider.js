@@ -8,6 +8,7 @@ function useSlider() {
   const TOTAL_SLIDES = 2;
 
   useEffect(() => {
+    if (!letters.length) return;
     const slideIntervalId = setInterval(() => {
       if (currentSlide >= TOTAL_SLIDES) {
         setCurrentSlide(0);
@@ -16,8 +17,9 @@ function useSlider() {
       }
     }, 3000);
 
+    // eslint-disable-next-line consistent-return
     return () => clearInterval(slideIntervalId);
-  }, [currentSlide]);
+  }, [letters, currentSlide]);
 
   useEffect(() => {
     if (!letters.length) return;

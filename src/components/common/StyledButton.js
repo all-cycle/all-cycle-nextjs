@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+const StyledButton = styled.button`
   all: unset;
   border: 1px solid ${(props) => props.theme.primary.color};
   padding: 0.5em 2em;
@@ -15,4 +15,4 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+export default StyledButton;

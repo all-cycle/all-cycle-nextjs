@@ -1,8 +1,8 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import connectDB from "@/core/api/connectDB";
+import connectDB from "@/utils/connectDB";
 
-import Product from "@/core/models/Product";
+import Product from "@/models/Product";
 
 // TODO constant로 관리
 const scrapOptions = {

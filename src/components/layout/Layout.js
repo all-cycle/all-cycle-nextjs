@@ -2,6 +2,7 @@ import Head from "next/head";
 import styled from "styled-components";
 
 const Container = styled.div`
+  color: ${(props) => props.theme.font.color};
 `;
 
 const Main = styled.main`
@@ -13,6 +14,7 @@ function Layout(props) {
       <Head>
         <title>ALL-Cycle</title>
         <meta name="description" content="Search first, Buy next!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
