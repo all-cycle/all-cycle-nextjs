@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import useReviewForm from "@/hooks/useReviewForm";
 import ReviewForm from "@/components/layout/ReviewForm";
+import fetchData from "@/utils/fetchData";
 
 const Container = styled.div`
   padding: 2vw;
@@ -17,8 +18,19 @@ function Review() {
   const {
     reviewData,
     handleChange,
-    handleSubmit,
-  } = useReviewForm("user1", productId);
+  } = useReviewForm(session.user?.email, productId);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    await fetchData(
+      "POST",
+      "http://localhost:3000/api/review",
+      reviewData,
+    );
+
+    router.push(`/product/${productId}`);
+  }
 
   return (
     <Container>

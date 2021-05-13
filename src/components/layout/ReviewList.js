@@ -13,9 +13,10 @@ const Picture = styled.img`
 `;
 
 function ReviewList() {
+  // TODO 세션에서 받아서 userId 출력
   const reviewList = [
     {
-      userId: "user1",
+      userId: "609c0b4eface171c5749a5b1",
       productId: "ion1",
       recycleScore: 4,
       preferenceScore: 3,
@@ -23,7 +24,7 @@ function ReviewList() {
       picture: "/bottle.png",
     },
     {
-      userId: "user1",
+      userId: "609c0b4eface171c5749a5b1",
       productId: "ion1",
       recycleScore: 4,
       preferenceScore: 3,
@@ -31,7 +32,7 @@ function ReviewList() {
       picture: "/bottle.png",
     },
     {
-      userId: "user1",
+      userId: "609c0b4eface171c5749a5b1",
       productId: "ion1",
       recycleScore: 4,
       preferenceScore: 3,

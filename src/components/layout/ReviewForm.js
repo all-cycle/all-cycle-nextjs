@@ -73,6 +73,28 @@ function ReviewForm({
         />
       </FormGroup>
 
+      <h3>재활용하기 편했다면 높은 점수를 줘 칭찬해주세요!</h3>
+      <RangeContainer>
+        <RangeSlider
+          name="recycleScore"
+          value={recycleScore}
+          type="range"
+          max="5"
+          min="1"
+          step="1"
+          list="ticks1"
+          onChange={onChange}
+        />
+        <RangeDataList id="ticks1">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </RangeDataList>
+      </RangeContainer>
+
+      <h3>다음에도 이 제품을 또 구매하실건가요?</h3>
       <RangeContainer>
         <RangeSlider
           name="recycleScore"

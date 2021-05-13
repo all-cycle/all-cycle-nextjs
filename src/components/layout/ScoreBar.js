@@ -40,7 +40,7 @@ const Bar = styled.div`
   ${Width}
 `;
 
-function ScoreBar({ title, score }) {
+function ScoreBar({ title, score = 3 }) {
   return (
     <Container>
       <Title>

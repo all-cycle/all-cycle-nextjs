@@ -30,11 +30,11 @@ const productSchema = new mongoose.Schema({
   },
   recycleScoreAvg: {
     type: Number,
-    default: 0,
+    default: 3,
   },
   preferenceScoreAvg: {
     type: Number,
-    default: 0,
+    default: 3,
   },
   reviewers: [
     {

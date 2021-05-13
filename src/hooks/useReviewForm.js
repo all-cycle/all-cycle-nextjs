@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 function useReviewForm(
-  userId,
+  email,
   productId,
 ) {
   const [reviewData, setReviewData] = useState({
-    userId,
+    email,
     productId,
-    recycleScore: 3,
-    preferenceScore: 3,
     comment: "",
     picture: "",
+    recycleScore: 3,
+    preferenceScore: 3,
   });
 
   function handleChange(e) {
@@ -23,15 +23,9 @@ function useReviewForm(
     }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(reviewData);
-  }
-
   return {
     reviewData,
     handleChange,
-    handleSubmit,
   };
 }
 

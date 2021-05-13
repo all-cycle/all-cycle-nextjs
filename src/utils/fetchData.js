@@ -18,11 +18,11 @@ async function fetchData(method, url, data) {
 
     response = await response.json();
 
-    if (response.ok) {
+    if (response.result) {
       return response.data;
     }
 
-    throw new Error(response.error.message);
+    return new Error();
   } catch (err) {
     throw new Error(err.message);
   }
