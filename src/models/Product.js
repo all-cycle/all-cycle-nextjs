@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-  productName: {
+  brand: String,
+  name: {
     type: String,
     required: true,
   },
@@ -31,17 +32,17 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  repurchaseScoreAvg: {
+  preferenceScoreAvg: {
     type: Number,
     default: 0,
   },
-  reviewer: [
+  reviewers: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
   ],
-  review: [
+  reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Review",

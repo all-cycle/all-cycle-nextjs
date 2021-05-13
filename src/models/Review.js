@@ -13,11 +13,12 @@ const reviewSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  repurchaseScore: {
+  preferenceScore: {
     type: Number,
     default: 0,
   },
   comment: String,
+  picture: String,
 });
 
 export default mongoose.models.Review || mongoose.model("Review", reviewSchema);

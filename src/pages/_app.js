@@ -2,13 +2,14 @@ import React from "react";
 import { Provider } from "next-auth/client";
 import { ThemeProvider } from "styled-components";
 
-import Header from "@/components/layout/Header";
-import Layout from "@/components/layout/Layout";
-import THEME from "@/util/constants/theme";
-
-import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+
+import Header from "@/components/layout/Header";
+import Layout from "@/components/layout/Layout";
+import THEME from "@/constants/theme";
+
+import "./globals.css";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
