@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/layout/ScoreBar";
@@ -79,10 +79,13 @@ const ProductItem = () => {
           <ProductName>{product.name}</ProductName>
         </ProductInfo>
       </ProductContainer>
+
       <ScoreContainer>
         <ScoreBar title="재활용 점수" score={product.recycleScoreAvg} />
         <ScoreBar title="선호도" score={product.preferenceScoreAvg} />
       </ScoreContainer>
+
+      <button type="button" onClick={() => router.push(`/review/${productId}`)}>리뷰쓰기</button>
       <ReviewList reviews={product.reviews} />
     </Container>
   );
