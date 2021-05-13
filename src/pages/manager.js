@@ -1,17 +1,20 @@
 import { useState } from "react";
 
+import StyledButton from "@/components/common/StyledButton";
+
 export default function Manager() {
   const [productList, setProductList] = useState([]);
   const [message, setMessage] = useState(null);
 
+  // NOTE useSWR?
   async function fetchData(e) {
     e.preventDefault();
 
     try {
-      let res = await fetch("api/manager/product");
+      let res = await fetch("/api/manager");
       res = await res.json();
 
-      if (res.result === "ok") {
+      if (res.result) {
         setProductList((prev) => prev.concat(res.data));
         return;
       }
@@ -24,13 +27,10 @@ export default function Manager() {
 
   return (
     <div>
-      관리자페이지
-      <button
-        type="button"
-        onClick={fetchData}
-      >
+      <h3>관리자페이지</h3>
+      <StyledButton onClick={fetchData}>
         제품 업데이트
-      </button>
+      </StyledButton>
       <ul>
         {productList.length > 0 && (
           productList.map((item, index) => {

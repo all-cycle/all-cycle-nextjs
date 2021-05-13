@@ -49,7 +49,6 @@ export default async (req, res) => {
     let count = 0;
 
     for (let i = 0; i < urls.length; i++) {
-      // TODO fetch로 하면 왜 스트링으로 반환되지 않을까 뉴스레터는 되는데
       const html = await axios.get(commonUrl + urls[i]);
       const $ = cheerio.load(html.data);
 
@@ -71,7 +70,7 @@ export default async (req, res) => {
         await Product.create({
           imgUrl,
           imgAlt,
-          productName,
+          name: productName,
         });
 
         count++;
@@ -79,13 +78,13 @@ export default async (req, res) => {
     }
 
     res.json({
-      result: "ok",
+      result: true,
       count,
       data,
     });
   } catch (err) {
     res.json({
-      result: "fail",
+      result: false,
       error: err.message,
     });
   }

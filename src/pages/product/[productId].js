@@ -50,45 +50,54 @@ const ScoreContainer = styled.div`
   padding: 3vh;
 `;
 
-const ProductItem = () => {
+const ProductItem = ({ product }) => {
   const router = useRouter();
-  const { productId } = router.query;
-
-  const product = {
-    name: "포카리",
-    brand: "롯데",
-    imgUrl: "/bottle.png",
-    imgAlt: "bottle",
-    searchCount: 2,
-    recycleType: "plastic",
-    productType: "ion",
-    recycleScoreAvg: 4.2,
-    preferenceScoreAvg: 4.8,
-    reviewers: ["A", "B"],
-    reviews: ["asdf", "efefeff"],
-  };
+  const {
+    _id,
+    name,
+    imgUrl,
+    imgAlt,
+    recycleScoreAvg,
+    preferenceScoreAvg,
+    reviews,
+    // brand,
+    // searchCount,
+    // recycleType,
+    // productType,
+    // reviewers,
+  } = product;
 
   return (
     <Container>
       <ProductContainer>
         <ImageContainer>
-          <Picture src={product.imgUrl} alt={product.imgAlt} />
+          <Picture src={imgUrl} alt={imgAlt} />
         </ImageContainer>
         <ProductInfo>
-          <ProductBrand>{product.brand}</ProductBrand>
-          <ProductName>{product.name}</ProductName>
+          {/* <ProductBrand>{brand}</ProductBrand> */}
+          <ProductName>{name}</ProductName>
         </ProductInfo>
       </ProductContainer>
 
       <ScoreContainer>
-        <ScoreBar title="재활용 점수" score={product.recycleScoreAvg} />
-        <ScoreBar title="선호도" score={product.preferenceScoreAvg} />
+        <ScoreBar title="재활용 점수" score={recycleScoreAvg} />
+        <ScoreBar title="선호도" score={preferenceScoreAvg} />
       </ScoreContainer>
 
-      <button type="button" onClick={() => router.push(`/review/${productId}`)}>리뷰쓰기</button>
-      <ReviewList reviews={product.reviews} />
+      <button type="button" onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</button>
+      {reviews.length > 0 && <ReviewList reviews={reviews} />}
     </Container>
   );
 };
 
 export default ProductItem;
+
+export async function getServerSideProps(context) {
+  const { productId } = context.params;
+  const response = await fetch(`http://localhost:3000/api/product/${productId}`);
+  const data = await response.json();
+
+  return {
+    props: { product: data.product },
+  };
+}

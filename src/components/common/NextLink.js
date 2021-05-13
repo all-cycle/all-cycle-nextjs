@@ -4,9 +4,9 @@ import styled from "styled-components";
 const LinkTo = styled.a`
 `;
 
-function NextLink({ apiRoute, children }) {
+function NextLink({ href, children }) {
   return (
-    <Link href={apiRoute}>
+    <Link href={href} passHref>
       <LinkTo>
         {children}
       </LinkTo>
