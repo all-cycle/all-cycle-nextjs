@@ -11,7 +11,7 @@ export default async (req, res) => {
 
   switch (method) {
     case "GET":
-      // Get data from your database
+      // 마이페이지에서 나의 리뷰 다 가져오기
       res.status(200).json({ result: true, data: "hi" });
       break;
     case "POST": {
@@ -36,11 +36,6 @@ export default async (req, res) => {
       });
 
       user.reviews.push(review._id);
-      // await Room.findOneAndUpdate(
-      //   { _id: roomId, "furniture._id": _id },
-      //   { $set: { "furniture.$.position": position } },
-      //   { new: true },
-      // );
 
       await Product.findOneAndUpdate({ id: productId },
         { $push: { reviewers: user._id, reviews: review._id } },
