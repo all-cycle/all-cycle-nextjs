@@ -5,9 +5,6 @@ import styled from "styled-components";
 import Logo from "@/components/layout/Logo";
 import HeadingLine from "@/components/common/HeadingLine";
 
-// import Slider from "../components/layout/Layout";
-// import useSlider from "../util/hooks/useSlider";
-
 const Container = styled.div`
   width: 100%;
   margin: 0;
