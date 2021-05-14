@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Adapters from "next-auth/adapters";
 import Providers from "next-auth/providers";
 
-import Models from "@/models";
+import User from "@/models";
 
 export default NextAuth({
   site: process.env.NEXTAUTH_URL,
@@ -15,9 +15,7 @@ export default NextAuth({
   adapter: Adapters.TypeORM.Adapter(
     process.env.MONGODB_URI,
     {
-      models: {
-        User: Models.User,
-      },
+      models: User,
     },
   ),
   debug: true,

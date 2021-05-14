@@ -15,3 +15,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+ul {
+  all: unset;
+}
+
+ul, li {
+  list-style: none;
+}

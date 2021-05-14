@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-  brand: String,
   name: {
     type: String,
     required: true,
@@ -20,7 +19,7 @@ const productSchema = new mongoose.Schema({
   },
   recycleType: {
     type: String,
-    enum: ["plastic", "glass", "etc"],
+    enum: ["pet", "glass", "aluminum", "etc"],
     default: "etc",
   },
   productType: {

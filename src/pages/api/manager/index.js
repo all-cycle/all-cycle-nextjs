@@ -24,7 +24,7 @@ const scrapOptions = {
       selector: ".item img",
       attr: "alt",
     },
-    name: {
+    productName: {
       selector: ".item_info span.name",
     },
   },
@@ -42,10 +42,10 @@ export default async (req, res) => {
       selector,
       src,
       alt,
-      name,
+      productName,
     } = scrapOptions.CHILSUNG;
 
-    const data = [];
+    const productList = [];
     let count = 0;
 
     for (let i = 0; i < urls.length; i++) {
@@ -55,22 +55,42 @@ export default async (req, res) => {
       $(selector).each(function (i, elem) {
         const imgUrl = $(this).find(src.selector).attr(src.attr);
         const imgAlt = $(this).find(alt.selector).attr(alt.attr);
-        const productName = $(this).find(name.selector).text();
+        const name = $(this).find(productName.selector).text();
 
-        data.push({ imgUrl, imgAlt, productName });
+        productList.push({ imgUrl, imgAlt, name });
       });
     }
 
-    for (let j = 0; j < data.length; j++) {
-      const { imgUrl, imgAlt, productName } = data[j];
+    // update를 자꾸하면 오히려 안좋으니 한번에 잘 넣자
+    for (let j = 0; j < productList.length; j++) {
+      const { imgUrl, imgAlt, name } = productList[j];
 
-      const product = await Product.findOne({ productName });
+      // const regex = /\[[^)]*\]/;
+      // const brand = productName.split(regex);
+      let recycleType;
+      const type = name.match(/\([^)]*\)/);
+      switch (type) {
+        case "펫":
+          recycleType = "plastic";
+          break;
+        case "캔":
+          recycleType = "aluminum";
+          break;
+        case "병":
+          recycleType = "glass";
+          break;
+        default:
+          recycleType = "etc";
+      }
+
+      const product = await Product.findOne({ name });
 
       if (!product && imgUrl) { // 주류의 경우 이미지가 나오지 않음
         await Product.create({
+          name,
           imgUrl,
           imgAlt,
-          name: productName,
+          recycleType,
         });
 
         count++;
@@ -80,7 +100,6 @@ export default async (req, res) => {
     res.json({
       result: true,
       count,
-      data,
     });
   } catch (err) {
     res.json({
