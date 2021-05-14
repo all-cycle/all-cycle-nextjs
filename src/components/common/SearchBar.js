@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.form`
   width: 90%;
   height: 5vh;
   display: flex;
@@ -13,16 +13,21 @@ const Container = styled.div`
 
 const Input = styled.input`
   all: unset;
+  width: 100%;
 
   ::placeholder {
     color: ${(props) => props.theme.gray.color};
   }
 `;
 
-function SearchBar() {
+function SearchBar({ keyword, onChange, onSubmit }) {
   return (
-    <Container>
-      <Input placeholder="Find Some" />
+    <Container onSubmit={onSubmit}>
+      <Input
+        placeholder="Find Some"
+        value={keyword}
+        onChange={onChange}
+      />
     </Container>
   );
 }

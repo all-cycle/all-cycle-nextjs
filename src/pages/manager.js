@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
 import StyledSelect from "@/components/common/StyledSelect";
-import fetchData from "@/utils/fetchData";
+import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
 
 const Container = styled.div`
   padding: 1em;
@@ -41,11 +42,6 @@ const Image = styled.img`
 
 const SelectContainer = styled.section`
 `;
-
-const TYPES = {
-  product: ["etc", "soft", "ion", "coffee", "water", "juice"],
-  recycle: ["etc", "pet", "glass", "aluminum"],
-};
 
 export default function Manager({ productList }) {
   const [updateList, setUpdateList] = useState([]);
@@ -112,14 +108,14 @@ export default function Manager({ productList }) {
                     <StyledSelect
                       productId={_id}
                       name="productType"
-                      types={TYPES.product}
+                      types={PRODUCT_TYPES}
                       defaultType={productType}
                       onChange={handleChange}
                     />
                     <StyledSelect
                       productId={_id}
                       name="recycleType"
-                      types={TYPES.recycle}
+                      types={RECYCLE_TYPES}
                       defaultType={recycleType}
                       onChange={handleChange}
                     />
