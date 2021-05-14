@@ -43,7 +43,7 @@ const Image = styled.img`
 const SelectContainer = styled.section`
 `;
 
-export default function Manager({ productList }) {
+export default function Manager({ count, productList }) {
   const [updateList, setUpdateList] = useState([]);
 
   async function updateData(e) {
@@ -77,7 +77,7 @@ export default function Manager({ productList }) {
 
   return (
     <Container>
-      <h3>관리자페이지</h3>
+      <h3>관리자페이지 {count}</h3>
       <StyledButton onClick={updateData}>
         DB 업데이트
       </StyledButton>
@@ -132,16 +132,12 @@ export default function Manager({ productList }) {
 
 // NOTE 페이지에 들어오면 새로 요청해서 받아온다
 export async function getStaticProps() {
+  const count = await fetchData("GET", "http://localhost:3000/api/manager");
+  // const count = await response.json();
   const productList = await fetchData("GET", "http://localhost:3000/api/product");
 
-  return {
-    props: { productList },
-  };
-  // const response = await fetch("http://localhost:3000/api/manager");
-  // const data = await response.json();
-
   // 몇개 새로 추가되었는지 알려줌
-  // return {
-  //   props: { count: data.count },
-  // };
+  return {
+    props: { count, productList },
+  };
 }

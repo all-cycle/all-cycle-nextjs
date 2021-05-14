@@ -23,11 +23,7 @@ function Review() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await fetchData(
-      "POST",
-      "http://localhost:3000/api/review",
-      reviewData,
-    );
+    await fetchData("POST", "/api/review", reviewData);
 
     router.push(`/product/${productId}`);
   }

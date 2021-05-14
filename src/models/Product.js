@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Review from "@/models/Review";
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -47,6 +48,6 @@ const productSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
-});
+}, { timestamps: true });
 
 export default mongoose.models.Product || mongoose.model("Product", productSchema);

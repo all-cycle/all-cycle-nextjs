@@ -1,8 +1,14 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
+import connectDB from "@/utils/connectDB";
+import Review from "@/models/Review";
+import Product from "@/models/Product";
+
+import fetchData from "@/utils/fetchData";
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/layout/ScoreBar";
+import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
   width: 90%;
@@ -42,15 +48,11 @@ const ProductInfo = styled.div`
 const ProductName = styled.div`
 `;
 
-const ProductBrand = styled.div`
-  font-size: 2vw;
-`;
-
 const ScoreContainer = styled.div`
   padding: 3vh;
 `;
 
-const ProductItem = ({ product }) => {
+function ProductItem({ product }) {
   const router = useRouter();
   const {
     _id,
@@ -60,11 +62,10 @@ const ProductItem = ({ product }) => {
     recycleScoreAvg,
     preferenceScoreAvg,
     reviews,
-    // brand,
     // searchCount,
     // recycleType,
     // productType,
-    // reviewers,
+    reviewers,
   } = product;
 
   return (
@@ -74,7 +75,6 @@ const ProductItem = ({ product }) => {
           <Picture src={imgUrl} alt={imgAlt} />
         </ImageContainer>
         <ProductInfo>
-          {/* <ProductBrand>{brand}</ProductBrand> */}
           <ProductName>{name}</ProductName>
         </ProductInfo>
       </ProductContainer>
@@ -84,20 +84,24 @@ const ProductItem = ({ product }) => {
         <ScoreBar title="선호도" score={preferenceScoreAvg} />
       </ScoreContainer>
 
-      <button type="button" onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</button>
-      {reviews.length > 0 && <ReviewList reviews={reviews} />}
+      <StyledButton onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</StyledButton>
+      <ReviewList reviews={reviews} />
     </Container>
   );
-};
+}
 
 export default ProductItem;
 
 export async function getServerSideProps(context) {
+  await connectDB();
+
   const { productId } = context.params;
-  const response = await fetch(`http://localhost:3000/api/product/${productId}`);
-  const data = await response.json();
+  let data = await Product.findOne({ _id: productId });
+  data = await data.populate("reviews");
+  // const product = JSON.parse(JSON.stringify(data));
+  // const data = await fetchData("GET", `http://localhost:3000/api/product/${productId}`);
 
   return {
-    props: { product: data.product },
+    props: { product: data },
   };
 }

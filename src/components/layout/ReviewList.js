@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import ImageContainer from "@/components/common/ImageContainer";
 import StyledListItem from "@/components/common/StyledListItem";
 
 const Container = styled.div`
@@ -11,68 +12,6 @@ const Picture = styled.img`
   max-width: 10vh;
   object-fit: cover;
 `;
-
-function ReviewList() {
-  // TODO 세션에서 받아서 userId 출력
-  const reviewList = [
-    {
-      userId: "609c0b4eface171c5749a5b1",
-      productId: "ion1",
-      recycleScore: 4,
-      preferenceScore: 3,
-      comment: "taste is good",
-      picture: "/bottle.png",
-    },
-    {
-      userId: "609c0b4eface171c5749a5b1",
-      productId: "ion1",
-      recycleScore: 4,
-      preferenceScore: 3,
-      comment: "taste is good",
-      picture: "/bottle.png",
-    },
-    {
-      userId: "609c0b4eface171c5749a5b1",
-      productId: "ion1",
-      recycleScore: 4,
-      preferenceScore: 3,
-      comment: "taste is good",
-    },
-  ];
-
-  return (
-    <Container>
-      <Title>REVIEW</Title>
-      {reviewList.map((review) => {
-        const {
-          userId,
-          productId,
-          recycleScore,
-          preferenceScore,
-          comment,
-          picture,
-        } = review;
-
-        return (
-          <StyledListItem>
-            <Content>
-              <UserId>{userId}</UserId>
-              {/* TODO 작성일 추가 */}
-              <Comment>{comment}</Comment>
-            </Content>
-            <ImageContainer>
-              {picture && (
-                <Picture src={picture} alt="user review" />
-              )}
-            </ImageContainer>
-          </StyledListItem>
-        );
-      })}
-    </Container>
-  );
-}
-
-export default ReviewList;
 
 const Title = styled.div`
   padding: 2vw;
@@ -96,13 +35,39 @@ const Comment = styled.div`
   color: ${(props) => props.theme.gray.color};
 `;
 
-const ImageContainer = styled.div`
-  flex-basis: 50%;
-  height: 10vh;
-  object-fit: cover;
-  border-top-left-radius: 5vw;
-  border-bottom-left-radius: 5vw;
+function ReviewList({ reviews }) {
+  return (
+    <Container>
+      <Title>REVIEW</Title>
+      {reviews.length > 0
+        && (reviews.map((review) => {
+          const {
+            _id,
+            userId,
+            productId,
+            recycleScore,
+            preferenceScore,
+            comment,
+            picture,
+          } = review;
 
-  /* NOTE 사진에서도 text-align 먹히는지 확인 */
-  text-align: center;
-`;
+          return (
+            <StyledListItem key={_id}>
+              <Content>
+                <UserId>{userId}</UserId>
+                {/* TODO 작성일 추가 */}
+                <Comment>{comment}</Comment>
+              </Content>
+              {picture && (
+                <ImageContainer>
+                  <Picture src={picture} alt="user review" />
+                </ImageContainer>
+              )}
+            </StyledListItem>
+          );
+        }))}
+    </Container>
+  );
+}
+
+export default ReviewList;

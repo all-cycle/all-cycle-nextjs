@@ -19,6 +19,6 @@ const reviewSchema = new mongoose.Schema({
   },
   comment: String,
   picture: String,
-});
+}, { timestamps: true });
 
 export default mongoose.models.Review || mongoose.model("Review", reviewSchema);

@@ -99,7 +99,7 @@ export default async (req, res) => {
 
     res.json({
       result: true,
-      count,
+      data: count,
     });
   } catch (err) {
     res.json({
