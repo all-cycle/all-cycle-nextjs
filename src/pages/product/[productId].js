@@ -94,7 +94,7 @@ export default ProductItem;
 
 export async function getServerSideProps(context) {
   const { productId } = context.params;
-  const response = await fetch(`http://localhost:3000/api/product/${productId}`);
+  const response = await fetch(`${process.env.HOMEPAGE_URL}/api/product/${productId}`);
   const data = await response.json();
 
   return {
