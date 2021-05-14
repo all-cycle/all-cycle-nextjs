@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/layout/ScoreBar";
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
   width: 90%;
@@ -40,10 +41,6 @@ const ProductInfo = styled.div`
 `;
 
 const ProductName = styled.div`
-`;
-
-const ProductBrand = styled.div`
-  font-size: 2vw;
 `;
 
 const ScoreContainer = styled.div`
@@ -84,7 +81,7 @@ const ProductItem = ({ product }) => {
         <ScoreBar title="선호도" score={preferenceScoreAvg} />
       </ScoreContainer>
 
-      <button type="button" onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</button>
+      <NextLink href={`/review/${_id}`}>리뷰쓰기</NextLink>
       {reviews.length > 0 && <ReviewList reviews={reviews} />}
     </Container>
   );
