@@ -131,9 +131,8 @@ export default function Manager({ count, productList }) {
 }
 
 // NOTE 페이지에 들어오면 새로 요청해서 받아온다
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const count = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/manager`);
-  // const count = await response.json();
   const productList = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
 
   // 몇개 새로 추가되었는지 알려줌
