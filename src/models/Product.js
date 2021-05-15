@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
+import Review from "@/models/Review";
 
 const productSchema = new mongoose.Schema({
-  brand: String,
   name: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema({
   },
   recycleType: {
     type: String,
-    enum: ["plastic", "glass", "etc"],
+    enum: ["pet", "glass", "aluminum", "etc"],
     default: "etc",
   },
   productType: {
@@ -48,6 +48,6 @@ const productSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
-});
+}, { timestamps: true });
 
 export default mongoose.models.Product || mongoose.model("Product", productSchema);

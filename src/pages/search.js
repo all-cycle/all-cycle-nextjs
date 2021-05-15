@@ -1,9 +1,13 @@
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
-import SearchBar from "@/components/common/SearchBar";
+import fetchData from "@/utils/fetchData";
 import NextLink from "@/components/common/NextLink";
+import StyledButton from "@/components/common/StyledButton";
+import SearchBar from "@/components/common/SearchBar";
+import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
+import useSearch from "@/hooks/useSearch";
 
 const Container = styled.div`
 `;
@@ -41,25 +45,62 @@ const Name = styled.div`
   font-size: 1rem;
 `;
 
-const Brand = styled.div`
-`;
-
 const Score = styled.div`
   color: ${(props) => props.theme.primary.color};
 `;
 
+const ToggleButton = styled(StyledButton)`
+  font-size: 0.3em;
+  margin: 0.5em;
+`;
+
 function Search({ productList }) {
+  const {
+    filter,
+    sortedList,
+    initializeFilter,
+    sortWithKeyword,
+    sortWithTypes,
+    handleKeywordChange,
+  } = useSearch(productList);
+
   return (
     <Container>
-      <SearchBar />
+      <SearchBar
+        keyword={filter.keyword}
+        onChange={handleKeywordChange}
+        onSubmit={sortWithKeyword}
+      />
+      <Container>
+        {PRODUCT_TYPES.map((productType) => (
+          <ToggleButton
+            key={JSON.stringify(productType)}
+            onClick={() => sortWithTypes("productType", productType[0])}
+          >
+            {productType[1]}
+          </ToggleButton>
+        ))}
+      </Container>
+
+      <Container>
+        {RECYCLE_TYPES.map((recycleType) => (
+          <ToggleButton
+            key={JSON.stringify(recycleType)}
+            onClick={() => sortWithTypes("recycleType", recycleType[0])}
+          >
+            {recycleType[1]}
+          </ToggleButton>
+        ))}
+      </Container>
+
+      <ToggleButton onClick={initializeFilter}>필터 초기화</ToggleButton>
+
       <ProductList>
-        {productList?.map((product) => (
-          <NextLink href={`/product/${product._id}`}>
-            <ProductItem key={product._id}>
+        {sortedList?.map((product) => (
+          <NextLink key={product._id} href={`/product/${product._id}`}>
+            <ProductItem>
               <ItemImage src={product.imgUrl} alt={product.imgAlt} />
               <ItemInfo>
-                {/* TODO 브랜드 이름은 [ ] 로 자르면 될듯 */}
-                {product.brand && <Brand>{product.brand}</Brand>}
                 <Name>{product.name}</Name>
                 <Score>
                   <FontAwesomeIcon icon={faStar} />
@@ -84,6 +125,6 @@ export async function getServerSideProps(context) {
   const data = await response.json();
 
   return {
-    props: { productList: data.productList },
+    props: { productList },
   };
 }

@@ -5,17 +5,50 @@ import Product from "@/models/Product";
 export default async (req, res) => {
   await connectDB();
 
-  try {
-    const productList = await Product.find({});
+  const { method } = req;
 
-    res.json({
-      result: true,
-      productList,
-    });
-  } catch (err) {
-    res.json({
-      result: false,
-      error: err.message,
-    });
+  switch (method) {
+    case "GET":
+      try {
+        const productList = await Product.find();
+
+        res.status(200).json({
+          result: true,
+          data: productList,
+        });
+      } catch (err) {
+        res.json({
+          result: false,
+          error: err.message,
+        });
+      }
+      break;
+    case "PUT": {
+      try {
+        const { body: list } = req;
+
+        list.forEach(async (product) => {
+          await Product.findOneAndUpdate(
+            { _id: product._id },
+            { $set: { ...product } },
+            { new: true },
+          );
+        });
+
+        res.status(200).json({
+          result: true,
+          data: "ok",
+        });
+      } catch (err) {
+        res.json({
+          result: false,
+          error: err.message,
+        });
+      }
+      break;
+    }
+    default:
+      res.setHeader("Allow", ["GET", "PUT"]);
+      res.status(405).end(`Method ${method} Not Allowed`);
   }
 };

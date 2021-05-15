@@ -2,6 +2,8 @@ import Link from "next/link";
 import cheerio from "cheerio";
 import styled from "styled-components";
 
+import ImageContainer from "@/components/common/ImageContainer";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,12 +39,8 @@ const LetterBox = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
-  flex-basis: 50%;
+const LetterImageContainer = styled(ImageContainer)`
   height: 20vh;
-  object-fit: cover;
-  border-top-left-radius: 5vw;
-  border-bottom-left-radius: 5vw;
 `;
 
 const Image = styled.img`
@@ -94,9 +92,9 @@ export default function WebLetter({ letters }) {
           return (
             <Link key={href} href={href}>
               <LetterBox>
-                <ImageContainer>
+                <LetterImageContainer>
                   <Image src={src} alt={title.slice(13)} />
-                </ImageContainer>
+                </LetterImageContainer>
                 <LetterTitle>
                   <Strong>{title.slice(0, 13)}</Strong>
                   <Plain>{title.slice(13)}</Plain>

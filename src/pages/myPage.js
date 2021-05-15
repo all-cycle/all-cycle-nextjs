@@ -17,7 +17,7 @@ export default function MyPage() {
 
   return (
     <Container>
-      <a href="/">HOME</a>
+      <a href="/">마이페이지, 로그인을 하세요</a>
     </Container>
   );
 }

@@ -22,9 +22,9 @@ async function fetchData(method, url, data) {
       return response.data;
     }
 
-    return new Error();
+    return "error occurs...";
   } catch (err) {
-    throw new Error(err.message);
+    return err.message;
   }
 }
 
