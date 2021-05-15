@@ -98,7 +98,11 @@ export default function WebLetter({ letters }) {
             <NextLink key={href} href={href}>
               <LetterBox>
                 <LetterImageContainer>
-                  <Image src={src} alt={title.slice(13)} />
+                  <Image
+                    referrerPolicy="no-referrer"
+                    src={src}
+                    alt={title.slice(13)}
+                  />
                 </LetterImageContainer>
                 <LetterTitle>
                   <Strong>{title.slice(0, 13)}</Strong>
