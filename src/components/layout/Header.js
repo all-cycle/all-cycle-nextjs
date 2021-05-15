@@ -43,7 +43,15 @@ function Header() {
       <LinkIcon iconName={faNewspaper} href="/webLetter" />
 
       {!session && (
-        <StyledIcon icon={faSignInAlt} onClick={signIn} />
+        // <StyledIcon icon={faSignInAlt} onClick={signIn} />
+        <LinkIcon
+          iconName={faSignInAlt}
+          href="/api/auth/signin"
+          onClick={(e) => {
+            e.preventDefault();
+            signIn();
+          }}
+        />
       )}
       {session
         && session.user.email === "maudlinsy@gmail.com"
@@ -51,7 +59,15 @@ function Header() {
       {session && (
         <>
           <LinkIcon iconName={faUserCircle} href="/myPage" />
-          <StyledIcon icon={faSignOutAlt} onClick={signOut} />
+          <LinkIcon
+            iconName={faSignOutAlt}
+            href="/api/auth/signout"
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          />
+          {/* <StyledIcon icon={faSignOutAlt} onClick={() => signOut()} /> */}
         </>
       )}
     </Container>
