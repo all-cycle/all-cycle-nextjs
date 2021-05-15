@@ -1,4 +1,5 @@
 import Link from "next/link";
+import axios from "axios";
 import cheerio from "cheerio";
 import styled from "styled-components";
 
@@ -69,6 +70,10 @@ const Plain = styled.div`
 `;
 
 export default function WebLetter({ letters }) {
+  if (!letters) {
+    return <div>아직 로딩중</div>;
+  }
+
   return (
     <Container>
       {/* 환경연합 링크 */}
@@ -109,9 +114,9 @@ export default function WebLetter({ letters }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
-  const html = await res.text();
-  const $ = cheerio.load(html);
+  const html = await axios.get("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
+  // const html = await res.text();
+  const $ = cheerio.load(html.data);
   const $bodyList = $("ul.cat-list > li").children("a");
 
   const letters = [];
