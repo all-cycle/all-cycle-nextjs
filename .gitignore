@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# google vision api
+all-cycle-313406-4c04594fb68f.json
