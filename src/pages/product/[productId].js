@@ -88,7 +88,6 @@ function ProductItem({ product }) {
         <ScoreBar title="선호도" score={preferenceScoreAvg} />
       </ScoreContainer>
 
-
       <StyledButton onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</StyledButton>
       <ReviewList reviews={reviews} />
 
@@ -108,9 +107,8 @@ export async function getServerSideProps(context) {
   let data = await Product.findOne({ _id: productId });
   data = await data.populate("reviews");
 
-  const response = await fetch(`${process.env.HOMEPAGE_URL}/api/product/${productId}`);
-  const data = await response.json();
-
+  // const response = await fetch(`${process.env.HOMEPAGE_URL}/api/product/${productId}`);
+  // const data = await response.json();
 
   return {
     props: { product: data },
