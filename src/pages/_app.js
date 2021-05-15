@@ -18,8 +18,8 @@ export default function App({ Component, pageProps }) {
     <React.StrictMode>
       <Provider session={pageProps.session}>
         <ThemeProvider theme={THEME}>
-          <Header />
           <Layout>
+            <Header />
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>

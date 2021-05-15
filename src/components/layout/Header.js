@@ -36,21 +36,21 @@ function Header() {
 
   return (
     <Container>
-      <LinkIcon iconName={faHome} route="/" />
-      <LinkIcon iconName={faSearch} route="/search" />
+      <LinkIcon iconName={faHome} href="/" />
+      <LinkIcon iconName={faSearch} href="/search" />
 
       {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
-      <LinkIcon iconName={faNewspaper} route="/webLetter" />
+      <LinkIcon iconName={faNewspaper} href="/webLetter" />
 
       {!session && (
         <StyledIcon icon={faSignInAlt} onClick={signIn} />
       )}
       {session
         && session.user.email === "maudlinsy@gmail.com"
-        && <LinkIcon iconName={faCogs} route="/manager" />}
+        && <LinkIcon iconName={faCogs} href="/manager" />}
       {session && (
         <>
-          <LinkIcon iconName={faUserCircle} route="/myPage" />
+          <LinkIcon iconName={faUserCircle} href="/myPage" />
           <StyledIcon icon={faSignOutAlt} onClick={signOut} />
         </>
       )}

@@ -14,11 +14,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 function LinkIcon({ iconName, href }) {
   const router = useRouter();
-  let color = "#A69E9E";
-
-  useEffect(() => {
-    color = router.asPath === href ? "#3DD97E" : "#A69E9E";
-  }, []);
+  const color = router.asPath === href ? "#3DD97E" : "#A69E9E";
 
   return (
     <Link href={href} passHref>

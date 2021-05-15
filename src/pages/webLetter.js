@@ -72,14 +72,14 @@ export default function WebLetter({ letters }) {
   return (
     <Container>
       {/* 환경연합 링크 */}
-      <Link href="http://ecoseoul.or.kr/">
+      <a href="http://ecoseoul.or.kr/">
         <EcoSeoulLogo>
           <LogoImage
             src="http://ecoseoul.or.kr/wp/wp-content/themes/ecoseoul/images/ecoseoul.png"
             alt="ecoSeoul"
           />
         </EcoSeoulLogo>
-      </Link>
+      </a>
 
       <LetterContainer>
         {letters.map((letter) => {

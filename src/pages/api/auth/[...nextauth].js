@@ -30,4 +30,6 @@ export default NextAuth({
   // jwt: {
   //   secret: process.env.SALT,
   // },
+
+  // 로그인 로그아웃 했을 때 redirect
 });

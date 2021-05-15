@@ -13,7 +13,6 @@ import StyledButton from "@/components/common/StyledButton";
 
 import NextLink from "@/components/common/NextLink";
 
-
 const Container = styled.div`
   width: 90%;
   margin: auto;
