@@ -4,6 +4,7 @@ import cheerio from "cheerio";
 import styled from "styled-components";
 
 import ImageContainer from "@/components/common/ImageContainer";
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
   display: flex;
@@ -26,18 +27,17 @@ const LetterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 3vh;
 `;
 
-const LetterBox = styled.div`
+const LetterBox = styled.article`
   width: 90%;
   display: flex;
+  margin: auto;
+  margin-bottom: 1vh;
   border-radius: 5vw;
   background-color: ${(props) => props.theme.lightGray.color};
-
-  & + & {
-    margin-top: 10px;
-  }
 `;
 
 const LetterImageContainer = styled(ImageContainer)`
@@ -95,7 +95,7 @@ export default function WebLetter({ letters }) {
           } = letter;
 
           return (
-            <Link key={href} href={href}>
+            <NextLink key={href} href={href}>
               <LetterBox>
                 <LetterImageContainer>
                   <Image src={src} alt={title.slice(13)} />
@@ -105,7 +105,7 @@ export default function WebLetter({ letters }) {
                   <Plain>{title.slice(13)}</Plain>
                 </LetterTitle>
               </LetterBox>
-            </Link>
+            </NextLink>
           );
         })}
       </LetterContainer>
