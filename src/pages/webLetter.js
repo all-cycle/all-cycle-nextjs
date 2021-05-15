@@ -1,8 +1,10 @@
 import Link from "next/link";
+import axios from "axios";
 import cheerio from "cheerio";
 import styled from "styled-components";
 
 import ImageContainer from "@/components/common/ImageContainer";
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
   display: flex;
@@ -25,18 +27,17 @@ const LetterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 3vh;
 `;
 
-const LetterBox = styled.div`
+const LetterBox = styled.article`
   width: 90%;
   display: flex;
+  margin: auto;
+  margin-bottom: 1vh;
   border-radius: 5vw;
   background-color: ${(props) => props.theme.lightGray.color};
-
-  & + & {
-    margin-top: 10px;
-  }
 `;
 
 const LetterImageContainer = styled(ImageContainer)`
@@ -69,6 +70,10 @@ const Plain = styled.div`
 `;
 
 export default function WebLetter({ letters }) {
+  if (!letters) {
+    return <div>아직 로딩중</div>;
+  }
+
   return (
     <Container>
       {/* 환경연합 링크 */}
@@ -90,17 +95,21 @@ export default function WebLetter({ letters }) {
           } = letter;
 
           return (
-            <Link key={href} href={href}>
+            <NextLink key={href} href={href}>
               <LetterBox>
                 <LetterImageContainer>
-                  <Image src={src} alt={title.slice(13)} />
+                  <Image
+                    referrerPolicy="no-referrer"
+                    src={src}
+                    alt={title.slice(13)}
+                  />
                 </LetterImageContainer>
                 <LetterTitle>
                   <Strong>{title.slice(0, 13)}</Strong>
                   <Plain>{title.slice(13)}</Plain>
                 </LetterTitle>
               </LetterBox>
-            </Link>
+            </NextLink>
           );
         })}
       </LetterContainer>
@@ -109,9 +118,9 @@ export default function WebLetter({ letters }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
-  const html = await res.text();
-  const $ = cheerio.load(html);
+  const html = await axios.get("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
+  // const html = await res.text();
+  const $ = cheerio.load(html.data);
   const $bodyList = $("ul.cat-list > li").children("a");
 
   const letters = [];
