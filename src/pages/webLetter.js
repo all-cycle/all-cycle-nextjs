@@ -128,15 +128,6 @@ export async function getStaticProps() {
     });
   });
 
-  if (!letters.length) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
   return {
     props: { letters }, // will be passed to the page component as props
     revalidate: 60 * 60 * 1000 * 7,

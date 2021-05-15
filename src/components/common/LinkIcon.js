@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
@@ -11,12 +12,16 @@ const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 8vw;
 `;
 
-function LinkIcon({ iconName, apiRoute }) {
+function LinkIcon({ iconName, href }) {
   const router = useRouter();
-  const color = router.asPath === apiRoute ? "#3DD97E" : "#A69E9E";
+  let color = "#A69E9E";
+
+  useEffect(() => {
+    color = router.asPath === href ? "#3DD97E" : "#A69E9E";
+  }, []);
 
   return (
-    <Link href={apiRoute}>
+    <Link href={href} passHref>
       <LinkTo>
         <StyledIcon icon={iconName} color={color} />
       </LinkTo>

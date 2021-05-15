@@ -8,7 +8,11 @@ import Product from "@/models/Product";
 import fetchData from "@/utils/fetchData";
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/layout/ScoreBar";
+
 import StyledButton from "@/components/common/StyledButton";
+
+import NextLink from "@/components/common/NextLink";
+
 
 const Container = styled.div`
   width: 90%;
@@ -84,8 +88,12 @@ function ProductItem({ product }) {
         <ScoreBar title="선호도" score={preferenceScoreAvg} />
       </ScoreContainer>
 
+
       <StyledButton onClick={() => router.push(`/review/${_id}`)}>리뷰쓰기</StyledButton>
       <ReviewList reviews={reviews} />
+
+      <NextLink href={`/review/${_id}`}>리뷰쓰기</NextLink>
+
     </Container>
   );
 }
@@ -96,10 +104,13 @@ export async function getServerSideProps(context) {
   await connectDB();
 
   const { productId } = context.params;
+
   let data = await Product.findOne({ _id: productId });
   data = await data.populate("reviews");
-  // const product = JSON.parse(JSON.stringify(data));
-  // const data = await fetchData("GET", `http://localhost:3000/api/product/${productId}`);
+
+  const response = await fetch(`${process.env.HOMEPAGE_URL}/api/product/${productId}`);
+  const data = await response.json();
+
 
   return {
     props: { product: data },

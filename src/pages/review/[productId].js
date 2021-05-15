@@ -11,9 +11,13 @@ const Container = styled.div`
 `;
 
 function Review() {
-  const [session] = useSession();
+  const [session, loading] = useSession();
   const router = useRouter();
   const { productId } = router.query;
+
+  if (loading) {
+    return <div>LOADING...</div>;
+  }
 
   const {
     reviewData,
@@ -23,7 +27,11 @@ function Review() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await fetchData("POST", "/api/review", reviewData);
+    await fetchData(
+      "POST",
+      `${process.env.HOMEPAGE_URL}/api/review`,
+      reviewData,
+    );
 
     router.push(`/product/${productId}`);
   }

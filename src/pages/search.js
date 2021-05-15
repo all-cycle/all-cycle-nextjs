@@ -120,8 +120,9 @@ function Search({ productList }) {
 
 export default Search;
 
-export async function getServerSideProps() {
-  const productList = await fetchData("GET", "http://localhost:3000/api/product");
+export async function getServerSideProps(context) {
+  const response = await fetch(`${process.env.HOMEPAGE_URL}/api/product`);
+  const data = await response.json();
 
   return {
     props: { productList },
