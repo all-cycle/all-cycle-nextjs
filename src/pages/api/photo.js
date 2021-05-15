@@ -14,15 +14,16 @@ export default async (req, res) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Referrer: process.env.GOOGLE_VISION_API_URL,
+      // Referrer: process.env.GOOGLE_VISION_API_URL,
     },
     body: JSON.stringify(body),
   });
 
   const parsed = await response.json();
+  console.log(parsed);
 
   res.json({
     result: true,
-    data: parsed.responses[0].fullTextAnnotation.text,
+    data: parsed,
   });
 };

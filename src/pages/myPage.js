@@ -9,7 +9,7 @@ const Container = styled.div`
 
 export default function MyPage() {
   const [session] = useSession();
-  const router = useRouter();
+  // const router = useRouter();
   // Call this function whenever you want to
   // refresh props!
   // const refreshData = () => {
