@@ -1,11 +1,9 @@
 export default async (req, res) => {
-  console.log(req.cookies["next-auth.session-token"], "kooooo");
-  const token = req.cookies["next-auth.session-token"];
-
+  const base64 = req.body.slice(23);
   const body = {
     requests: [
       {
-        image: { content: req.body },
+        image: { content: base64 },
         features: [{ type: "DOCUMENT_TEXT_DETECTION", maxResults: 10 }],
       },
     ],
@@ -14,16 +12,17 @@ export default async (req, res) => {
   const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
     method: "post",
     headers: {
-      Authorization: `Bearer ${token}`,
       Accept: "application/json",
       "Content-Type": "application/json",
+      Referrer: process.env.GOOGLE_VISION_API_URL,
     },
     body: JSON.stringify(body),
   });
 
-  console.log(response.data);
+  const parsed = await response.json();
+
   res.json({
     result: true,
-    data: response.data,
+    data: parsed.responses[0].fullTextAnnotation.text,
   });
 };

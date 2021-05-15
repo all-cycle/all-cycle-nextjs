@@ -21,7 +21,6 @@ export default function MyPage() {
       <Container>
         <h1>{session.user.email}</h1>
         <Photo />
-        <div>{router.asPath}</div>
       </Container>
     );
   }

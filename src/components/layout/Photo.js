@@ -2,7 +2,6 @@ import { useState } from "react";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 
-import axios from "axios";
 import fetchData from "@/utils/fetchData";
 
 function Photo() {
@@ -22,9 +21,11 @@ function Photo() {
       <Camera
         onTakePhotoAnimationDone={handleTakePhoto}
         isFullscreen={false}
+        imageCompression={0.5}
+        sizeFactor={0.5}
+        imageType="jpg"
       />
       <img src={dataUri} alt="hi" style={{ width: "100px", height: "80px" }} />
-      {/* <button type="button" onClick={getTextFromImage}>분석하기</button> */}
     </div>
   );
 }
