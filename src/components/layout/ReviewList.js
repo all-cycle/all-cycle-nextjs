@@ -85,7 +85,7 @@ function ReviewList({ id, reviews }) {
             </Content>
             {picture && (
               <ImageContainer>
-                <Picture src={picture} alt="user review" />
+                <Picture src={picture} alt="user photo" />
               </ImageContainer>
             )}
           </StyledListItem>

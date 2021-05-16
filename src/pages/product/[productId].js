@@ -1,9 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import connectDB from "@/utils/connectDB";
 import fetchData from "@/utils/fetchData";
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/common/ScoreBar";
+import ReviewForm from "@/components/layout/ReviewForm";
 
 const Container = styled.div`
   margin: auto;
@@ -72,6 +74,8 @@ function ProductItem({ product }) {
     reviewers,
   } = product;
 
+  const [isList, setIsList] = useState(false);
+
   return (
     <Container>
       <ProductContainer>
@@ -97,7 +101,9 @@ function ProductItem({ product }) {
         <ScoreBar width={50} height={2} score={recycleScoreAvg} />
       </ScoreContainer>
 
-      <ReviewList id={_id} reviews={reviews} />
+      {isList
+        ? <ReviewList id={_id} reviews={reviews} />
+        : <ReviewForm productId={_id} />}
     </Container>
   );
 }

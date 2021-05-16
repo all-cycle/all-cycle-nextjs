@@ -1,6 +1,10 @@
+import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
+import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/common/StyledButton";
+import fetchData from "@/utils/fetchData";
 
 const Form = styled.form`
 `;
@@ -56,20 +60,32 @@ const RangeDataList = styled.datalist`
   color: ${(props) => props.theme.gray.color};
 `;
 
-function ReviewForm({
-  comment,
-  recycleScore,
-  preferenceScore,
-  onChange,
-  onSubmit,
-}) {
+function ReviewForm({ productId }) {
+  const [session] = useSession();
+  const router = useRouter();
+  const {
+    reviewData,
+    handleChange,
+  } = useReviewForm(session.user?.email, productId);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    await fetchData(
+      "POST",
+      `${process.env.HOMEPAGE_URL}/api/review`,
+      reviewData,
+    );
+
+    router.push(`/product/${productId}`);
+  }
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Textarea
           name="comment"
-          value={comment}
-          onChange={onChange}
+          value={reviewData.comment}
+          onChange={handleChange}
         />
       </FormGroup>
 
@@ -77,13 +93,13 @@ function ReviewForm({
       <RangeContainer>
         <RangeSlider
           name="recycleScore"
-          value={recycleScore}
+          value={reviewData.recycleScore}
           type="range"
           max="5"
           min="1"
           step="1"
           list="ticks1"
-          onChange={onChange}
+          onChange={handleChange}
         />
         <RangeDataList id="ticks1">
           <option value="1">1</option>
@@ -97,14 +113,14 @@ function ReviewForm({
       <h3>다음에도 이 제품을 또 구매하실건가요?</h3>
       <RangeContainer>
         <RangeSlider
-          name="recycleScore"
-          value={recycleScore}
+          name="preferenceScore"
+          value={reviewData.preferenceScore}
           type="range"
           max="5"
           min="1"
           step="1"
           list="ticks1"
-          onChange={onChange}
+          onChange={handleChange}
         />
         <RangeDataList id="ticks1">
           <option value="1">1</option>
