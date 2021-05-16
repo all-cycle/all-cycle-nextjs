@@ -43,6 +43,12 @@ const Image = styled.img`
 const SelectContainer = styled.section`
 `;
 
+const UpdateCount = styled.span`
+  font-size: 0.3em;
+  font-weight: 400;
+  margin-left: 2vw;
+`;
+
 export default function Manager({ count, productList }) {
   const [updateList, setUpdateList] = useState([]);
 
@@ -77,7 +83,10 @@ export default function Manager({ count, productList }) {
 
   return (
     <Container>
-      <h3>관리자페이지 {count}</h3>
+      <h3>
+        관리자페이지
+        <UpdateCount>업데이트 된 제품 수: {count}</UpdateCount>
+      </h3>
       <StyledButton onClick={updateData}>
         DB 업데이트
       </StyledButton>
@@ -137,6 +146,9 @@ export async function getServerSideProps() {
 
   // 몇개 새로 추가되었는지 알려줌
   return {
-    props: { count, productList },
+    props: {
+      count: count.data,
+      productList: productList.data,
+    },
   };
 }
