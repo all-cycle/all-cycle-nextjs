@@ -2,7 +2,6 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import styled from "styled-components";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faSearch,
@@ -25,14 +24,8 @@ const Container = styled.header`
   background-color: ${(props) => props.theme.white.color};
 `;
 
-const StyledIcon = styled(FontAwesomeIcon)`
-  width: 100%;
-  font-size: 8vw;
-  color: ${(props) => props.theme.gray.color};
-`;
-
 function Header() {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   return (
     <Container>

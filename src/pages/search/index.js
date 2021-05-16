@@ -38,11 +38,7 @@ function Search({ productList }) {
 
   return (
     <Container>
-      <SearchBar
-        keyword={filter.keyword}
-        onChange={handleKeywordChange}
-        onSubmit={sortWithKeyword}
-      />
+      <SearchBar sortWithKeyword={sortWithKeyword} />
       <FilterContainer>
         <ToggleButton onClick={initializeFilter}>필터 초기화</ToggleButton>
 
@@ -68,7 +64,7 @@ function Search({ productList }) {
 
       <StyledList>
         {sortedList?.map((product) => (
-          <NextLink key={product._id} href={`/product/${product._id}`}>
+          <NextLink key={product._id} href={`/search/${product._id}`}>
             <ProductItem product={product} />
           </NextLink>
         ))}

@@ -52,16 +52,12 @@ const ReviewButton = styled(StyledButton)`
   background-color: ${(props) => props.theme.graishGreen.color};
 `;
 
-function ReviewList({ id, reviews }) {
-  const router = useRouter();
-
+function ReviewList({ reviews, toggle }) {
   return (
     <Container>
       <Title>
         REVIEW
-        <ReviewButton
-          onClick={() => router.push(`/review/${id}`)}
-        >
+        <ReviewButton onClick={toggle}>
           작성하기
         </ReviewButton>
       </Title>

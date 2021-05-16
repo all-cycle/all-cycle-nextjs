@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.form`
@@ -20,13 +21,25 @@ const Input = styled.input`
   }
 `;
 
-function SearchBar({ keyword, onChange, onSubmit }) {
+function SearchBar({ sortWithKeyword }) {
+  const [keyword, setKeyword] = useState("");
+
+  function handleChange(e) {
+    setKeyword(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    sortWithKeyword(keyword);
+  }
+
   return (
-    <Container onSubmit={onSubmit}>
+    <Container onSubmit={handleSubmit}>
       <Input
         placeholder="Find Some"
+        name="keyword"
         value={keyword}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </Container>
   );

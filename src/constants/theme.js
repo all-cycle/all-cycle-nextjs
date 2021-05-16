@@ -43,6 +43,10 @@ const THEME = {
     title: "orange",
     color: "#F19949",
   },
+  red: {
+    title: "red",
+    color: "red",
+  },
 };
 
 export default THEME;

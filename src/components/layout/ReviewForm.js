@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useSession } from "next-auth/client";
-import { useRouter } from "next/router";
 import styled from "styled-components";
+import { faSmile, faSadTear } from "@fortawesome/free-solid-svg-icons";
 
+import fetchData from "@/utils/fetchData";
 import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/common/StyledButton";
-import fetchData from "@/utils/fetchData";
+import StyledIcon from "@/components/common/StyledIcon";
 
 const Form = styled.form`
+  padding: 1em;
 `;
 
 const FormGroup = styled.div`
@@ -30,21 +33,23 @@ const Textarea = styled.textarea`
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `;
 
-const RangeContainer = styled.div`
-  text-align: center;
+const RangeFigure = styled.figure`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 2em;
 `;
 
 const RangeSlider = styled.input`
   all: unset;
   width: 70vw;
-  height: 5vh;
+  height: 3vh;
   background-color: ${(props) => props.theme.lightGray.color};
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20%;
-    height: 5vh;
+    height: 3vh;
     background-color: ${(props) => props.theme.green.color};
   }
 
@@ -54,15 +59,48 @@ const RangeSlider = styled.input`
 `;
 
 const RangeDataList = styled.datalist`
-  width: 70%;
+  width: 100%;
   display: inline-flex;
   justify-content: space-between;
+  padding-top: 0.3em;
+  font-size: 0.8em;
   color: ${(props) => props.theme.gray.color};
 `;
 
-function ReviewForm({ productId }) {
+const Label = styled.label`
+  font-weight: 600;
+  margin-bottom: 1em;
+`;
+
+const FigCaption = styled.figcaption`
+  margin-bottom: 0.3em;
+`;
+
+const SmileIcon = styled(StyledIcon)`
+  margin: 0 0.8em;
+  color: ${(props) => props.theme.yellow.color};
+`;
+
+const SadIcon = styled(StyledIcon)`
+  margin: 0 0.8em;
+  color: ${(props) => props.theme.graishGreen.color};
+`;
+
+const RangeContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Message = styled.span`
+  margin: 0.7em;
+  font-size: 0.7em;
+  font-weight: 400;
+  color: ${(props) => props.theme.red.color};
+`;
+
+function ReviewForm({ productId, toggle }) {
   const [session] = useSession();
-  const router = useRouter();
+  const [message, setMessage] = useState("");
   const {
     reviewData,
     handleChange,
@@ -71,17 +109,23 @@ function ReviewForm({ productId }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await fetchData(
-      "POST",
-      `${process.env.HOMEPAGE_URL}/api/review`,
-      reviewData,
-    );
+    const response = await fetchData("POST", "/api/review", reviewData);
 
-    router.push(`/product/${productId}`);
+    if (response.result) {
+      toggle();
+      return;
+    }
+
+    setMessage("다시 시도해주세요.");
   }
+
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
+        <Label>
+          한줄평
+          {(message) && <Message>{message}</Message>}
+        </Label>
         <Textarea
           name="comment"
           value={reviewData.comment}
@@ -89,18 +133,22 @@ function ReviewForm({ productId }) {
         />
       </FormGroup>
 
-      <h3>재활용하기 편했다면 높은 점수를 줘 칭찬해주세요!</h3>
-      <RangeContainer>
-        <RangeSlider
-          name="recycleScore"
-          value={reviewData.recycleScore}
-          type="range"
-          max="5"
-          min="1"
-          step="1"
-          list="ticks1"
-          onChange={handleChange}
-        />
+      <FigCaption>재활용하기 편했다면 높은 점수를 줘 칭찬해주세요!</FigCaption>
+      <RangeFigure>
+        <RangeContainer>
+          <SmileIcon icon={faSmile} />
+          <RangeSlider
+            name="recycleScore"
+            value={reviewData.recycleScore}
+            type="range"
+            max="5"
+            min="1"
+            step="1"
+            list="ticks1"
+            onChange={handleChange}
+          />
+          <SadIcon icon={faSadTear} />
+        </RangeContainer>
         <RangeDataList id="ticks1">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -108,20 +156,24 @@ function ReviewForm({ productId }) {
           <option value="4">4</option>
           <option value="5">5</option>
         </RangeDataList>
-      </RangeContainer>
+      </RangeFigure>
 
-      <h3>다음에도 이 제품을 또 구매하실건가요?</h3>
-      <RangeContainer>
-        <RangeSlider
-          name="preferenceScore"
-          value={reviewData.preferenceScore}
-          type="range"
-          max="5"
-          min="1"
-          step="1"
-          list="ticks1"
-          onChange={handleChange}
-        />
+      <FigCaption>다음에도 이 제품을 또 구매하실건가요?</FigCaption>
+      <RangeFigure>
+        <RangeContainer>
+          <SmileIcon icon={faSmile} />
+          <RangeSlider
+            name="preferenceScore"
+            value={reviewData.preferenceScore}
+            type="range"
+            max="5"
+            min="1"
+            step="1"
+            list="ticks1"
+            onChange={handleChange}
+          />
+          <SadIcon icon={faSadTear} />
+        </RangeContainer>
         <RangeDataList id="ticks1">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -129,10 +181,9 @@ function ReviewForm({ productId }) {
           <option value="4">4</option>
           <option value="5">5</option>
         </RangeDataList>
-      </RangeContainer>
+      </RangeFigure>
 
-      {/* TODO insert CSR 함수실행 */}
-      <StyledButton type="submit">Confirm</StyledButton>
+      <StyledButton type="submit">작성완료</StyledButton>
     </Form>
   );
 }

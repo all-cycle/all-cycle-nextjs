@@ -1,44 +1,35 @@
 import { useState } from "react";
 
 function useSearch(productList) {
-  const [filter, setFilter] = useState({
+  const initialState = {
     recycleType: "all",
     productType: "all",
-    keyword: "",
-  });
+  };
+  const [filter, setFilter] = useState(initialState);
   const [sortedList, setSortedList] = useState(productList);
 
   function sortWithTypes(type, value) {
-    setSortedList(productList.filter((product) => product[type] === value));
+    setSortedList((prev) => prev.filter((product) => product[type] === value));
   }
 
   function initializeFilter(e) {
     e.stopPropagation();
+    setFilter(initialState);
     setSortedList(productList);
   }
 
-  function handleKeywordChange(e) {
-    e.stopPropagation();
-    setFilter((prev) => ({ ...prev, keyword: e.target.value }));
-  }
-
-  function sortWithKeyword(e) {
-    e.preventDefault();
-    const { keyword } = filter;
-
+  function sortWithKeyword(word) {
     setSortedList(productList.filter((product) => {
-      if (product.name.match(keyword)) {
+      if (product.name.match(word)) {
         return product;
       }
 
-      if (product.productType.match(keyword) || product.recycleType.match(keyword)) {
+      if (product.productType.match(word) || product.recycleType.match(word)) {
         return product;
       }
 
       return null;
     }));
-
-    setFilter((prev) => ({ ...prev, keyword: "" }));
   }
 
   return {
@@ -47,7 +38,6 @@ function useSearch(productList) {
     initializeFilter,
     sortWithKeyword,
     sortWithTypes,
-    handleKeywordChange,
   };
 }
 
