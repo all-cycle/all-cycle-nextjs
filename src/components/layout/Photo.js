@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Camera from "react-html5-camera-photo";
+import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 
 import fetchData from "@/utils/fetchData";
@@ -20,10 +20,11 @@ function Photo() {
     <div>
       <Camera
         onTakePhotoAnimationDone={handleTakePhoto}
+        idealFacingMode={FACING_MODES.ENVIRONMENT}
         isFullscreen={false}
         imageCompression={0.5}
         sizeFactor={0.5}
-        imageType="jpg"
+        imageType={IMAGE_TYPES.JPG}
       />
       <img src={dataUri} alt="hi" style={{ width: "100px", height: "80px" }} />
     </div>
