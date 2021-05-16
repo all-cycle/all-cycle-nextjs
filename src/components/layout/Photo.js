@@ -20,6 +20,7 @@ function Photo() {
     <div>
       <Camera
         onTakePhotoAnimationDone={handleTakePhoto}
+        isImageMirror={false}
         idealFacingMode={FACING_MODES.ENVIRONMENT}
         isFullscreen={false}
         imageCompression={0.5}
