@@ -5,17 +5,14 @@ import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 
 import useWindowSize from "@/hooks/useWindowSize";
 import Photo from "@/components/layout/Photo";
-import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
-  height: 30vh;
-  max-height: 30vh;
   text-align: center;
 `;
 
 function AnimationCamera() {
-  const [startCamera, setStartCamera] = useState(false);
   const { isMobile, idealResolution } = useWindowSize();
+  const [startCamera, setStartCamera] = useState(false);
 
   function handleStartCamera() {
     setStartCamera((prev) => !prev);
@@ -23,7 +20,6 @@ function AnimationCamera() {
 
   return (
     <Container>
-      <StyledButton onClick={handleStartCamera}>X</StyledButton>
       {startCamera
         ? (
           <Photo

@@ -6,36 +6,38 @@ function useWindowSize() {
     width: undefined,
     height: undefined,
   });
+  function handleResize() {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }
+
   const [isMobile, setIsMobile] = useState(false);
-  const [idealResolution, setIdealResolution] = useState({ width: 640, height: 480 });
+  const [idealResolution, setIdealResolution] = useState({ width: 375, height: 812 });
 
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // eslint-disable-next-line no-inner-declarations
-      function handleResize() {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-
-        if (window.innerWidth < 400) {
-          setIsMobile(true);
-          setIdealResolution({ width: 375, height: 812 });
-        }
-
-        if (window.innerWidth > 400) {
-          setIsMobile(false);
-          setIdealResolution({ width: 640, height: 480 });
-        }
-      }
-
-      window.addEventListener("resize", handleResize);
-
-      handleResize();
-
-      return () => window.removeEventListener("resize", handleResize);
+  function handleSetResolution() {
+    if (window.innerWidth <= 450) {
+      setIsMobile(true);
+      setIdealResolution({ width: 375, height: 812 });
+      return;
     }
+
+    setIsMobile(false);
+    setIdealResolution({ width: 640, height: 480 });
+  }
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.addEventListener("resize", handleSetResolution);
+
+    handleSetResolution();
+
+    // eslint-disable-next-line consistent-return
+    return () => window.removeEventListener("resize", handleSetResolution);
   }, []);
 
   return {

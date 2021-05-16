@@ -1,9 +1,15 @@
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import ImageContainer from "@/components/common/ImageContainer";
 import StyledListItem from "@/components/common/StyledListItem";
+import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
+  margin: 0.3em;
+  margin-top: 5vh;
+  border: 1px solid ${(props) => props.theme.graishGreen.color};
+  border-radius: 2vw;
 `;
 
 const Picture = styled.img`
@@ -14,6 +20,9 @@ const Picture = styled.img`
 `;
 
 const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 2vw;
   font-style: italic;
   font-size: 5vw;
@@ -35,37 +44,53 @@ const Comment = styled.div`
   color: ${(props) => props.theme.gray.color};
 `;
 
-function ReviewList({ reviews }) {
+const ReviewButton = styled(StyledButton)`
+  height: 2vh;
+  font-size: 0.7em;
+  border: none;
+  color: ${(props) => props.theme.white.color};
+  background-color: ${(props) => props.theme.graishGreen.color};
+`;
+
+function ReviewList({ id, reviews }) {
+  const router = useRouter();
+
   return (
     <Container>
-      <Title>REVIEW</Title>
-      {reviews.length > 0
-        && (reviews.map((review) => {
-          const {
-            _id,
-            userId,
-            productId,
-            recycleScore,
-            preferenceScore,
-            comment,
-            picture,
-          } = review;
+      <Title>
+        REVIEW
+        <ReviewButton
+          onClick={() => router.push(`/review/${id}`)}
+        >
+          작성하기
+        </ReviewButton>
+      </Title>
+      {reviews?.map((review) => {
+        const {
+          _id,
+          userId,
+          productId,
+          recycleScore,
+          preferenceScore,
+          comment,
+          picture,
+        } = review;
 
-          return (
-            <StyledListItem key={_id}>
-              <Content>
-                <UserId>{userId}</UserId>
-                {/* TODO 작성일 추가 */}
-                <Comment>{comment}</Comment>
-              </Content>
-              {picture && (
-                <ImageContainer>
-                  <Picture src={picture} alt="user review" />
-                </ImageContainer>
-              )}
-            </StyledListItem>
-          );
-        }))}
+        return (
+          <StyledListItem key={_id}>
+            <Content>
+              <UserId>{userId}</UserId>
+              {/* TODO 작성일 추가 */}
+              <Comment>{comment}</Comment>
+            </Content>
+            {picture && (
+              <ImageContainer>
+                <Picture src={picture} alt="user review" />
+              </ImageContainer>
+            )}
+          </StyledListItem>
+        );
+      })}
     </Container>
   );
 }

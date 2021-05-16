@@ -1,57 +1,29 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
+import useSearch from "@/hooks/useSearch";
 import fetchData from "@/utils/fetchData";
-import NextLink from "@/components/common/NextLink";
+import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
 import StyledButton from "@/components/common/StyledButton";
 import SearchBar from "@/components/common/SearchBar";
-import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
-import useSearch from "@/hooks/useSearch";
+import ProductItem from "@/components/common/ProductItem";
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
-`;
-
-const ProductList = styled.div`
-  width: 90%;
-  margin: auto;
-  margin-top: 15px;
-`;
-
-const ProductItem = styled.div`
-  display: flex;
-  height: 13vh;
-  padding: 0.7em;
-  border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
-
-  & + & {
-    margin-top: 10px;
-  }
-`;
-
-const ItemImage = styled.img`
-  height: 100%;
-`;
-
-const ItemInfo = styled.div`
-  max-width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: ${(props) => props.theme.gray.color};
-`;
-
-const Name = styled.div`
-  font-size: 1rem;
-`;
-
-const Score = styled.div`
-  color: ${(props) => props.theme.primary.color};
+  margin: 0;
 `;
 
 const ToggleButton = styled(StyledButton)`
   font-size: 0.3em;
   margin: 0.5em;
+`;
+
+const StyledList = styled.article`
+  width: 100%;
+  margin-top: 15px;
+`;
+
+const FilterContainer = styled.div`
+  padding: 1em;
 `;
 
 function Search({ productList }) {
@@ -71,7 +43,9 @@ function Search({ productList }) {
         onChange={handleKeywordChange}
         onSubmit={sortWithKeyword}
       />
-      <Container>
+      <FilterContainer>
+        <ToggleButton onClick={initializeFilter}>필터 초기화</ToggleButton>
+
         {PRODUCT_TYPES.map((productType) => (
           <ToggleButton
             key={JSON.stringify(productType)}
@@ -80,9 +54,7 @@ function Search({ productList }) {
             {productType[1]}
           </ToggleButton>
         ))}
-      </Container>
 
-      <Container>
         {RECYCLE_TYPES.map((recycleType) => (
           <ToggleButton
             key={JSON.stringify(recycleType)}
@@ -91,29 +63,16 @@ function Search({ productList }) {
             {recycleType[1]}
           </ToggleButton>
         ))}
-      </Container>
 
-      <ToggleButton onClick={initializeFilter}>필터 초기화</ToggleButton>
+      </FilterContainer>
 
-      <ProductList>
+      <StyledList>
         {sortedList?.map((product) => (
           <NextLink key={product._id} href={`/product/${product._id}`}>
-            <ProductItem>
-              <ItemImage src={product.imgUrl} alt={product.imgAlt} />
-              <ItemInfo>
-                <Name>{product.name}</Name>
-                <Score>
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                </Score>
-              </ItemInfo>
-            </ProductItem>
+            <ProductItem product={product} />
           </NextLink>
         ))}
-      </ProductList>
+      </StyledList>
     </Container>
   );
 }
@@ -121,9 +80,15 @@ function Search({ productList }) {
 export default Search;
 
 export async function getServerSideProps() {
-  const productList = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
+  const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
+
+  if (response.result) {
+    return {
+      props: { productList: response.data },
+    };
+  }
 
   return {
-    props: { productList },
+    props: { productList: [] },
   };
 }
