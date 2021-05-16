@@ -2,8 +2,8 @@ import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 
-import Logo from "@/components/layout/Logo";
 import HeadingLine from "@/components/common/HeadingLine";
+import AnimationCamera from "@/components/layout/AnimationCamera";
 
 const Container = styled.div`
   width: 100%;
@@ -32,8 +32,8 @@ export default function Main() {
   ]);
 
   return (
-    <Container id="modalRoot">
-      <Logo />
+    <Container>
+      <AnimationCamera />
       <HeadingLine title="TOP LANK ITEMS" />
       <TopItems>
         {topList.length && (

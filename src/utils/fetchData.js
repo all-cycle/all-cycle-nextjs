@@ -18,11 +18,7 @@ async function fetchData(method, url, data) {
 
     response = await response.json();
 
-    if (response.result) {
-      return response.data;
-    }
-
-    return "error occurs...";
+    return response;
   } catch (err) {
     return err.message;
   }

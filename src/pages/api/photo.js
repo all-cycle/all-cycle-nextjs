@@ -9,21 +9,34 @@ export default async (req, res) => {
     ],
   };
 
-  const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      // Referrer: process.env.GOOGLE_VISION_API_URL,
-    },
-    body: JSON.stringify(body),
-  });
+  try {
+    const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // Referrer: process.env.GOOGLE_VISION_API_URL,
+      },
+      body: JSON.stringify(body),
+    });
 
-  const parsed = await response.json();
-  console.log(parsed);
+    const parsed = await response.json();
 
-  res.json({
-    result: true,
-    data: parsed,
-  });
+    if (!Object.entries(parsed.responses[0]).length) {
+      return res.json({
+        result: false,
+        error: "TRY AGAIN!",
+      });
+    }
+
+    res.json({
+      result: true,
+      data: parsed.responses[0].fullTextAnnotation.text,
+    });
+  } catch (error) {
+    res.status(400).json({
+      result: false,
+      error: error.message,
+    });
+  }
 };

@@ -5,7 +5,7 @@ const Container = styled.article`
   height: 100%;
   min-height: 10vh;
   display: flex;
-  padding: 3vh 0;
+  padding: 0.3em;
 
   border-top: 1px solid ${(props) => props.theme.darkGreen.color};
 `;
