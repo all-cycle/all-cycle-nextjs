@@ -1,6 +1,8 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import styled from "styled-components";
+import imageToBase64 from "image-to-base64";
+// import base64Img from "base64-img";
 
 import ImageContainer from "@/components/common/ImageContainer";
 import NextLink from "@/components/common/NextLink";
@@ -68,14 +70,10 @@ export default function WebLetter({ letters }) {
     <Container>
       {/* 환경연합 링크 */}
       <EcoSeoulLogo />
-      <img src="data:image/png;base64,aHR0cDovL2Vjb3Nlb3VsLm9yLmtyL2FyY2hpdmVzL2NhdGVnb3J5LyVlYyU5ZSU5MCVlYiVhMyU4Yy93ZWJsZXR0ZXI=" alt="logo" />
+      <img src="aHR0cDovL2Vjb3Nlb3VsLm9yLmtyL3dwL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIxLzAxL+GEi+GFteGHgeGEieGFouGEkOGFqeGGvOGEhuGFruGGqy0xNDfhhJLhhakxLmpwZw==" alt="aaaiej" />
       <LetterContainer>
         {letters.map((letter) => {
-          const {
-            href,
-            title,
-            src,
-          } = letter;
+          const { href, title, src } = letter;
 
           return (
             <NextLink key={href} href={href}>
