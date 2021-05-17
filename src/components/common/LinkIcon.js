@@ -14,7 +14,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
 function LinkIcon({ iconName, href }) {
   const router = useRouter();
   const currentRoute = router.asPath.split("/")[1];
-  console.log(currentRoute);
   const color = `/${currentRoute}` === href ? "#3DD97E" : "#A69E9E";
 
   return (

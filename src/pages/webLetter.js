@@ -1,12 +1,15 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import styled from "styled-components";
-import imageToBase64 from "image-to-base64";
-// import base64Img from "base64-img";
+import fs from "fs";
+// import imageToBase64 from "image-to-base64";
+import base64Img from "base64-img";
 
 import ImageContainer from "@/components/common/ImageContainer";
 import NextLink from "@/components/common/NextLink";
 import EcoSeoulLogo from "@/components/common/EcoSeoulLogo";
+import { useEffect } from "react";
+import imageToBase64 from "image-to-base64";
 
 const Container = styled.div`
   display: flex;
@@ -62,15 +65,18 @@ const Plain = styled.div`
 `;
 
 export default function WebLetter({ letters }) {
+  // const url = "http://ecoseoul.or.kr/wp/wp-content/themes/ecoseoul/images/ecoseoul.png";
+
   if (!letters) {
     return <div>아직 로딩중</div>;
   }
+
+  console.log(letters);
 
   return (
     <Container>
       {/* 환경연합 링크 */}
       <EcoSeoulLogo />
-      <img src="aHR0cDovL2Vjb3Nlb3VsLm9yLmtyL3dwL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIxLzAxL+GEi+GFteGHgeGEieGFouGEkOGFqeGGvOGEhuGFruGGqy0xNDfhhJLhhakxLmpwZw==" alt="aaaiej" />
       <LetterContainer>
         {letters.map((letter) => {
           const { href, title, src } = letter;
@@ -80,8 +86,7 @@ export default function WebLetter({ letters }) {
               <LetterBox>
                 <LetterImageContainer>
                   <Image
-                    referrerPolicy="no-referrer"
-                    src={src}
+                    src={`data:image/png;base64,${src}`}
                     alt={title.slice(13)}
                   />
                 </LetterImageContainer>
@@ -105,16 +110,27 @@ export async function getStaticProps() {
 
   const letters = [];
 
-  $bodyList.each((i, elem) => {
+  $bodyList.each(async (i, elem) => {
     const { title } = elem.attribs;
     const { href } = elem.attribs;
     const src = $(elem).find("img").attr("src");
 
+    const encode = await imageToBase64(encodeURI(src));
+
+    // fs.writeFile(`/Users/soyoon/Documents/programming/2th/all-cycle/src/constants/${title}.js`,
+    //   encode, (err) => {
+    //     if (err) {
+    //       console.log(err.message);
+    //       return;
+    //     }
+    //   });
+
     letters.push({
       href,
       title,
-      src,
+      src: encode,
     });
+    console.log(letters);
   });
 
   return {
