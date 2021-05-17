@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
+import { useSession } from "next-auth/client";
 
 const Container = styled.div`
   position: fixed;
@@ -42,15 +43,24 @@ function Photo({ isMobile, idealResolution, onClick }) {
   const [dataUri, setDataUri] = useState("");
   const [isError, setIsError] = useState(false);
   const router = useRouter();
+  const [session] = useSession();
 
   async function handleTakePhoto(uri) {
     console.log("takePhoto");
     setDataUri(uri);
 
-    const response = await fetchData("POST", "/api/photo", uri);
+    const response = await fetchData(
+      "POST",
+      "/api/photo",
+      {
+        email: session.user.email,
+        uri,
+      },
+    );
 
     if (response.result) {
-      router.push(`/search/${response}`);
+      console.log("키워드인가!", response.data);
+      // router.push(`/search/${response.data}`);
       return;
     }
 
