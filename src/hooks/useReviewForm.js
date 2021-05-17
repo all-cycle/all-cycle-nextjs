@@ -1,9 +1,6 @@
 import { useState } from "react";
 
-function useReviewForm(
-  email,
-  productId,
-) {
+function useReviewForm(email, productId) {
   const [reviewData, setReviewData] = useState({
     email,
     productId,

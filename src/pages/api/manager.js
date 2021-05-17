@@ -65,10 +65,9 @@ export default async (req, res) => {
     for (let j = 0; j < productList.length; j++) {
       const { imgUrl, imgAlt, name } = productList[j];
 
-      // const regex = /\[[^)]*\]/;
-      // const brand = productName.split(regex);
-      let recycleType;
       const type = name.match(/\([^)]*\)/);
+
+      let recycleType;
       switch (type) {
         case "펫":
           recycleType = "plastic";
