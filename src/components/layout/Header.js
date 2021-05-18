@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { signIn, signOut, useSession } from "next-auth/client";
 import styled from "styled-components";
-
 import {
   faHome,
   faSearch,
@@ -10,6 +8,7 @@ import {
   faCogs,
   faSignInAlt,
   faSignOutAlt,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
 import LinkIcon from "@/components/common/LinkIcon";
@@ -32,6 +31,7 @@ function Header() {
       <LinkIcon iconName={faHome} href="/" />
       <LinkIcon iconName={faSearch} href="/search" />
 
+      <LinkIcon iconName={faGraduationCap} href="/quiz" />
       {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
       <LinkIcon iconName={faNewspaper} href="/webLetter" />
 
