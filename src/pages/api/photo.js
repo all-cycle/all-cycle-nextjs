@@ -29,12 +29,12 @@ export default async (req, res) => {
       });
     }
 
-    res.json({
+    return res.json({
       result: true,
       data: parsed.responses[0].fullTextAnnotation.text,
     });
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       result: false,
       error: error.message,
     });

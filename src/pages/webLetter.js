@@ -1,15 +1,12 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import styled from "styled-components";
 import fs from "fs";
-// import imageToBase64 from "image-to-base64";
-import base64Img from "base64-img";
+import styled from "styled-components";
+import imageToBase64 from "image-to-base64";
 
+import EcoSeoulLogo from "@/components/common/EcoSeoulLogo";
 import ImageContainer from "@/components/common/ImageContainer";
 import NextLink from "@/components/common/NextLink";
-import EcoSeoulLogo from "@/components/common/EcoSeoulLogo";
-import { useEffect } from "react";
-import imageToBase64 from "image-to-base64";
 
 const Container = styled.div`
   display: flex;
@@ -110,29 +107,59 @@ export async function getStaticProps() {
 
   const letters = [];
 
-  $bodyList.each(async (i, elem) => {
-    const { title } = elem.attribs;
-    const { href } = elem.attribs;
+  // NOTE 비동기처리를 해서 아랫부분이 먼저 실행되버리게 하다니이이이!
+  $bodyList.each((i, elem) => {
+    const { title, href } = elem.attribs;
     const src = $(elem).find("img").attr("src");
 
     const encode = await imageToBase64(encodeURI(src));
 
-    // fs.writeFile(`/Users/soyoon/Documents/programming/2th/all-cycle/src/constants/${title}.js`,
-    //   encode, (err) => {
-    //     if (err) {
-    //       console.log(err.message);
-    //       return;
-    //     }
-    //   });
+    fs.writeFile(`/Users/soyoon/Documents/programming/2th/all-cycle/src/constants/${title}.js`,
+      encode, (err) => {
+        if (err) {
+          console.log(err.message);
+          return;
+        }
 
-    letters.push({
-      href,
-      title,
-      src: encode,
+        letters.push({
+          href,
+          title,
+          src: encode,
+        });
+      });
     });
-    console.log(letters);
-  });
+  }
 
+  console.log($bodyList, Array.isArray($bodyList));
+
+  // return Promise.all(
+  //   $bodyList.each(async (i, elem) => {
+  //     const { title } = elem.attribs;
+  //     const { href } = elem.attribs;
+  //     const src = $(elem).find("img").attr("src");
+
+  //     const encode = await imageToBase64(encodeURI(src));
+
+  //     fs.writeFile(`/Users/soyoon/Documents/programming/2th/all-cycle/src/constants/${title}.js`,
+  //       encode, (err) => {
+  //         if (err) {
+  //           console.log(err.message);
+  //           return;
+  //         }
+
+  //         letters.push({
+  //           href,
+  //           title,
+  //           src: encode,
+  //         });
+  //       });
+  //   }),
+  // )
+  //   .then(() => ({
+  //     props: { letters }, // will be passed to the page component as props
+  //     revalidate: 60 * 60 * 1000 * 7,
+  //   }))
+  //   .catch((err) => console.log(err.message));
   return {
     props: { letters }, // will be passed to the page component as props
     revalidate: 60 * 60 * 1000 * 7,
