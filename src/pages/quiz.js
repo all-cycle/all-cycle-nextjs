@@ -77,6 +77,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
               isFullscreen={isMobile}
               imageCompression={0.9}
               isMaxResolution
+              sizeFactor={1}
               imageType={IMAGE_TYPES.JPG}
               isDisplayStartCameraError={false}
               idealResolution={idealResolution}
