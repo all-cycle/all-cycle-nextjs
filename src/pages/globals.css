@@ -16,7 +16,7 @@ a {
   box-sizing: border-box;
 }
 
-ul {
+ul, dl, dt, dd {
   all: unset;
 }
 

@@ -31,16 +31,28 @@ const Title = styled.div`
   background-color: ${(props) => props.theme.lightGreen.color};
 `;
 
-const Content = styled.div`
-  flex-basis: 70%;
+const Content = styled.dl`
+  width: 100%;
+  padding: 0.3em;
 `;
 
-const UserId = styled.div`
+const Info = styled.dt`
+  display: flex;
+  justify-content: space-between;
   font-size: 0.7em;
   color: ${(props) => props.theme.green.color};
 `;
 
-const Comment = styled.div`
+const UserName = styled.span`
+  font-size: 1rem;
+  margin-bottom: 0.3em;
+`;
+
+const CreatedAt = styled.span`
+  color: ${(props) => props.theme.gray.color};
+`;
+
+const Comment = styled.dd`
   color: ${(props) => props.theme.gray.color};
 `;
 
@@ -65,18 +77,22 @@ function ReviewList({ reviews, toggle }) {
         const {
           _id,
           userId,
+          username,
           productId,
           recycleScore,
           preferenceScore,
           comment,
           picture,
+          createdAt,
         } = review;
 
         return (
           <StyledListItem key={_id}>
             <Content>
-              <UserId>{userId}</UserId>
-              {/* TODO 작성일 추가 */}
+              <Info>
+                <UserName>{username}</UserName>
+                <CreatedAt>{createdAt.slice(0, 13)}</CreatedAt>
+              </Info>
               <Comment>{comment}</Comment>
             </Content>
             {picture && (
