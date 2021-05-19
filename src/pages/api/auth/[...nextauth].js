@@ -3,7 +3,6 @@ import Adapters from "next-auth/adapters";
 import Providers from "next-auth/providers";
 
 import User from "@/models";
-import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default NextAuth({
   site: process.env.NEXTAUTH_URL,

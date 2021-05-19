@@ -1,14 +1,12 @@
 import { useState } from "react";
 
 import fetchData from "@/utils/fetchData";
-import { useRouter } from "next/router";
 
 function useQuiz(answer, slug) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   async function checkAnswer(e) {
     e.preventDefault();
