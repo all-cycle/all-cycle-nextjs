@@ -20,6 +20,6 @@ alts: [
         'plastic-marks6',
         'plastic-marks7'
       ]
-description: "앞으로 재활용이 가능한 투명페트병은 별도 표기에 '바이오 HDPE', '바이오 LDPE', '바이오 PP', '바이오 PS'로 표시된다고 하니 재활용하기 좀더 쉬워질 것 같습니다."
+description: '앞으로 재활용이 가능한 투명페트병은 별도 표기에 <바이오 HDPE>, <바이오 LDPE>, <바이오 PP>, <바이오 PS>로 표시된다고 하니 재활용하기 좀더 쉬워질 것 같습니다.'
 category: 'plastic'
 ---

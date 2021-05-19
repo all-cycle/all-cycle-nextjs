@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import styled from "styled-components";
 
 import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
-import { useSession } from "next-auth/client";
 
 const Container = styled.div`
   position: fixed;

@@ -1,9 +1,9 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import connectDB from "@/utils/connectDB";
-
-import Product from "@/models/Product";
 import { getSession } from "next-auth/client";
+
+import connectDB from "@/utils/connectDB";
+import Product from "@/models/Product";
 
 // TODO constant로 관리
 const scrapOptions = {
