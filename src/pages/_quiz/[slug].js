@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-import { getAllQuizList, getQuizBySlug } from "@/utils/quizAPI";
-import StyledModal from "@/components/common/StyledModal";
 import AnswerModal from "@/components/layout/AnswerModal";
+import { getAllQuizList, getQuizBySlug } from "@/utils/quizAPI";
 import useQuiz from "@/hooks/useQuiz";
-import QuizOption from "@/components/layout/QuizOption";
 import Toggle from "@/components/common/Toggle";
+import StyledModal from "@/components/common/StyledModal";
+import QuizOption from "@/components/layout/QuizOption";
+import Message from "@/components/common/Message";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Container = styled.section`
   margin-top: 1.5em;
@@ -35,12 +38,13 @@ function Quiz({ quiz }) {
 
   const {
     result,
+    error,
     showAnswer,
     selectedOption,
     handleSelectOption,
     checkAnswer,
     handleReset,
-  } = useQuiz(answer);
+  } = useQuiz(answer, slug);
 
   return (
     <Container>
@@ -48,27 +52,33 @@ function Quiz({ quiz }) {
       <Question>
         {question}
       </Question>
-
-      {showAnswer ? (
+      {error && (
         <StyledModal>
-          <AnswerModal
-            realAnswer={realAnswer}
-            result={result}
-            description={description}
-            handleReset={handleReset}
-          />
+          <Message>{error}</Message>
         </StyledModal>
-      ) : (
-        <QuizOption
-          slug={slug}
-          examples={examples}
-          images={images}
-          alts={alts}
-          checkAnswer={checkAnswer}
-          selectedOption={selectedOption}
-          handleSelectOption={handleSelectOption}
-        />
       )}
+
+      {showAnswer
+        ? (
+          <StyledModal>
+            <AnswerModal
+              realAnswer={realAnswer}
+              result={result}
+              description={description}
+              handleReset={handleReset}
+            />
+          </StyledModal>
+        ) : (
+          <QuizOption
+            slug={slug}
+            examples={examples}
+            images={images}
+            alts={alts}
+            checkAnswer={checkAnswer}
+            selectedOption={selectedOption}
+            handleSelectOption={handleSelectOption}
+          />
+        )}
     </Container>
   );
 }

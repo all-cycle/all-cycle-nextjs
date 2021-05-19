@@ -1,4 +1,6 @@
+import Link from "next/link";
 import styled from "styled-components";
+import NextLink from "../common/NextLink";
 
 const Container = styled.section`
   height: 50%;
@@ -36,9 +38,12 @@ function AnswerModal({
   return (
     <Container>
       {result ? (
-        <Toggle color={result ? "#3DD97E" : "red"} size={0.8}>
-          정답입니다!!
-        </Toggle>
+        <>
+          <Toggle color={result ? "#3DD97E" : "red"} size={0.8}>
+            정답입니다!!
+          </Toggle>
+          <NextLink href="/myPage">뱃지 확인하러 가기</NextLink>
+        </>
       ) : (
         <>
           <Toggle onClick={handleReset}>다시풀기</Toggle>

@@ -76,8 +76,10 @@ function QuizOption({
   return (
     <Container>
       <Message>
-        {selectedOption && <AnswerButton onClick={checkAnswer}>정답확인</AnswerButton>}
+        {selectedOption
+          && <AnswerButton onClick={checkAnswer}>정답확인</AnswerButton>}
       </Message>
+
       {examples && (
         <Option>
           {examples.map((example, index) => (
@@ -94,6 +96,7 @@ function QuizOption({
           ))}
         </Option>
       )}
+
       {images && (
         <ImageOption>
           {images.map((image, index) => (

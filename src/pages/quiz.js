@@ -1,8 +1,10 @@
+import { useSession } from "next-auth/client";
 import Image from "next/image";
 import styled from "styled-components";
 
 import { getAllQuizList } from "@/utils/quizAPI";
 import NextLink from "@/components/common/NextLink";
+import AccessDenied from "@/components/common/AccessDenied";
 
 const Container = styled.div`
   width: 100%;
@@ -26,13 +28,17 @@ const BadgeContainer = styled.div`
 `;
 
 function Quiz({ allQuizList }) {
-  // 로그인 안했으면 로그인 하도록 redirect
+  const [session, loading] = useSession();
+
+  if (!session && loading) {
+    return <AccessDenied />;
+  }
 
   return (
     <Container>
       {allQuizList.map((quiz) => (
-        <BadgeContainer>
-          <NextLink key={quiz.slug} href={`/_quiz/${quiz.slug}`}>
+        <BadgeContainer key={quiz.slug}>
+          <NextLink href={`/_quiz/${quiz.slug}`} as={`/quiz/${quiz.slug}`}>
             <Image
               src={`/badges/${quiz.slug}.png`}
               alt="Flower pot Badge"

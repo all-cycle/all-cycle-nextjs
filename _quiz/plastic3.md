@@ -1,5 +1,5 @@
 ---
-question: "다음 중 '투명페트(PETE)'에 속하는 것을 모두 고르세요"
+question: "다음 중 '투명페트(PETE)'에 속하는 것을 모두 고른 것은?"
 answer: 'https://aws-all-cycle.s3.ap-northeast-2.amazonaws.com/quiz/plastic-bottle.png'
 realAnswer: '1번 일반 투명 생수병 용기'
 images: [

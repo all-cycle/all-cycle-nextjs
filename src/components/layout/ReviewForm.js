@@ -7,6 +7,7 @@ import fetchData from "@/utils/fetchData";
 import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/common/StyledButton";
 import StyledIcon from "@/components/common/StyledIcon";
+import AccessDenied from "../common/AccessDenied";
 
 const Form = styled.form`
   padding: 1em;
@@ -100,6 +101,11 @@ const Message = styled.span`
 
 function ReviewForm({ productId, toggle }) {
   const [session] = useSession();
+
+  if (!session) {
+    return <AccessDenied />;
+  }
+
   const [message, setMessage] = useState("");
   const {
     reviewData,
