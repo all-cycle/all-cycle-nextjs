@@ -34,7 +34,7 @@ function Header() {
       />
       <LinkIcon
         iconName={faSearch}
-        href="/product"
+        href="/search"
       />
       <LinkIcon
         iconName={faGraduationCap}

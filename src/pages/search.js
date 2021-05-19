@@ -26,7 +26,7 @@ const FilterContainer = styled.div`
   padding: 1em;
 `;
 
-function Product({ productList }) {
+function Search({ productList }) {
   const {
     filter,
     sortedList,
@@ -73,7 +73,7 @@ function Product({ productList }) {
   );
 }
 
-export default Product;
+export default Search;
 
 export async function getServerSideProps() {
   const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
