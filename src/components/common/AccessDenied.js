@@ -1,6 +1,6 @@
 import { signIn } from "next-auth/client";
 import styled from "styled-components";
-import StyledButton from "./StyledButton";
+import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
   height: 30vh;

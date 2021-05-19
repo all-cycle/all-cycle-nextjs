@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NextLink from "../common/NextLink";
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.section`
   height: 50%;
