@@ -2,7 +2,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 import styled from "styled-components";
 
-import ImageContainer from "@/components/common/ImageContainer";
+import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-import ImageContainer from "@/components/common/ImageContainer";
+import ImageContainer from "@/components/common/StyledImageContainer";
 import StyledListItem from "@/components/common/StyledListItem";
 import StyledButton from "@/components/common/StyledButton";
 

@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import LinkIcon from "@/components/common/LinkIcon";
+import { useRouter } from "next/router";
 
 const Container = styled.header`
   width: 100%;
@@ -28,15 +29,24 @@ function Header() {
 
   return (
     <Container>
-      <LinkIcon iconName={faHome} href="/" />
-      <LinkIcon iconName={faSearch} href="/search" />
-
-      <LinkIcon iconName={faGraduationCap} href="/quiz" />
-      {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
-      <LinkIcon iconName={faNewspaper} href="/webLetter" />
+      <LinkIcon
+        iconName={faHome}
+        href="/"
+      />
+      <LinkIcon
+        iconName={faSearch}
+        href="/product"
+      />
+      <LinkIcon
+        iconName={faGraduationCap}
+        href="/quiz"
+      />
+      <LinkIcon
+        iconName={faNewspaper}
+        href="/webLetter"
+      />
 
       {!session && (
-        // <StyledIcon icon={faSignInAlt} onClick={signIn} />
         <LinkIcon
           iconName={faSignInAlt}
           href="/api/auth/signin"
@@ -47,22 +57,28 @@ function Header() {
         />
       )}
       {session
-        && session.user.email === "maudlinsy@gmail.com"
-        && <LinkIcon iconName={faCogs} href="/manager" />}
-      {session && (
-        <>
-          <LinkIcon iconName={faUserCircle} href="/myPage" />
+        && session.user.email === process.env.MANAGER_ACCOUNT
+        ? (
           <LinkIcon
-            iconName={faSignOutAlt}
-            href="/api/auth/signout"
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
+            iconName={faCogs}
+            href="/manager"
           />
-          {/* <StyledIcon icon={faSignOutAlt} onClick={() => signOut()} /> */}
-        </>
-      )}
+        ) : (
+          <>
+            <LinkIcon
+              iconName={faUserCircle}
+              href="/myPage"
+            />
+            <LinkIcon
+              iconName={faSignOutAlt}
+              href="/api/auth/signout"
+              onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}
+            />
+          </>
+        )}
     </Container>
   );
 }

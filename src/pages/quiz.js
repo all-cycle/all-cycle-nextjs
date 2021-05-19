@@ -1,91 +1,71 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css";
+import { useSession } from "next-auth/client";
+import Image from "next/image";
 import styled from "styled-components";
 
-import fetchData from "@/utils/fetchData";
-import StyledButton from "@/components/common/StyledButton";
+import { getAllQuizList } from "@/utils/quizAPI";
+import NextLink from "@/components/common/NextLink";
+import AccessDenied from "@/components/common/AccessDenied";
 
 const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
-
-const ImagePreview = styled.img`
-  width: 100vw;
-  height: 100vh;
-`;
-
-const ToggleButton = styled(StyledButton)`
-  position: absolute;
-  top: 3vh;
-  left: 3vw;
-  color: ${(props) => props.theme.primary.color};
-  background-color: ${(props) => props.theme.white.color};
-`;
-
-const Message = styled.div`
   width: 100%;
-  position: fixed;
-  top: 40vh;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 150px;
+  align-content: center;
+  justify-content: center;
+  padding: 0.5em;
+  gap: 0.3em;
   font-size: 10vw;
-  color: ${(props) => props.theme.primary.color};
-  background-color: ${(props) => props.theme.white.color};
-  z-index: 2;
+  background-color: green;
 `;
 
-function Photo({ isMobile, idealResolution, onClick }) {
-  const [dataUri, setDataUri] = useState("");
-  const [isError, setIsError] = useState(false);
-  const router = useRouter();
+const BadgeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+`;
 
-  async function handleTakePhoto(uri) {
-    console.log("takePhoto");
-    setDataUri(uri);
+function Quiz({ allQuizList }) {
+  const [session, loading] = useSession();
 
-    const response = await fetchData("POST", "/api/photo", uri);
-
-    if (response.result) {
-      router.push(`/search/${response}`);
-      return;
-    }
-
-    setIsError(true);
-
-    setTimeout(() => {
-      setDataUri("");
-      setIsError(false);
-    }, 1000);
+  if (!session && loading) {
+    return <AccessDenied />;
   }
 
   return (
     <Container>
-      <ToggleButton onClick={onClick}>X</ToggleButton>
-      {isError && <Message>TRY AGAIN!</Message>}
-      {
-        (dataUri)
-          ? <ImagePreview src={dataUri} alt="photo by user" />
-          : (
-            <Camera
-              onTakePhotoAnimationDone={handleTakePhoto}
-              isImageMirror={false}
-              idealFacingMode={FACING_MODES.ENVIRONMENT}
-              isFullscreen={isMobile}
-              imageCompression={0.9}
-              isMaxResolution
-              sizeFactor={1}
-              imageType={IMAGE_TYPES.JPG}
-              isDisplayStartCameraError={false}
-              idealResolution={idealResolution}
+      {allQuizList.map((quiz) => (
+        <BadgeContainer key={quiz.slug}>
+          <NextLink href={`/_quiz/${quiz.slug}`} as={`/quiz/${quiz.slug}`}>
+            <Image
+              src={`/badges/${quiz.slug}.png`}
+              alt="Flower pot Badge"
+              width={100}
+              height={100}
             />
-          )
-      }
+          </NextLink>
+        </BadgeContainer>
+      ))}
     </Container>
   );
 }
 
-export default Photo;
+export default Quiz;
+
+export async function getStaticProps() {
+  const allQuizList = getAllQuizList([
+    "slug",
+    "question",
+    "examples",
+    "answer",
+    "realAnswer",
+    "description",
+    "category",
+  ]);
+
+  return {
+    props: { allQuizList },
+  };
+}
