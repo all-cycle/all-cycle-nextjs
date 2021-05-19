@@ -8,7 +8,6 @@ const Container = styled.section`
 `;
 
 const Option = styled.dd`
-  all: unset;
 `;
 
 const OptionButton = styled(StyledButton)`

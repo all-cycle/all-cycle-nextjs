@@ -7,14 +7,14 @@ import Toggle from "@/components/common/Toggle";
 import StyledModal from "@/components/common/StyledModal";
 import QuizOption from "@/components/layout/QuizOption";
 import Message from "@/components/common/Message";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 const Container = styled.section`
+  width: 100%;
   margin-top: 1.5em;
 `;
 
 const Question = styled.dt`
+  display: block;
   padding: 1em;
   font-size: 1.1em;
   border-radius: 2vw;
