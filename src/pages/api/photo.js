@@ -13,8 +13,8 @@ import {
 } from "@/constants/awsParams";
 import callVisionAPI from "@/utils/callVisionApi";
 
-const { AWS_ACCESS_ID, AWS_ACCESS_KEY } = process.env;
-AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID, AWS_ACCESS_KEY);
+const { AWS_ACCESS_ID, AWS_ACCESS_SECRET_KEY } = process.env;
+AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID, AWS_ACCESS_SECRET_KEY);
 
 export default async (req, res) => {
   const { email, uri } = req.body;
