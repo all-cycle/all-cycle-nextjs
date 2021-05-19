@@ -61,8 +61,12 @@ function Header() {
             href="/myPage"
           />
           <LinkIcon
-            iconName={faCogs}
-            href="/manager"
+            iconName={faSignOutAlt}
+            href="/api/auth/signout"
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
           />
         </>
       )}
