@@ -104,7 +104,7 @@ export async function getStaticProps() {
   const $bodyList = $("ul.cat-list > li").children("a");
 
   // NOTE 비동기처리를 해서 아랫부분이 먼저 실행되버리게 하다니이이이!
-  const asyncFn = $bodyList.map(async (i, elem) => {
+  const letterScraps = $bodyList.map(async (i, elem) => {
     const { title, href } = elem.attribs;
     const src = $(elem).find("img").attr("src");
     const url = encodeURI(src);
@@ -121,7 +121,7 @@ export async function getStaticProps() {
     };
   });
 
-  const letters = await Promise.all(asyncFn);
+  const letters = await Promise.all(letterScraps);
 
   return {
     props: { letters }, // will be passed to the page component as props

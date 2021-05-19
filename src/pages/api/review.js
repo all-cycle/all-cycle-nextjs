@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/client";
-import connectDB from "@/utils/connectDB";
 
+import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
 import Product from "@/models/Product";
 import Review from "@/models/Review";
