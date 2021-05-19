@@ -40,7 +40,7 @@ function Search({ productList }) {
     <Container>
       <SearchBar sortWithKeyword={sortWithKeyword} />
       <FilterContainer>
-        <ToggleButton onClick={initializeFilter}>필터 초기화</ToggleButton>
+        <ToggleButton onClick={initializeFilter}>검색 초기화</ToggleButton>
 
         {PRODUCT_TYPES.map((productType) => (
           <ToggleButton
