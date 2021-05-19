@@ -2,7 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 
-const quizDirectory = join(process.cwd(), "_quiz");
+const quizDirectory = join(process.cwd(), "/_quiz");
 
 export function getQuizSlugs() {
   return fs.readdirSync(quizDirectory);

@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router";
 
 const LinkTo = styled.a`
 `;
