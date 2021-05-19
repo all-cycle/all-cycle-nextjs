@@ -19,7 +19,7 @@ function LinkIcon({ iconName, href, size }) {
   return (
     <Link href={href} passHref>
       <LinkTo>
-        <StyledIcon icon={iconName} color={color} size={size || "8vw"} />
+        <StyledIcon icon={iconName} color={color} size={size || "2x"} />
       </LinkTo>
     </Link>
   );
