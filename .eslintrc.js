@@ -24,6 +24,7 @@ module.exports = {
     quotes: ["error", "double"],
     indent: ["error", 2, { SwitchCase: 1, MemberExpression: 1 }],
 
+    "consistent-return": "off",
     "no-plusplus": "off",
     "no-await-in-loop": "off",
     "import/export": 0,

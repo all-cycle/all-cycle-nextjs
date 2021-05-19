@@ -3,6 +3,7 @@ import cheerio from "cheerio";
 import connectDB from "@/utils/connectDB";
 
 import Product from "@/models/Product";
+import { getSession } from "next-auth/client";
 
 // TODO constant로 관리
 const scrapOptions = {
@@ -35,7 +36,15 @@ export default async (req, res) => {
   await connectDB();
 
   try {
-    // TODO req.body.회사이름 으로 받아서 일괄처리하자
+    const session = await getSession({ req });
+
+    if (!session) {
+      return res.json({
+        result: false,
+        error: "Unauthorized user",
+      });
+    }
+
     const {
       commonUrl,
       urls,

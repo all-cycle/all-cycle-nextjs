@@ -3,6 +3,7 @@ import AWS from "aws-sdk";
 
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
+import Product from "@/models/Product";
 import getImgBuffer from "@/utils/getImgBuffer";
 import {
   BUCKET,
@@ -20,6 +21,16 @@ export default async (req, res) => {
 
   try {
     const detectedText = await callVisionAPI(uri);
+    // const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
+    //   method: "post",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(body),
+    // });
+
+    // const parsed = await response.json();
 
     if (!detectedText.length) {
       res.json({
@@ -32,6 +43,9 @@ export default async (req, res) => {
     const keywords = textList.find((text) => text.length >= 2);
 
     await connectDB();
+    // const detectedProductText = parsed.responses[0].fullTextAnnotation.text.split(/\n/);
+
+    // const productNames = await Product.find().select("name");
 
     const s3 = new AWS.S3();
     const buffer = getImgBuffer(uri);

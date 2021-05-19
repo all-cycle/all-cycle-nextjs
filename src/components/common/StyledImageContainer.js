@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ImageContainer = styled.div`
+const StyledImageContainer = styled.div`
   flex-basis: 50%;
   height: 10vh;
   object-fit: cover;
@@ -11,4 +11,4 @@ const ImageContainer = styled.div`
   text-align: center;
 `;
 
-export default ImageContainer;
+export default StyledImageContainer;

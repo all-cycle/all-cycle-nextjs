@@ -12,6 +12,11 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async redirect() {
+      return "/";
+    },
+  },
   adapter: Adapters.TypeORM.Adapter(
     process.env.MONGODB_URI,
     {

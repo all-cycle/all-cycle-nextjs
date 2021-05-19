@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { faSmile, faSadTear } from "@fortawesome/free-solid-svg-icons";
 
+import AccessDenied from "@/components/common/AccessDenied";
 import fetchData from "@/utils/fetchData";
 import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/common/StyledButton";
@@ -100,11 +102,17 @@ const Message = styled.span`
 
 function ReviewForm({ productId, toggle }) {
   const [session] = useSession();
+  const router = useRouter();
+
+  if (!session) {
+    return <AccessDenied />;
+  }
+
   const [message, setMessage] = useState("");
   const {
     reviewData,
     handleChange,
-  } = useReviewForm(session.user?.email, productId);
+  } = useReviewForm(productId);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -113,6 +121,7 @@ function ReviewForm({ productId, toggle }) {
 
     if (response.result) {
       toggle();
+      router.replace(router.asPath);
       return;
     }
 
@@ -183,6 +192,7 @@ function ReviewForm({ productId, toggle }) {
         </RangeDataList>
       </RangeFigure>
 
+      <StyledButton onClick={toggle}>취소</StyledButton>
       <StyledButton type="submit">작성완료</StyledButton>
     </Form>
   );

@@ -59,8 +59,8 @@ function Photo({ isMobile, idealResolution, onClick }) {
     );
 
     if (response.result) {
-      console.log("키워드인가!", response.data);
-      // router.push(`/search/${response.data}`);
+      console.log(response.data);
+      // router.push(`/product/${response}`);
       return;
     }
 
@@ -86,7 +86,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
               idealFacingMode={FACING_MODES.ENVIRONMENT}
               isFullscreen={isMobile}
               imageCompression={0.9}
-              isMaxResolution={false}
+              // isMaxResolution={false}
               sizeFactor={0.9}
               imageType={IMAGE_TYPES.JPG}
               isDisplayStartCameraError={false}

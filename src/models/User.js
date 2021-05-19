@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   pictures: [String],
+  badges: [String],
 }, { timestamps: true });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

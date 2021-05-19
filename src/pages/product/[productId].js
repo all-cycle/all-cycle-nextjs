@@ -1,9 +1,12 @@
+import { useState } from "react";
+import { useSession } from "next-auth/client";
 import styled from "styled-components";
 
 import connectDB from "@/utils/connectDB";
 import fetchData from "@/utils/fetchData";
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/common/ScoreBar";
+import ReviewForm from "@/components/layout/ReviewForm";
 
 const Container = styled.div`
   margin: auto;
@@ -72,6 +75,17 @@ function ProductItem({ product }) {
     reviewers,
   } = product;
 
+  const [isList, setIsList] = useState(true);
+  const [session] = useSession();
+
+  function toggle() {
+    setIsList((prev) => !prev);
+  }
+
+  if (!session) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <ProductContainer>
@@ -81,23 +95,29 @@ function ProductItem({ product }) {
         </ProductInfo>
       </ProductContainer>
 
-      <ScoreContainer>
-        <Title>
-          재활용 점수
-          <Score>({recycleScoreAvg})</Score>
-        </Title>
-        <ScoreBar width={50} height={2} score={recycleScoreAvg} />
-      </ScoreContainer>
+      {isList ? (
+        <>
+          <ScoreContainer>
+            <Title>
+              재활용 점수
+              <Score>({recycleScoreAvg})</Score>
+            </Title>
+            <ScoreBar width={50} height={2} score={recycleScoreAvg} />
+          </ScoreContainer>
 
-      <ScoreContainer>
-        <Title>
-          선호도 점수
-          <Score>({recycleScoreAvg})</Score>
-        </Title>
-        <ScoreBar width={50} height={2} score={recycleScoreAvg} />
-      </ScoreContainer>
+          <ScoreContainer>
+            <Title>
+              선호도 점수
+              <Score>({recycleScoreAvg})</Score>
+            </Title>
+            <ScoreBar width={50} height={2} score={recycleScoreAvg} />
+          </ScoreContainer>
+          <ReviewList reviews={reviews} toggle={toggle} />
+        </>
+      ) : (
+        <ReviewForm productId={_id} toggle={toggle} />
+      )}
 
-      <ReviewList id={_id} reviews={reviews} />
     </Container>
   );
 }
