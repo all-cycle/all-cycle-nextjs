@@ -3,6 +3,7 @@ import Adapters from "next-auth/adapters";
 import Providers from "next-auth/providers";
 
 import User from "@/models";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default NextAuth({
   site: process.env.NEXTAUTH_URL,
@@ -12,6 +13,11 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async redirect() {
+      return "/";
+    },
+  },
   adapter: Adapters.TypeORM.Adapter(
     process.env.MONGODB_URI,
     {

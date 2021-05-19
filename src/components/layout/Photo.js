@@ -76,7 +76,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
               idealFacingMode={FACING_MODES.ENVIRONMENT}
               isFullscreen={isMobile}
               imageCompression={0.9}
-              isMaxResolution={false}
+              // isMaxResolution={false}
               sizeFactor={0.9}
               imageType={IMAGE_TYPES.JPG}
               isDisplayStartCameraError={false}

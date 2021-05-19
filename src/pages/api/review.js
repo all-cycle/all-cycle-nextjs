@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/client";
 import connectDB from "@/utils/connectDB";
 
 import User from "@/models/User";
@@ -10,13 +11,19 @@ export default async (req, res) => {
   const { method } = req;
 
   switch (method) {
-    case "GET":
-      // 마이페이지에서 나의 리뷰 다 가져오기
-      res.status(200).json({ result: true, data: "hi" });
-      break;
     case "POST": {
+      const session = await getSession({ req });
+
+      if (!session) {
+        return res.json({
+          result: false,
+          error: "Unauthorized user",
+        });
+      }
+
+      const { name, email } = session.user;
+
       const {
-        email,
         productId,
         comment,
         picture,
@@ -27,12 +34,15 @@ export default async (req, res) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        res.status(404).json({ result: false, error: "로그인을 하세요" });
-        return;
+        return res.status(404).json({
+          result: false,
+          error: "로그인을 하세요",
+        });
       }
 
       const review = await Review.create({
         userId: user._id,
+        username: name,
         productId,
         comment,
         picture,
@@ -43,6 +53,10 @@ export default async (req, res) => {
       user.reviews.push(review._id);
       await user.save();
 
+      const product = await Product.findById(productId);
+      const newRecycleScore = (Number(recycleScore) + product.recycleScoreAvg) / 2;
+      const newPreferenceScore = (Number(preferenceScore) + product.preferenceScoreAvg) / 2;
+
       await Product.findOneAndUpdate(
         { _id: productId },
         {
@@ -50,12 +64,18 @@ export default async (req, res) => {
             reviewers: user._id,
             reviews: review._id,
           },
+          $set: {
+            recycleScoreAvg: newRecycleScore,
+            preferenceScoreAvg: newPreferenceScore,
+          },
         },
         { new: true },
       );
 
-      res.status(200).json({ result: true, data: review });
-      break;
+      return res.status(200).json({
+        result: true,
+        data: review,
+      });
     }
     default:
       res.setHeader("Allow", ["GET", "POST"]);

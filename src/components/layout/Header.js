@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { signIn, signOut, useSession } from "next-auth/client";
 import styled from "styled-components";
-
 import {
   faHome,
   faSearch,
@@ -10,6 +8,7 @@ import {
   faCogs,
   faSignInAlt,
   faSignOutAlt,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
 import LinkIcon from "@/components/common/LinkIcon";
@@ -29,14 +28,24 @@ function Header() {
 
   return (
     <Container>
-      <LinkIcon iconName={faHome} href="/" />
-      <LinkIcon iconName={faSearch} href="/search" />
+      <LinkIcon
+        iconName={faHome}
+        href="/"
+      />
+      <LinkIcon
+        iconName={faSearch}
+        href="/product"
+      />
+      <LinkIcon
+        iconName={faGraduationCap}
+        href="/quiz"
+      />
+      <LinkIcon
+        iconName={faNewspaper}
+        href="/webLetter"
+      />
 
-      {/* NOTE 뉴스레터 누르면 dropdown 목록 나와서 유튜브/뉴스레터 메뉴 */}
-      <LinkIcon iconName={faNewspaper} href="/webLetter" />
-
-      {!session && (
-        // <StyledIcon icon={faSignInAlt} onClick={signIn} />
+      {!session ? (
         <LinkIcon
           iconName={faSignInAlt}
           href="/api/auth/signin"
@@ -45,13 +54,12 @@ function Header() {
             signIn();
           }}
         />
-      )}
-      {session
-        && session.user.email === "maudlinsy@gmail.com"
-        && <LinkIcon iconName={faCogs} href="/manager" />}
-      {session && (
+      ) : (
         <>
-          <LinkIcon iconName={faUserCircle} href="/myPage" />
+          <LinkIcon
+            iconName={faUserCircle}
+            href="/myPage"
+          />
           <LinkIcon
             iconName={faSignOutAlt}
             href="/api/auth/signout"
@@ -60,9 +68,16 @@ function Header() {
               signOut();
             }}
           />
-          {/* <StyledIcon icon={faSignOutAlt} onClick={() => signOut()} /> */}
         </>
       )}
+      {session
+        && session?.user.email === process.env.managerAccount
+        && (
+          <LinkIcon
+            iconName={faCogs}
+            href="/manager"
+          />
+        )}
     </Container>
   );
 }

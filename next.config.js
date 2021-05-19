@@ -9,4 +9,7 @@ module.exports = {
 
     return config;
   },
+  env: {
+    managerAccount: "maudlinsy@gmail.com",
+  },
 };
