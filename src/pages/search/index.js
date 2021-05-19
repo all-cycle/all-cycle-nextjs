@@ -5,7 +5,7 @@ import fetchData from "@/utils/fetchData";
 import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
 import StyledButton from "@/components/common/StyledButton";
 import SearchBar from "@/components/common/SearchBar";
-import ProductItem from "@/components/layout/ProductItem";
+import ProductItem from "@/components/common/ProductItem";
 import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
