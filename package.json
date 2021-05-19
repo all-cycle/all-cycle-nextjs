@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "aws-sdk": "^2.909.0",
     "axios": "^0.21.1",
     "cheerio": "*",
     "gray-matter": "^4.0.3",
@@ -23,7 +24,8 @@
     "react-dom": "^16.9.0",
     "react-html5-camera-photo": "^1.5.4",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.1",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0",
