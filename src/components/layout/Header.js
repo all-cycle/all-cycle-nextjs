@@ -71,7 +71,7 @@ function Header() {
         </>
       )}
       {session
-        && session?.user.email === process.env.managerAccount
+        && session?.user.email === "maudlinsy@gmail.com"
         && (
           <LinkIcon
             iconName={faCogs}
