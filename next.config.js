@@ -9,6 +9,9 @@ module.exports = {
 
     return config;
   },
+  images: {
+    domains: ["ecoseoul.or.kr"],
+  },
   env: {
     managerAccount: "maudlinsy@gmail.com",
   },
