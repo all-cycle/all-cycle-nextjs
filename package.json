@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "cheerio": "*",
     "gray-matter": "^4.0.3",
+    "image-downloader": "^4.0.2",
     "mongoose": "^5.12.7",
     "next": "^10.2.0",
     "next-auth": "^3.21.1",

@@ -147,7 +147,7 @@ export async function getServerSideProps() {
   // 몇개 새로 추가되었는지 알려줌
   return {
     props: {
-      count: count.data,
+      count: count.data || 0,
       productList: productList.data,
     },
   };
