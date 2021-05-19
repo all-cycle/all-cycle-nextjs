@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { faSmile, faSadTear } from "@fortawesome/free-solid-svg-icons";
 
+import AccessDenied from "@/components/common/AccessDenied";
 import fetchData from "@/utils/fetchData";
 import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/common/StyledButton";
 import StyledIcon from "@/components/common/StyledIcon";
-import AccessDenied from "../common/AccessDenied";
 
 const Form = styled.form`
   padding: 1em;

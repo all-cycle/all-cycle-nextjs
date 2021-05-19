@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import StyledButton from "@/components/common/StyledButton";
 import Toggle from "@/components/common/Toggle";
-import StyledList from "../common/StyledList";
+import StyledList from "@/components/common/StyledList";
 
 const Container = styled.section`
 `;

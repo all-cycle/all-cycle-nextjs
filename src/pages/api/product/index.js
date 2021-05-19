@@ -1,5 +1,4 @@
 import connectDB from "@/utils/connectDB";
-
 import Product from "@/models/Product";
 
 export default async (req, res) => {

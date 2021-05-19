@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSession } from "next-auth/client";
 import styled from "styled-components";
 
 import connectDB from "@/utils/connectDB";
@@ -6,7 +7,6 @@ import fetchData from "@/utils/fetchData";
 import ReviewList from "@/components/layout/ReviewList";
 import ScoreBar from "@/components/common/ScoreBar";
 import ReviewForm from "@/components/layout/ReviewForm";
-import { useSession } from "next-auth/client";
 
 const Container = styled.div`
   margin: auto;
