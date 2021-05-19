@@ -1,6 +1,6 @@
 {
   "name": "all-cycle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "cheerio": "*",
+    "image-downloader": "^4.0.2",
     "gray-matter": "^4.0.3",
     "mongoose": "^5.12.7",
     "next": "^10.2.0",

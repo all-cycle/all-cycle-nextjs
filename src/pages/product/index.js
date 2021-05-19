@@ -64,7 +64,7 @@ function Search({ productList }) {
 
       <StyledList>
         {sortedList?.map((product) => (
-          <NextLink key={product._id} href={`/product/${product._id}`}>
+          <NextLink key={product._id} href={`/search/${product._id}`}>
             <ProductItem product={product} />
           </NextLink>
         ))}
