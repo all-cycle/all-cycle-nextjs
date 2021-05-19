@@ -12,4 +12,7 @@ module.exports = {
   env: {
     managerAccount: "maudlinsy@gmail.com",
   },
+  images: {
+    domains: ["ecoseoul.or.kr"],
+  },
 };
