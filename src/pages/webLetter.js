@@ -104,24 +104,38 @@ export async function getStaticProps() {
   const $bodyList = $("ul.cat-list > li").children("a");
 
   // NOTE 비동기처리를 해서 아랫부분이 먼저 실행되버리게 하다니이이이!
-  const letterScraps = $bodyList.map(async (i, elem) => {
-    const { title, href } = elem.attribs;
+  // const letterScraps = $bodyList.map(async (i, elem) => {
+  //   const { title, href } = elem.attribs;
+  //   const src = $(elem).find("img").attr("src");
+  //   const url = encodeURI(src);
+
+  //   await imgDownload.image({
+  //     url,
+  //     dest: `${process.cwd()}/public/_assets/${title.slice(7, 10)}.jpg`,
+  //   });
+
+  //   return {
+  //     href,
+  //     title,
+  //     img: `/_assets/${title.slice(7, 10)}.jpg`,
+  //   };
+  // });
+
+  // const letters = await Promise.all(letterScraps);
+
+  const letters = [];
+
+  $bodyList.each((i, elem) => {
+    const { title } = elem.attribs;
+    const { href } = elem.attribs;
     const src = $(elem).find("img").attr("src");
-    const url = encodeURI(src);
 
-    await imgDownload.image({
-      url,
-      dest: `${process.cwd()}/public/_assets/${title.slice(7, 10)}.jpg`,
-    });
-
-    return {
+    letters.push({
       href,
       title,
-      img: `/_assets/${title.slice(7, 10)}.jpg`,
-    };
+      src,
+    });
   });
-
-  const letters = await Promise.all(letterScraps);
 
   return {
     props: { letters }, // will be passed to the page component as props
