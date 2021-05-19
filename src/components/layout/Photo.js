@@ -50,7 +50,8 @@ function Photo({ isMobile, idealResolution, onClick }) {
     const response = await fetchData("POST", "/api/photo", uri);
 
     if (response.result) {
-      router.push(`/search/${response}`);
+      console.log(response.data);
+      // router.push(`/product/${response}`);
       return;
     }
 

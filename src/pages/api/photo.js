@@ -1,3 +1,6 @@
+import Product from "@/models/Product";
+import connectDB from "@/utils/connectDB";
+
 export default async (req, res) => {
   const base64 = req.body.slice(23);
   const body = {
@@ -15,7 +18,6 @@ export default async (req, res) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // Referrer: process.env.GOOGLE_VISION_API_URL,
       },
       body: JSON.stringify(body),
     });
@@ -28,6 +30,11 @@ export default async (req, res) => {
         error: "TRY AGAIN!",
       });
     }
+
+    await connectDB();
+    const detectedProductText = parsed.responses[0].fullTextAnnotation.text.split(/\n/);
+
+    const productNames = await Product.find().select("name");
 
     return res.json({
       result: true,
