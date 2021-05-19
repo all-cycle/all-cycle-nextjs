@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.article`
+const Container = styled.li`
   width: 100%;
   height: 100%;
   min-height: 10vh;

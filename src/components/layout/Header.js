@@ -12,7 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import LinkIcon from "@/components/common/LinkIcon";
-import { useRouter } from "next/router";
 
 const Container = styled.header`
   width: 100%;
@@ -46,7 +45,7 @@ function Header() {
         href="/webLetter"
       />
 
-      {!session && (
+      {!session ? (
         <LinkIcon
           iconName={faSignInAlt}
           href="/api/auth/signin"
@@ -55,29 +54,29 @@ function Header() {
             signIn();
           }}
         />
+      ) : (
+        <>
+          <LinkIcon
+            iconName={faUserCircle}
+            href="/myPage"
+          />
+          <LinkIcon
+            iconName={faSignOutAlt}
+            href="/api/auth/signout"
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          />
+        </>
       )}
       {session
-        && session.user.email === process.env.MANAGER_ACCOUNT
-        ? (
+        && session?.user.email === process.env.managerAccount
+        && (
           <LinkIcon
             iconName={faCogs}
             href="/manager"
           />
-        ) : (
-          <>
-            <LinkIcon
-              iconName={faUserCircle}
-              href="/myPage"
-            />
-            <LinkIcon
-              iconName={faSignOutAlt}
-              href="/api/auth/signout"
-              onClick={(e) => {
-                e.preventDefault();
-                signOut();
-              }}
-            />
-          </>
         )}
     </Container>
   );
