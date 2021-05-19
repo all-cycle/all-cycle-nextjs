@@ -9,7 +9,7 @@ const Container = styled.section`
   border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
 `;
 
-const InfoContainer = styled.dl`
+const InfoContainer = styled.div`
   width: 100%;
   height: 80%;
   display: flex;
@@ -22,11 +22,11 @@ const ItemImage = styled.img`
   height: 100%;
 `;
 
-const Name = styled.dt`
+const Name = styled.div`
   font-size: 0.8em;
 `;
 
-const Title = styled.dd`
+const Title = styled.div`
   all: unset;
   font-size: 0.5em;
   margin-right: 0.5em;

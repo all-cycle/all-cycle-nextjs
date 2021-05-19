@@ -30,12 +30,12 @@ const Title = styled.div`
   background-color: ${(props) => props.theme.lightGreen.color};
 `;
 
-const Content = styled.dl`
+const Content = styled.div`
   width: 100%;
   padding: 0.3em;
 `;
 
-const Info = styled.dt`
+const Info = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 0.7em;
@@ -51,7 +51,7 @@ const CreatedAt = styled.span`
   color: ${(props) => props.theme.gray.color};
 `;
 
-const Comment = styled.dd`
+const Comment = styled.div`
   color: ${(props) => props.theme.gray.color};
 `;
 

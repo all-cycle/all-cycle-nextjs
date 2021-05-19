@@ -19,11 +19,11 @@ const Toggle = styled.span`
   background-color: ${(props) => props.color || props.theme.green.color};
 `;
 
-const Answer = styled.dt`
+const Answer = styled.div`
   font-size: 0.8em;
 `;
 
-const Description = styled.dd`
+const Description = styled.div`
   all: unset;
   font-size: 0.9em;
 `;

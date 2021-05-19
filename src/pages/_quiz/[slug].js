@@ -13,7 +13,7 @@ const Container = styled.section`
   margin-top: 1.5em;
 `;
 
-const Question = styled.dt`
+const Question = styled.div`
   display: block;
   padding: 1em;
   font-size: 1.1em;

@@ -7,7 +7,7 @@ import StyledList from "@/components/common/StyledList";
 const Container = styled.section`
 `;
 
-const Option = styled.dd`
+const Option = styled.div`
 `;
 
 const OptionButton = styled(StyledButton)`
