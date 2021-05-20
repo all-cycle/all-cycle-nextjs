@@ -5,34 +5,36 @@ import User from "@/models/User";
 import Product from "@/models/Product";
 import getImgBuffer from "@/utils/getImgBuffer";
 import callVisionAPI from "@/utils/callVisionAPI";
+// import {
+//   BUCKET,
+//   ACL,
+//   CONTENT_ENCODING,
+//   CONTENT_TYPE,
+// } from "@/constants/awsParams";
+
+// const { AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP } = process.env;
+// AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP);
+
+// AWS.config.update({
+//   accessKeyId: process.env.AWS_ACCESS_ID_MYAPP,
+//   secretAccessKey: process.env.AWS_ACCESS_KEY_MYAPP,
+//   region: process.env.AWS_REGION_MYAPP,
+//   bucketname: process.env.AWS_BUCKET_NAME,
+// });
+
+// New S3 class
+// const s3 = new AWS.S3();
 
 export default async (req, res) => {
-  const base64 = req.body.slice(23);
-  const body = {
-    requests: [
-      {
-        image: { content: base64 },
-        features: [{ type: "DOCUMENT_TEXT_DETECTION", maxResults: 10 }],
-      },
-    ],
-  };
+  const { email, uri } = req.body;
 
   try {
-    const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const detectedText = await callVisionAPI(uri);
 
-    const parsed = await response.json();
-
-    if (!Object.entries(parsed.responses[0]).length) {
-      return res.json({
+    if (!detectedText.length) {
+      res.json({
         result: false,
-        error: "TRY AGAIN!",
+        error: "TRY AGAIN!!",
       });
     }
 
