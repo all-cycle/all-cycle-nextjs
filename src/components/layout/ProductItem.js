@@ -7,6 +7,8 @@ const Container = styled.section`
   align-items: center;
   height: 15vh;
   border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
+  font-family: ${(props) => props.theme.font};
+  padding: 0.7em;
 `;
 
 const InfoContainer = styled.dl`
@@ -15,7 +17,7 @@ const InfoContainer = styled.dl`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 0;
+  padding-left: 1em;
 `;
 
 const ItemImage = styled.img`
@@ -29,7 +31,7 @@ const Name = styled.dt`
 const Title = styled.dd`
   all: unset;
   font-size: 0.5em;
-  margin-right: 0.5em;
+  margin-left: 1.5em;
 `;
 
 const Score = styled.span`
@@ -37,9 +39,10 @@ const Score = styled.span`
 `;
 
 const ScoreContainer = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 1em;
 `;
 
 function ProductItem({ product }) {

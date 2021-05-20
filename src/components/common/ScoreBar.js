@@ -16,6 +16,7 @@ const Width = css`
 
 const Bar = styled.div`
   height: 100%;
+  max-width: 100px;
   border-radius: 3vw;
   background-color: ${(props) => props.theme.primary.color};
   box-shadow: inset 0px 0px 11px rgba(0, 0, 0, 0.15);
