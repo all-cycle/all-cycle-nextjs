@@ -47,6 +47,8 @@ const THEME = {
     title: "red",
     color: "red",
   },
+  fontEng: "Montserrat, sans-serif",
+  fontKor: "Nanum Gothic, sans-serif",
 };
 
 export default THEME;

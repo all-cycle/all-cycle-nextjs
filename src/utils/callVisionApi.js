@@ -13,8 +13,6 @@ async function callVisionAPI(uri) {
 
   try {
     const data = await fetchData("POST", process.env.GOOGLE_VISION_API_URL, body);
-    // console.log("1", data.responses[0].textAnnotations[0].description);
-    // console.log("2", data.responses[0].fullTextAnnotation.text);
 
     if (!Object.entries(data.responses[0]).length) {
       return [];

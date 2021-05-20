@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 import HeadingLine from "@/components/common/HeadingLine";
-import AnimationCamera from "@/components/layout/AnimationCamera";
+import MainCamera from "@/components/layout/MainCamera";
 
 const Container = styled.div`
   width: 100%;
@@ -33,7 +33,7 @@ export default function Main() {
 
   return (
     <Container>
-      <AnimationCamera />
+      <MainCamera />
       <HeadingLine title="TOP LANK ITEMS" />
       <TopItems>
         {topList.length && (
@@ -43,8 +43,8 @@ export default function Main() {
               <Image
                 src={product}
                 alt={product}
-                width="100"
-                height="100"
+                width={100}
+                height={100}
               />
             </Thumbnail>
           ))
