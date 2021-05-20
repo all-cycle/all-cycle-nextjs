@@ -59,7 +59,7 @@ const Image = styled.img`
 
 const LetterTitle = styled.div`
   flex-basis: 50%;
-  padding: 1em;
+  padding: 1em 0.2EM;
   overflow: hidden;
 `;
 
@@ -72,7 +72,8 @@ const Plain = styled.div`
   border-radius: 2vw;
   padding: 0.5em;
   font-size: 3vw;
-  background-color: ${(props) => props.theme.white.color};
+  word-spacing: 1px;
+  line-height: 2em;
 `;
 
 export default function WebLetter({ letters }) {

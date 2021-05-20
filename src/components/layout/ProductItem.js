@@ -1,14 +1,30 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import ScoreBar from "@/components/common/ScoreBar";
+
+const backgroundColor = css`
+  ${({ isEven }) => {
+    if (isEven) {
+      return css`
+        background-color: ${(props) => props.theme.lightGray.color};
+      `;
+    }
+
+    return css`
+      background-color: ${(props) => props.theme.white.color};;
+    `;
+  }}
+`;
 
 const Container = styled.section`
   display: flex;
   align-items: center;
   height: 15vh;
   border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
-  font-family: ${(props) => props.theme.font};
+  font-family: ${(props) => props.theme.fontKor};
   padding: 0.7em;
+
+  ${backgroundColor}
 `;
 
 const InfoContainer = styled.dl`
@@ -45,7 +61,7 @@ const ScoreContainer = styled.div`
   align-items: center;
 `;
 
-function ProductItem({ product }) {
+function ProductItem({ product, isEven }) {
   const {
     _id,
     name,
@@ -56,7 +72,7 @@ function ProductItem({ product }) {
   } = product;
 
   return (
-    <Container>
+    <Container isEven={isEven}>
       <ItemImage src={imgUrl} alt={imgAlt} />
       <InfoContainer>
         <Name>{name}</Name>

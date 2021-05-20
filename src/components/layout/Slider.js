@@ -1,58 +1,64 @@
-import Link from "next/link";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
-  width: 80vw;
-  max-width: 640px;
+  width: 1000px;
   margin: auto;
-  overflow: hidden;
+`;
+
+const scroll = keyframes`
+  0% {
+    transform: translateX(0);
+   }
+	100% {
+    transform: translateX(calc(-100px * 6));
+  }
 `;
 
 const SliderContainer = styled.div`
-  width: 100%;
+  width: calc(100px * 10);
+  position: relative;
   display: flex;
+  animation: ${scroll} 20s linear infinite;
+  overflow: hidden;
 `;
 
-const Wrapper = styled.a`
-  width: 100%;
-  cursor: pointer;
+const ItemImage = styled.img`
+  width: 100px;
+  height: 100%;
+
+  &:focus {
+    transform: scale(1.2);
+  }
 `;
 
-const IMG = styled.img`
-  border-radius: 2vw;
-`;
+const ImageContainer = styled.div`
+  flex-basis: 50%;
+  height: 12vh;
+  object-fit: cover;
+  border-top-left-radius: 5vw;
+  border-bottom-left-radius: 5vw;
 
-const ImgTitle = styled.div`
-  position: absolute;
-  top: 1.5vh;
-  width: 100%;
+  /* NOTE 사진에서도 text-align 먹히는지 확인 */
   text-align: center;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  color: ${(props) => props.theme.white.color};
-  background-color: ${(props) => props.theme.lightGreen.color};
 `;
 
-function Slider({
-  list,
-  slideRef,
-}) {
+function Slider({ list }) {
+  const carouselList = list.concat(list[0]);
+
   return (
     <Container>
-      <SliderContainer ref={slideRef}>
-        {list.map((letter) => {
-          const { href, src, title } = letter;
+      <SliderContainer>
+        {carouselList.map((letter) => {
+          const { _id, imgUrl, imgAlt } = letter;
 
           return (
-            <Link key={href} href={href} passHref>
-              <Wrapper>
-                <IMG
-                  src={src}
-                  alt={title.slice(13)}
-                />
-                <ImgTitle>{title}</ImgTitle>
-              </Wrapper>
-            </Link>
+            <NextLink key={_id + Math.random(2)} href={`/product/${_id}`}>
+              <ImageContainer>
+                <ItemImage src={imgUrl} alt={imgAlt} />
+              </ImageContainer>
+            </NextLink>
           );
         })}
       </SliderContainer>

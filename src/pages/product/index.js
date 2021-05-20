@@ -63,9 +63,9 @@ function Search({ productList }) {
       </FilterContainer>
 
       <StyledList>
-        {sortedList?.map((product) => (
+        {sortedList?.map((product, index) => (
           <NextLink key={product._id} href={`/product/${product._id}`}>
-            <ProductItem product={product} />
+            <ProductItem product={product} isEven={index % 2} />
           </NextLink>
         ))}
       </StyledList>

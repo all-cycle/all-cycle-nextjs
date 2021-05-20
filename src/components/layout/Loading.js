@@ -33,6 +33,7 @@ const RecycleMark = styled.div`
 function Loading() {
   return (
     <Container>
+      <div>ALL CYCLE</div>
       <RecycleMark>
         <FontAwesomeIcon icon={faRecycle} size="5x" />
       </RecycleMark>

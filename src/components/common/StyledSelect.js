@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 1vh;
 `;
 
 const Label = styled.label`
   padding: 0.4em;
   font-size: 3vw;
-  background-color: ${(props) => props.theme.lightGray.color};
-  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  font-family: ${(props) => props.theme.fontEng};
 `;
 
 const Select = styled.select`
@@ -17,9 +19,13 @@ const Select = styled.select`
   font-size: 3vw;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.gray.color};
+  font-family: ${(props) => props.theme.fontKor};
 `;
 
 const Option = styled.option`
+  &:focus {
+    outline: none;
+  }
 `;
 
 function StyledSelect({
@@ -43,7 +49,7 @@ function StyledSelect({
             value={type}
             // selected={type === defaultType}
           >
-            {type}
+            {type[1]}
           </Option>
         ))}
       </Select>

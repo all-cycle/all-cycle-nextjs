@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { getAllQuizList } from "@/utils/quizAPI";
 import NextLink from "@/components/common/NextLink";
 import AccessDenied from "@/components/common/AccessDenied";
+import Loading from "@/components/layout/Loading";
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +31,11 @@ const BadgeContainer = styled.div`
 function Quiz({ allQuizList }) {
   const [session, loading] = useSession();
 
-  if (!session && loading) {
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!session) {
     return <AccessDenied />;
   }
 
