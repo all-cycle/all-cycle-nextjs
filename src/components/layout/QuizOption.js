@@ -2,13 +2,19 @@ import styled from "styled-components";
 
 import StyledButton from "@/components/common/StyledButton";
 import Toggle from "@/components/common/Toggle";
-import StyledList from "@/components/common/StyledList";
 
 const Container = styled.section`
+  width: 100%;
+  padding: 0.5em 1em;
 `;
 
-const Option = styled.dd`
-  all: unset;
+const OptionList = styled.ul`
+`;
+
+const Option = styled.li`
+  & + & {
+    margin-top: 0.3em;
+  }
 `;
 
 const OptionButton = styled(StyledButton)`
@@ -35,7 +41,7 @@ const Caption = styled.figcaption`
   z-index: 1;
 `;
 
-const ImageOption = styled.div`
+const ImageOptionList = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 110px);
@@ -44,7 +50,7 @@ const ImageOption = styled.div`
   justify-content: center;
 `;
 
-const ImageContainer = styled.div`
+const ImageOption = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.primary.color};
@@ -81,9 +87,9 @@ function QuizOption({
       </Message>
 
       {examples && (
-        <Option>
+        <OptionList>
           {examples.map((example, index) => (
-            <StyledList key={slug + example}>
+            <Option key={slug + example}>
               <Caption>{index + 1}</Caption>
               <OptionButton
                 key={slug}
@@ -92,23 +98,23 @@ function QuizOption({
               >
                 {example}
               </OptionButton>
-            </StyledList>
+            </Option>
           ))}
-        </Option>
+        </OptionList>
       )}
 
       {images && (
-        <ImageOption>
+        <ImageOptionList>
           {images.map((image, index) => (
-            <ImageContainer
+            <ImageOption
               key={alts[index]}
               onClick={() => handleSelectOption(image)}
             >
               <Caption>{index + 1}</Caption>
               <Picture src={image} alt={alts[index]} />
-            </ImageContainer>
+            </ImageOption>
           ))}
-        </ImageOption>
+        </ImageOptionList>
       )}
     </Container>
   );

@@ -9,16 +9,18 @@ import QuizOption from "@/components/layout/QuizOption";
 import Message from "@/components/common/Message";
 
 const Container = styled.section`
+  width: 100%;
   margin-top: 1.5em;
 `;
 
-const Question = styled.dt`
+const Question = styled.div`
   padding: 1em;
   font-size: 1.1em;
   border-radius: 2vw;
   border: 1px solid ${(props) => props.theme.green.color};
 
   margin: 1em;
+  margin-bottom: auto;
 `;
 
 function Quiz({ quiz }) {
