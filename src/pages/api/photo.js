@@ -18,7 +18,6 @@ AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY
 
 export default async (req, res) => {
   const { body } = req;
-  console.log("uriiiiiii");
 
   try {
     const session = await getSession({ req });
@@ -31,7 +30,6 @@ export default async (req, res) => {
     }
 
     const { email } = session.user;
-    console.log(email, "emailalailaia");
 
     const detectedText = await callVisionAPI(body);
 

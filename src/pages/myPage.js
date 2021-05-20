@@ -1,28 +1,39 @@
-import { useSession } from "next-auth/client";
+import { useSession, signIn } from "next-auth/client";
 import styled from "styled-components";
+
+import fetchData from "@/utils/fetchData";
+import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
 `;
 
-export default function MyPage() {
-  const [session] = useSession();
-  // Call this function whenever you want to
-  // refresh props!
-  // const refreshData = () => {
-  //   router.replace(router.asPath);
-  // };
+export default function MyPage({ userInfo }) {
+  // const [session] = useSession();
 
-  if (session) {
-    return (
-      <Container>
-        <h1>{session.user.email}</h1>
-      </Container>
-    );
-  }
+  console.log(userInfo);
 
+  // if (session) {
+  // }
   return (
     <Container>
-      <a href="/">마이페이지, 로그인을 하세요</a>
+      <h1>hihi</h1>
     </Container>
   );
+
+  // return (
+  //   <Container>
+  //     <StyledButton onClick={signIn}>마이페이지, 로그인을 하세요</StyledButton>
+  //   </Container>
+  // );
+}
+
+export async function getServerSideProps() {
+  const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/mypage`);
+  console.log(response);
+
+  return {
+    props: {
+      userInfo: response.data || {},
+    },
+  };
 }
