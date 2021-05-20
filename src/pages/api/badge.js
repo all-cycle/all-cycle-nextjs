@@ -4,6 +4,8 @@ import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
 
 export default async (req, res) => {
+  await connectDB();
+
   try {
     const session = await getSession({ req });
 
@@ -13,8 +15,6 @@ export default async (req, res) => {
         error: "Unauthorized user",
       });
     }
-
-    await connectDB();
 
     const user = await User.findOneAndUpdate(
       { email: session.user.email },

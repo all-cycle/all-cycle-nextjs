@@ -45,7 +45,11 @@ function Header() {
         href="/webLetter"
       />
 
-      {!session ? (
+      <LinkIcon
+        iconName={faUserCircle}
+        href="/myPage"
+      />
+      {/* {!session ? (
         <LinkIcon
           iconName={faSignInAlt}
           href="/api/auth/signin"
@@ -69,7 +73,7 @@ function Header() {
             }}
           />
         </>
-      )}
+      )} */}
       {session
         && session?.user.email === process.env.managerAccount
         && (

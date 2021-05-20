@@ -3,7 +3,6 @@ import cheerio from "cheerio";
 import imgDownload from "image-downloader";
 import styled from "styled-components";
 
-import EcoSeoulLogo from "@/components/common/EcoSeoulLogo";
 import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
 
@@ -11,6 +10,22 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: ${(props) => props.theme.fontKor};
+`;
+
+const Toggle = styled.span`
+  padding: 0.5em 1em;
+  border-radius: 2vw;
+  font-size: 0.7em;
+  color: ${(props) => props.theme.white.color};
+  background-color: ${(props) => props.theme.gray.color};
+`;
+
+const ToggleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1em;
 `;
 
 const LetterContainer = styled.div`
@@ -19,7 +34,7 @@ const LetterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 3vh;
+  margin-top: 1em;
 `;
 
 const LetterBox = styled.article`
@@ -67,8 +82,13 @@ export default function WebLetter({ letters }) {
 
   return (
     <Container>
-      {/* 환경연합 링크 */}
-      <EcoSeoulLogo />
+      <ToggleContainer>
+        <Toggle>
+          <a href="http://ecoseoul.or.kr/">
+            @서울환경연합
+          </a>
+        </Toggle>
+      </ToggleContainer>
       <LetterContainer>
         {letters.map((letter) => {
           const { href, title, img } = letter;
