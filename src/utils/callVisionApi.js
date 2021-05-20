@@ -1,4 +1,4 @@
-import fetchData from "@/utils/fetchData";
+import axios from "axios";
 
 async function callVisionAPI(uri) {
   const body = {
@@ -12,7 +12,7 @@ async function callVisionAPI(uri) {
   };
 
   try {
-    const data = await fetchData("POST", process.env.GOOGLE_VISION_API_URL, body);
+    const data = await axios("POST", process.env.GOOGLE_VISION_API_URL, body);
 
     if (!Object.entries(data.responses[0]).length) {
       return [];
