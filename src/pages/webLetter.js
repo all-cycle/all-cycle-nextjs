@@ -3,6 +3,7 @@ import cheerio from "cheerio";
 import imgDownload from "image-downloader";
 import styled from "styled-components";
 
+import EcoSeoulLogo from "@/components/common/EcoSeoulLogo";
 import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
 
