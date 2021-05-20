@@ -91,13 +91,15 @@ const Button = styled.button`
 `;
 
 export default function Manager({ count, productList }) {
-  const [updateList, setUpdateList] = useState([]);
+  const [updatedList, setUpdatedList] = useState(productList);
+  const [message, setMessage] = useState("");
 
   async function updateData(e) {
     e.preventDefault();
 
     try {
-      await fetchData("PUT", "/api/product", updateList);
+      const response = await fetchData("PUT", "/api/product", updatedList);
+      setMessage(response.data);
       return;
     } catch (err) {
       console.log(err.message);
@@ -106,14 +108,8 @@ export default function Manager({ count, productList }) {
 
   async function handleChange(e, _id, name) {
     const { value } = e.target;
-    const sameProduct = updateList.find((product) => product._id === _id);
 
-    if (!sameProduct) {
-      setUpdateList((prev) => prev.concat({ _id, [name]: value }));
-      return;
-    }
-
-    setUpdateList((prev) => prev.map((product) => {
+    setUpdatedList((prev) => prev.map((product) => {
       if (product._id !== _id) {
         return product;
       }
@@ -127,7 +123,9 @@ export default function Manager({ count, productList }) {
       <Title>
         <UpdateCount>
           <Strong>관리자페이지 </Strong>
-          업데이트 된 제품 수: {count}
+          {message
+            ? <span>{message}</span>
+            : <span>업데이트 된 제품 수: {count}</span>}
         </UpdateCount>
         <Button onClick={updateData}>
           DB 업데이트

@@ -36,15 +36,6 @@ export default async (req, res) => {
   await connectDB();
 
   try {
-    const session = await getSession({ req });
-
-    if (!session) {
-      return res.json({
-        result: false,
-        error: "Unauthorized user",
-      });
-    }
-
     const {
       commonUrl,
       urls,

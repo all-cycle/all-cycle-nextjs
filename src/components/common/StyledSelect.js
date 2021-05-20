@@ -43,15 +43,14 @@ function StyledSelect({
         defaultValue={defaultType}
         onChange={(e) => onChange(e, productId, name)}
       >
-        {types.map((type) => (
-          <Option
-            key={productId + type}
-            value={type}
-            // selected={type === defaultType}
-          >
-            {type[1]}
-          </Option>
-        ))}
+        {types.map((type) => {
+          const [engType, korType] = type;
+          return (
+            <Option key={productId + type} value={engType}>
+              {korType}
+            </Option>
+          );
+        })}
       </Select>
     </Container>
   );
