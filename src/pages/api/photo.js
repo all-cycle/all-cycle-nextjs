@@ -34,19 +34,23 @@ export default async (req, res) => {
     const detectedText = await callVisionAPI(body);
 
     if (!detectedText.length) {
-      res.json({
+      return res.json({
         result: false,
         error: "TRY AGAIN!!",
       });
     }
 
-    const textList = detectedText.split(" ");
-    const keywords = textList.find((text) => text.length >= 2);
+    const textList = detectedText.split(/\n/);
+    const keywords = textList.filter((text) => text.length >= 2);
 
     await connectDB();
-    // const detectedProductText = parsed.responses[0].fullTextAnnotation.text.split(/\n/);
 
-    // const productNames = await Product.find().select("name");
+    const productList = await Product.find().select("name");
+    const productInfo = productList.find((product) => {
+      return keywords.some((keyword) => {
+        return product.name.includes(keyword);
+      });
+    });
 
     const s3 = new AWS.S3();
     const buffer = getImgBuffer(body);
@@ -82,7 +86,7 @@ export default async (req, res) => {
 
     return res.json({
       result: true,
-      data: keywords,
+      data: productInfo,
     });
   } catch (error) {
     return res.status(400).json({

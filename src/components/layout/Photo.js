@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/client";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import styled from "styled-components";
@@ -27,6 +26,7 @@ const ToggleButton = styled(StyledButton)`
   left: 3vw;
   color: ${(props) => props.theme.primary.color};
   background-color: ${(props) => props.theme.white.color};
+  z-index: 2;
 `;
 
 const Message = styled.div`
@@ -44,7 +44,6 @@ function Photo({ isMobile, idealResolution, handleClose }) {
   const [dataUri, setDataUri] = useState("");
   const [isError, setIsError] = useState(false);
   const router = useRouter();
-  const [session] = useSession();
   const [detected, setDetected] = useState("");
   const [startedCamera, setStartedCamera] = useState(true);
 
@@ -55,9 +54,9 @@ function Photo({ isMobile, idealResolution, handleClose }) {
     const response = await fetchData("POST", "/api/photo", uri);
 
     if (response.result) {
-      setDetected(response.data);
-      console.log(response.data);
-      // router.push(`/product/${response}`);
+      const { _id, name } = response.data;
+      setDetected(name);
+      router.push(`/product/${_id}`);
       return;
     }
 
@@ -70,11 +69,8 @@ function Photo({ isMobile, idealResolution, handleClose }) {
   }
 
   function handleStart() {
-    console.log("handleCameraStart");
     setStartedCamera((prev) => !prev);
   }
-
-  console.log("started", startedCamera);
 
   return (
     <Container>
