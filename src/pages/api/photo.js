@@ -11,7 +11,7 @@ import {
   CONTENT_ENCODING,
   CONTENT_TYPE,
 } from "@/constants/awsParams";
-import callVisionAPI from "@/utils/callVisionApi";
+import callVisionAPI from "@/utils/callVisionAPI";
 
 const { AWS_ACCESS_ID, AWS_ACCESS_SECRET_KEY } = process.env;
 AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID, AWS_ACCESS_SECRET_KEY);
