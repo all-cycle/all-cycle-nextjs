@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import styled from "styled-components";
@@ -42,12 +43,20 @@ function Photo({ isMobile, idealResolution, onClick }) {
   const [dataUri, setDataUri] = useState("");
   const [isError, setIsError] = useState(false);
   const router = useRouter();
+  const [session] = useSession();
 
   async function handleTakePhoto(uri) {
     console.log("takePhoto");
     setDataUri(uri);
 
-    const response = await fetchData("POST", "/api/photo", uri);
+    const response = await fetchData(
+      "POST",
+      "/api/photo",
+      {
+        email: session.user.email,
+        uri,
+      },
+    );
 
     if (response.result) {
       console.log(response.data);
