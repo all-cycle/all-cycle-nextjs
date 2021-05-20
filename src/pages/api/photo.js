@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { getSession } from "next-auth/client";
 
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
@@ -16,20 +17,23 @@ const { AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP } = process.env;
 AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP);
 
 export default async (req, res) => {
-  const { email, uri } = req.body;
+  const { body } = req;
+  console.log("uriiiiiii");
 
   try {
-    const detectedText = await callVisionAPI(uri);
-    // const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
-    //   method: "post",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(body),
-    // });
+    const session = await getSession({ req });
 
-    // const parsed = await response.json();
+    if (!session) {
+      return res.json({
+        result: false,
+        error: "Unauthorized user",
+      });
+    }
+
+    const { email } = session.user;
+    console.log(email, "emailalailaia");
+
+    const detectedText = await callVisionAPI(body);
 
     if (!detectedText.length) {
       res.json({
@@ -47,7 +51,7 @@ export default async (req, res) => {
     // const productNames = await Product.find().select("name");
 
     const s3 = new AWS.S3();
-    const buffer = getImgBuffer(uri);
+    const buffer = getImgBuffer(body);
 
     const params = {
       Bucket: BUCKET,
