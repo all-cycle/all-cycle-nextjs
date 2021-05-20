@@ -15,15 +15,15 @@ import callVisionAPI from "@/utils/callVisionAPI";
 // const { AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP } = process.env;
 // AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP);
 
-// AWS.config.update({
-//   accessKeyId: process.env.AWS_ACCESS_ID_MYAPP,
-//   secretAccessKey: process.env.AWS_ACCESS_KEY_MYAPP,
-//   region: process.env.AWS_REGION_MYAPP,
-//   bucketname: process.env.AWS_BUCKET_NAME,
-// });
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_ID_MYAPP,
+  secretAccessKey: process.env.AWS_ACCESS_KEY_MYAPP,
+  region: process.env.AWS_REGION_MYAPP,
+  bucketname: process.env.AWS_BUCKET_NAME,
+});
 
 // New S3 class
-// const s3 = new AWS.S3();
+const s3 = new AWS.S3();
 
 export default async (req, res) => {
   const { email, uri } = req.body;
