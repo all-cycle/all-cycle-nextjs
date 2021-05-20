@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
+import Loading from "@/components/layout/Loading";
 
 const Container = styled.div`
   position: fixed;
@@ -39,12 +40,13 @@ const Message = styled.div`
   z-index: 2;
 `;
 
-function Photo({ isMobile, idealResolution, onClick }) {
+function Photo({ isMobile, idealResolution, handleClose }) {
   const [dataUri, setDataUri] = useState("");
   const [isError, setIsError] = useState(false);
   const router = useRouter();
   const [session] = useSession();
   const [detected, setDetected] = useState("");
+  const [startedCamera, setStartedCamera] = useState(true);
 
   async function handleTakePhoto(uri) {
     console.log("takePhoto");
@@ -67,9 +69,17 @@ function Photo({ isMobile, idealResolution, onClick }) {
     }, 1000);
   }
 
+  function handleStart() {
+    console.log("handleCameraStart");
+    setStartedCamera((prev) => !prev);
+  }
+
+  console.log("started", startedCamera);
+
   return (
     <Container>
-      <ToggleButton onClick={onClick}>X</ToggleButton>
+      {startedCamera && <Loading />}
+      <ToggleButton onClick={handleClose}>X</ToggleButton>
       {detected && <Message>{detected}</Message>}
       {isError && <Message>TRY AGAIN!</Message>}
       {
@@ -82,11 +92,11 @@ function Photo({ isMobile, idealResolution, onClick }) {
               idealFacingMode={FACING_MODES.ENVIRONMENT}
               isFullscreen={isMobile}
               imageCompression={0.9}
-              // isMaxResolution={false}
               sizeFactor={0.9}
               imageType={IMAGE_TYPES.JPG}
               isDisplayStartCameraError={false}
               idealResolution={idealResolution}
+              onCameraStart={handleStart}
             />
           )
       }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+
+import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
   width: 100%;
@@ -9,28 +9,40 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 1em;
-  font-weight: 600;
+  font-family: ${(props) => props.theme.fontEng};
   color: ${(props) => props.theme.white.color};
-
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    width: 90vw;
-  }
-`;
-
-const Arrow = styled(FontAwesomeIcon)`
-  font-size: 13vw;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1em;
 `;
 
 const Title = styled.span`
   font-size: 1.2em;
+  font-weight: 600;
+`;
+
+const Text = styled.span`
+  padding: 0.5em 1em;
+  border-radius: 2vw;
+  color: ${(props) => props.theme.white.color};
+  font-size: 0.7em;
+  background-color: ${(props) => props.theme.lightGreen.color};
+
+
+  &:hover {
+    transition: all 0.5s;
+    transform: translateX(100px);
+  }
 `;
 
 function HeadingLine({ title }) {
   return (
     <Container>
       <Title>{title}</Title>
-      <Arrow icon={faCaretRight} />
+      <Text>
+        <NextLink href="/product">
+          MORE..
+        </NextLink>
+      </Text>
     </Container>
   );
 }

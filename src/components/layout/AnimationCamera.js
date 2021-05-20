@@ -15,9 +15,20 @@ const Comment = styled.div`
   font-size: 1em;
   font-weight: 400;
   color: ${(props) => props.theme.white.color};
+  text-shadow: inset 1px 1px 1px ${(props) => props.theme.gray.color};
 `;
 
-const rotate = keyframes`
+const AllCycle = styled.div`
+  padding: 0.5em;
+  color: ${(props) => props.theme.white.color};
+  font-size: 3em;
+  font-weight: 700;
+  font-style: italic;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-shadow: 1px 1px 2px ${(props) => props.theme.gray.color};
+`;
+
+const shake = keyframes`
   0% {
     transform: rotate(10deg);
   }
@@ -29,23 +40,16 @@ const rotate = keyframes`
   }
 `;
 
-const AllCycle = styled.div`
-  padding: 0.5em;
-  color: ${(props) => props.theme.white.color};
-  font-size: 3em;
-  font-weight: 700;
-  font-style: italic;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-`;
-
 const ShakeCamera = styled.div`
   position: absolute;
   top: 35%;
   right: 10%;
   display: inline-block;
-  animation: ${rotate} 2s ease-in-out infinite;
+  border-radius: 5vw;
+  animation: ${shake} 2s ease-in-out infinite;
 
   color: ${(props) => props.theme.font.color};
+  background-color: ${(props) => props.theme.lightGray.color};
 `;
 
 const Bubble = styled.div`
@@ -65,9 +69,10 @@ const BubbleText = styled.span`
   font-weight: 600;
   font-family: ${(props) => props.theme.fontEng};
   z-index: 1;
+  text-shadow: 1px 1px 2px ${(props) => props.theme.font.color};
 `;
 
-function AnimationCamera({ handleStartCamera }) {
+function AnimationCamera({ onClick }) {
   return (
     <Container>
       <AllCycle>All-Cycle</AllCycle>
@@ -85,7 +90,7 @@ function AnimationCamera({ handleStartCamera }) {
         <FontAwesomeIcon
           icon={faMobileAlt}
           size="8x"
-          onClick={handleStartCamera}
+          onClick={onClick}
         />
       </ShakeCamera>
       <Comment>BEFORE BUY DRINK, SEARCH IT!!</Comment>

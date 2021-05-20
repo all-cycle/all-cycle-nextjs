@@ -33,7 +33,7 @@ const THEME = {
   },
   yellow: {
     title: "yellow",
-    color: "#FBD056",
+    color: "#FFC914",
   },
   font: {
     title: "font color",
@@ -45,7 +45,11 @@ const THEME = {
   },
   red: {
     title: "red",
-    color: "red",
+    color: "#F06449",
+  },
+  skyblue: {
+    title: "skyblue",
+    color: "#60C4F9",
   },
   fontEng: "Montserrat, sans-serif",
   fontKor: "Nanum Gothic, sans-serif",

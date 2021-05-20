@@ -13,7 +13,7 @@ function MainCamera() {
   const { isMobile, idealResolution } = useWindowSize();
   const [startCamera, setStartCamera] = useState(false);
 
-  function handleStartCamera() {
+  function toggleCamera() {
     setStartCamera((prev) => !prev);
   }
 
@@ -24,11 +24,11 @@ function MainCamera() {
           <Photo
             isMobile={isMobile}
             idealResolution={idealResolution}
-            onClick={handleStartCamera}
+            handleClose={toggleCamera}
           />
         )
         : (
-          <AnimationCamera onClick={handleStartCamera} />
+          <AnimationCamera onClick={toggleCamera} />
         )}
     </Container>
   );

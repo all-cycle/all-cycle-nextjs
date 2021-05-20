@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import HeadingLine from "@/components/common/HeadingLine";
 import MainCamera from "@/components/layout/MainCamera";
 import fetchData from "@/utils/fetchData";
+import Loading from "@/components/layout/Loading";
 
 const Container = styled.div`
   width: 100vw;
@@ -34,25 +36,29 @@ const ImageContainer = styled.div`
   text-align: center;
 `;
 
-const ItemInfo = styled.span`
-  font-size: 0.5em;
-`;
-
 export default function Main({ topScoreList }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const setTimeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(setTimeoutId);
+  }, []);
+
   return (
     <Container>
+      {isLoading && <Loading />}
       <MainCamera />
       <HeadingLine title="TOP LANK ITEMS" />
       <TopItems>
         {topScoreList.length && (
-          topScoreList.map((product, index) => {
-            const {
-              _id, imgUrl, imgAlt, name,
-            } = product;
+          topScoreList.map((product) => {
+            const { _id, imgUrl, imgAlt } = product;
             return (
               <ImageContainer key={_id}>
                 <ItemImage src={imgUrl} alt={imgAlt} />
-                {/* <ItemInfo>{name}</ItemInfo> */}
               </ImageContainer>
             );
           })
