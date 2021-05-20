@@ -1,58 +1,73 @@
-import { useState } from "react";
-import Image from "next/image";
 import styled from "styled-components";
 
 import HeadingLine from "@/components/common/HeadingLine";
 import MainCamera from "@/components/layout/MainCamera";
+import fetchData from "@/utils/fetchData";
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: 90vh;
   margin: 0;
+  background-color: ${(props) => props.theme.primary.color};
+  overflow: hidden;
 `;
 
 const TopItems = styled.div`
   display: flex;
   width: 100vw;
-  margin: 10px 0 10px 0;
+  margin: 0.3em 0;
+  padding-bottom: 2em;
 `;
 
-const Thumbnail = styled.div`
-  padding: 0.7em;
-  margin: 0.3em;
-  border-radius: 10%;
-  background-color: ${(props) => props.theme.lightGray.color};
+const ItemImage = styled.img`
+  height: 100%;
 `;
 
-export default function Main() {
-  const [topList, setTopList] = useState([
-    "/bottle.png",
-    "/bottle.png",
-    "/bottle.png",
-    "/bottle.png",
-  ]);
+const ImageContainer = styled.div`
+  flex-basis: 50%;
+  height: 10vh;
+  object-fit: cover;
+  border-top-left-radius: 5vw;
+  border-bottom-left-radius: 5vw;
 
+  /* NOTE 사진에서도 text-align 먹히는지 확인 */
+  text-align: center;
+`;
+
+const ItemInfo = styled.span`
+  font-size: 0.5em;
+`;
+
+export default function Main({ topScoreList }) {
   return (
     <Container>
       <MainCamera />
       <HeadingLine title="TOP LANK ITEMS" />
       <TopItems>
-        {topList.length && (
-          topList.map((product, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Thumbnail key={index}>
-              <Image
-                src={product}
-                alt={product}
-                width={100}
-                height={100}
-              />
-            </Thumbnail>
-          ))
+        {topScoreList.length && (
+          topScoreList.map((product, index) => {
+            const {
+              _id, imgUrl, imgAlt, name,
+            } = product;
+            return (
+              <ImageContainer key={_id}>
+                <ItemImage src={imgUrl} alt={imgAlt} />
+                {/* <ItemInfo>{name}</ItemInfo> */}
+              </ImageContainer>
+            );
+          })
         )}
       </TopItems>
-
-      <HeadingLine title="TIPS" />
-      {/* 유튜브 목록들 세로스크롤 */}
     </Container>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product/topScore`);
+
+  return {
+    props: {
+      topScoreList: response.data || [],
+    },
+  };
 }

@@ -1,13 +1,12 @@
 import Image from "next/image";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCameraRetro, faComment, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 
 import StyledIcon from "@/components/common/StyledIcon";
 
 const Container = styled.div`
   text-align: center;
-  background-color: ${(props) => props.theme.primary.color};
 `;
 
 const Comment = styled.div`
