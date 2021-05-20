@@ -44,6 +44,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
   const [isError, setIsError] = useState(false);
   const router = useRouter();
   const [session] = useSession();
+  const [detected, setDetected] = useState("");
 
   async function handleTakePhoto(uri) {
     console.log("takePhoto");
@@ -59,6 +60,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
     );
 
     if (response.result) {
+      setDetected(response.data);
       console.log(response.data);
       // router.push(`/product/${response}`);
       return;
@@ -75,6 +77,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
   return (
     <Container>
       <ToggleButton onClick={onClick}>X</ToggleButton>
+      {detected && <Message>{detected}</Message>}
       {isError && <Message>TRY AGAIN!</Message>}
       {
         (dataUri)
