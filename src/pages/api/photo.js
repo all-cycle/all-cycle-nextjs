@@ -39,13 +39,14 @@ export default async (req, res) => {
     }
 
     await connectDB();
-    const detectedProductText = parsed.responses[0].fullTextAnnotation.text.split(/\n/);
+    // const detectedProductText = parsed.responses[0].fullTextAnnotation.text.split(/\n/);
 
-    const productNames = await Product.find().select("name");
+    // const productNames = await Product.find().select("name");
 
     return res.json({
       result: true,
-      data: parsed.responses[0].fullTextAnnotation.text,
+      // data: parsed.responses[0].fullTextAnnotation.text,
+      data: "hi",
     });
   } catch (error) {
     return res.status(400).json({
