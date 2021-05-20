@@ -50,7 +50,7 @@ function Photo({ isMobile, idealResolution, onClick }) {
     console.log("takePhoto");
     setDataUri(uri);
 
-    const response = await fetchData("POST", "/api/photo", uri);
+    const response = await fetchData("POST", `${process.env.HOMEPAGE_URL}/api/photo`, uri);
 
     if (response.result) {
       setDetected(response.data);
