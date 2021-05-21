@@ -14,7 +14,9 @@ async function callVisionAPI(uri) {
 
   try {
     console.log("callVisionAPI 주소", process.env.GOOGLE_VISION_API_URL);
+
     const res = await fetch(process.env.GOOGLE_VISION_API_URL, { method: "POST", body });
+
 
     console.log("callVisionAPI 다녀옴", res.data);
     if (!Object.entries(res.data.responses[0]).length) {

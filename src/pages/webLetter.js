@@ -127,6 +127,7 @@ export async function getStaticProps() {
   const html = await response.text();
 
   const $ = cheerio.load(html);
+
   const $bodyList = $("ul.cat-list > li").children("a");
   console.log("axios cheerio load", $bodyList);
 
