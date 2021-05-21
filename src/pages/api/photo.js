@@ -23,6 +23,7 @@ export default async (req, res) => {
     const session = await getSession({ req });
 
     if (!session) {
+      console.log("session이 없음");
       return res.json({
         result: false,
         error: "Unauthorized user",
