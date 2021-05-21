@@ -123,9 +123,10 @@ export default function WebLetter({ letters }) {
 }
 
 export async function getStaticProps() {
-  const html = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
-  // console.log("axios webletter", html);
-  const $ = cheerio.load(html.data);
+  const response = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
+  const html = await response.text();
+
+  const $ = cheerio.load(html);
   const $bodyList = $("ul.cat-list > li").children("a");
   console.log("axios cheerio load", $bodyList);
 
