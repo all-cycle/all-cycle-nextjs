@@ -1,5 +1,6 @@
 import AWS from "aws-sdk";
 import { getSession } from "next-auth/client";
+import fetch from "node-fetch";
 
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
@@ -11,13 +12,13 @@ import {
   CONTENT_ENCODING,
   CONTENT_TYPE,
 } from "@/constants/awsParams";
-import callVisionAPI from "@/utils/callVisionAPI";
+// import callVisionAPI from "@/utils/callVisionAPI";
 
 const { AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP } = process.env;
 AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP);
 
 export default async (req, res) => {
-  const { body } = req;
+  const { body: uri } = req;
 
   try {
     const session = await getSession({ req });
@@ -26,21 +27,40 @@ export default async (req, res) => {
       console.log("session이 없음");
       return res.json({
         result: false,
-        error: "Unauthorized user",
+        error: "session이 없음",
       });
     }
 
     const { email } = session.user;
 
-    const detectedText = await callVisionAPI(body);
+    const body = {
+      requests: [
+        {
+          image: { content: uri.slice(23) },
+          features: [{ type: "DOCUMENT_TEXT_DETECTION", maxResults: 10 }],
+        },
+      ],
+    };
 
-    if (!detectedText.length) {
+    const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    const parsed = await response.json();
+
+    if (!Object.entries(parsed.responses[0]).length) {
       return res.json({
         result: false,
-        error: "TRY AGAIN!!",
+        error: "vision api에서 받은게 없음",
       });
     }
 
+    const detectedText = parsed.responses[0].fullTextAnnotation.text;
     const textList = detectedText.split(/\n/);
     const keywords = textList.filter((text) => text.length >= 2);
 
@@ -56,12 +76,12 @@ export default async (req, res) => {
     if (!productInfo) {
       return res.json({
         result: false,
-        error: "TRY AGAIN!!",
+        error: "일치하는 데이터가 없음",
       });
     }
 
     const s3 = new AWS.S3();
-    const buffer = getImgBuffer(body);
+    const buffer = getImgBuffer(uri);
 
     const params = {
       Bucket: BUCKET,
