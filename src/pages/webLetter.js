@@ -123,7 +123,9 @@ export default function WebLetter({ letters }) {
 
 export async function getStaticProps() {
   const html = await axios.get("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
+  console.log("axios webletter", html);
   const $ = cheerio.load(html.data);
+  console.log("axios cheerio load", $);
   const $bodyList = $("ul.cat-list > li").children("a");
 
   // NOTE 비동기처리를 해서 아랫부분이 먼저 실행되버리게 하다니이이이!

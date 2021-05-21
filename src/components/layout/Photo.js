@@ -56,6 +56,8 @@ function Photo({ isMobile, idealResolution, handleClose }) {
 
     if (response.result) {
       const { _id, name } = response.data;
+      console.log("photo 분석 response.data");
+
       setDetected(name);
       setTimeout(() => {
         router.push(`/product/${_id}`);
