@@ -90,9 +90,22 @@ const Button = styled.button`
   background-color: ${(props) => props.theme.skyblue.color};
 `;
 
-export default function Manager({ count, productList }) {
+export default function Manager({ productList }) {
   const [updatedList, setUpdatedList] = useState(productList);
   const [message, setMessage] = useState("");
+  const [count, setCount] = useState("");
+
+  // 새로크롤링 하고 싶으면 버튼 누르기
+  async function crawlData(e) {
+    e.preventDefault();
+
+    try {
+      const response = await fetchData("GET", "/api/manager");
+      setCount(response.count);
+    } catch (err) {
+      setMessage(err.message);
+    }
+  }
 
   async function updateData(e) {
     e.preventDefault();
@@ -102,7 +115,7 @@ export default function Manager({ count, productList }) {
       setMessage(response.data);
       return;
     } catch (err) {
-      console.log(err.message);
+      setMessage(err.message);
     }
   }
 
@@ -123,13 +136,17 @@ export default function Manager({ count, productList }) {
       <Title>
         <UpdateCount>
           <Strong>관리자페이지 </Strong>
-          {message
-            ? <span>{message}</span>
-            : <span>업데이트 된 제품 수: {count}</span>}
+          {message && <span>{message}</span>}
+          {count && <span>업데이트 된 제품 수: {count}</span>}
         </UpdateCount>
-        <Button onClick={updateData}>
-          DB 업데이트
-        </Button>
+        <div>
+          <Button onClick={crawlData}>
+            NEW 크롤링
+          </Button>
+          <Button onClick={updateData}>
+            DB 업데이트
+          </Button>
+        </div>
       </Title>
       <Ul>
         {productList.length > 0
@@ -180,16 +197,28 @@ export default function Manager({ count, productList }) {
   );
 }
 
-// NOTE 페이지에 들어오면 새로 요청해서 받아온다
 export async function getServerSideProps() {
-  const count = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/manager`);
-  const productList = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
+  const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
 
-  // 몇개 새로 추가되었는지 알려줌
+  if (response.result) {
+    return {
+      props: { productList: response.data },
+    };
+  }
+
   return {
-    props: {
-      count: count.data || 0,
-      productList: productList.data,
-    },
+    props: { productList: [] },
   };
 }
+
+// export async function getStaticProps() {
+//   const count = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/manager`);
+//   const productList = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
+
+//   return {
+//     props: {
+//       count: count.data || 0,
+//       productList: productList.data,
+//     },
+//   };
+// }

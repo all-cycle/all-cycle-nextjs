@@ -66,6 +66,7 @@ function Quiz({ quiz }) {
               result={result}
               description={description}
               handleReset={handleReset}
+              slug={slug}
             />
           </StyledModal>
         ) : (

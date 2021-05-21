@@ -6,9 +6,10 @@ import StyledButton from "@/components/common/StyledButton";
 
 const Container = styled.div`
   margin: 0.3em;
-  margin-top: 5vh;
+  margin-top: 2em;
   border: 1px solid ${(props) => props.theme.graishGreen.color};
   border-radius: 2vw;
+  background-color: ${(props) => props.theme.lightGray.color};
 `;
 
 const Picture = styled.img`
@@ -23,6 +24,8 @@ const Title = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2vw;
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
   font-style: italic;
   font-size: 5vw;
   font-weight: 600;
@@ -61,6 +64,11 @@ const ReviewButton = styled(StyledButton)`
   border: none;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.graishGreen.color};
+
+  &:hover {
+    color: ${(props) => props.theme.graishGreen.color};
+    background-color: ${(props) => props.theme.white.color};
+  }
 `;
 
 function ReviewList({ reviews, toggle }) {
