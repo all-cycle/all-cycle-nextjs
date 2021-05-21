@@ -12,13 +12,13 @@ async function callVisionAPI(uri) {
   };
 
   try {
-    const data = await axios("POST", process.env.GOOGLE_VISION_API_URL, body);
+    const res = await axios.post(process.env.GOOGLE_VISION_API_URL, body);
 
-    if (!Object.entries(data.responses[0]).length) {
+    if (!Object.entries(res.data.responses[0]).length) {
       return [];
     }
 
-    return data.responses[0].fullTextAnnotation.text;
+    return res.data.responses[0].fullTextAnnotation.text;
   } catch (err) {
     return err.message;
   }

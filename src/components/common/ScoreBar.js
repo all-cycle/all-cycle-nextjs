@@ -6,6 +6,7 @@ const Container = styled.div`
   border-radius: 3vw;
   background-color: ${(props) => props.theme.lightGray.color};
   box-shadow: inset 0px 0px 11px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 `;
 
 const Width = css`
@@ -20,6 +21,7 @@ const Bar = styled.div`
   border-radius: 3vw;
   background-color: ${(props) => props.theme.primary.color};
   box-shadow: inset 0px 0px 11px rgba(0, 0, 0, 0.15);
+
   ${Width}
 `;
 

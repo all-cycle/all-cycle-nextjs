@@ -9,7 +9,11 @@ import ScoreBar from "@/components/common/ScoreBar";
 import ReviewForm from "@/components/layout/ReviewForm";
 
 const Container = styled.div`
+  height: 90vh;
   margin: auto;
+  padding-bottom: 30px;
+  overflow: auto;
+  background-color: ${(props) => props.theme.lightGray.color};
 `;
 
 const ProductContainer = styled.div`
@@ -22,6 +26,9 @@ const Picture = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 3vw;
+  box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1em;
 `;
 
 const ProductInfo = styled.div`
@@ -33,22 +40,26 @@ const ProductInfo = styled.div`
 `;
 
 const ProductName = styled.div`
+  color: ${(props) => props.theme.darkGray.color};
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.div`
-  font-size: 1em;
-  margin-top: 1vh;
-
-  & + & {
-    margin-bottom: 0.1em;
-  }
+  font-size: 0.7em;
+  margin: 0.5em;
+  color: ${(props) => props.theme.lightFont.color};
 `;
 
 const ScoreContainer = styled.div`
+`;
+
+const Figure = styled.figure`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 
   & + & {
     margin-top: 1em;
@@ -98,26 +109,27 @@ function ProductItem({ product }) {
       {isList ? (
         <>
           <ScoreContainer>
-            <Title>
-              재활용 점수
-              <Score>({recycleScoreAvg})</Score>
-            </Title>
-            <ScoreBar width={50} height={2} score={recycleScoreAvg} />
-          </ScoreContainer>
+            <Figure>
+              <Title>
+                재활용 점수
+                <Score>({recycleScoreAvg})</Score>
+              </Title>
+              <ScoreBar width={50} height={2} score={recycleScoreAvg} />
+            </Figure>
 
-          <ScoreContainer>
-            <Title>
-              선호도 점수
-              <Score>({recycleScoreAvg})</Score>
-            </Title>
-            <ScoreBar width={50} height={2} score={recycleScoreAvg} />
+            <Figure>
+              <Title>
+                선호도 점수
+                <Score>({recycleScoreAvg})</Score>
+              </Title>
+              <ScoreBar width={50} height={2} score={recycleScoreAvg} />
+            </Figure>
           </ScoreContainer>
           <ReviewList reviews={reviews} toggle={toggle} />
         </>
       ) : (
         <ReviewForm productId={_id} toggle={toggle} />
       )}
-
     </Container>
   );
 }

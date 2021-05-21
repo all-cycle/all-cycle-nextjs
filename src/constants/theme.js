@@ -35,6 +35,14 @@ const THEME = {
     title: "yellow",
     color: "#FFC914",
   },
+  darkGray: {
+    title: "dark gray font",
+    color: "#707070",
+  },
+  lightFont: {
+    title: "light font color",
+    color: "#5C5C5C",
+  },
   font: {
     title: "font color",
     color: "#414141",
@@ -50,6 +58,10 @@ const THEME = {
   skyblue: {
     title: "skyblue",
     color: "#60C4F9",
+  },
+  badgeBg: {
+    title: "badge background color",
+    color: "#E1E1E1",
   },
   fontEng: "Montserrat, sans-serif",
   fontKor: "Nanum Gothic, sans-serif",

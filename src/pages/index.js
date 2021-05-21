@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -16,19 +17,22 @@ const Container = styled.div`
 `;
 
 export default function Main({ topScoreList }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [session, isLoading] = useSession();
 
-  useEffect(() => {
-    const setTimeoutId = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+  // useEffect(() => {
+  //   const setTimeoutId = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1500);
 
-    return () => clearTimeout(setTimeoutId);
-  }, []);
+  //   return () => clearTimeout(setTimeoutId);
+  // }, []);
+
+  if (!session && isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Container>
-      {isLoading && <Loading />}
       <MainCamera />
       <HeadingLine title="TOP LANK ITEMS" />
       <Slider list={topScoreList} />
