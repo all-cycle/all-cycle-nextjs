@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
@@ -48,6 +48,19 @@ function Photo({ isMobile, idealResolution, handleClose }) {
   const [detected, setDetected] = useState("");
   const [startedCamera, setStartedCamera] = useState(true);
 
+  useEffect(() => {
+    if (!isError) return;
+
+    const timeoutId = setTimeout(() => {
+      setDataUri("");
+      setIsError(false);
+      handleClose();
+      router.push("/");
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [isError]);
+
   async function handleTakePhoto(uri) {
     console.log("takePhoto");
     setDataUri(uri);
@@ -66,13 +79,6 @@ function Photo({ isMobile, idealResolution, handleClose }) {
     }
 
     setIsError(true);
-
-    setTimeout(() => {
-      setDataUri("");
-      setIsError(false);
-      handleClose();
-      router.push("/");
-    }, 1000);
   }
 
   function handleStart() {
