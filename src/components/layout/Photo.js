@@ -7,6 +7,7 @@ import styled from "styled-components";
 import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
 import Loading from "@/components/layout/Loading";
+import FindIt from "@/components/layout/FindIt";
 
 const Container = styled.div`
   position: fixed;
@@ -56,7 +57,9 @@ function Photo({ isMobile, idealResolution, handleClose }) {
     if (response.result) {
       const { _id, name } = response.data;
       setDetected(name);
-      router.push(`/product/${_id}`);
+      setTimeout(() => {
+        router.push(`/product/${_id}`);
+      }, 500);
       return;
     }
 
@@ -75,25 +78,27 @@ function Photo({ isMobile, idealResolution, handleClose }) {
   return (
     <Container>
       {startedCamera && <Loading />}
-      <ToggleButton onClick={handleClose}>X</ToggleButton>
-      {detected && <Message>{detected}</Message>}
+      {detected && <FindIt detected={detected} />}
       {isError && <Message>TRY AGAIN!</Message>}
       {
         (dataUri)
           ? <ImagePreview src={dataUri} alt="photo by user" />
           : (
-            <Camera
-              onTakePhotoAnimationDone={handleTakePhoto}
-              isImageMirror={false}
-              idealFacingMode={FACING_MODES.ENVIRONMENT}
-              isFullscreen={isMobile}
-              imageCompression={0.9}
-              sizeFactor={0.9}
-              imageType={IMAGE_TYPES.JPG}
-              isDisplayStartCameraError={false}
-              idealResolution={idealResolution}
-              onCameraStart={handleStart}
-            />
+            <>
+              <ToggleButton onClick={handleClose}>X</ToggleButton>
+              <Camera
+                onTakePhotoAnimationDone={handleTakePhoto}
+                isImageMirror={false}
+                idealFacingMode={FACING_MODES.ENVIRONMENT}
+                isFullscreen={isMobile}
+                imageCompression={0.9}
+                sizeFactor={0.9}
+                imageType={IMAGE_TYPES.JPG}
+                isDisplayStartCameraError={false}
+                idealResolution={idealResolution}
+                onCameraStart={handleStart}
+              />
+            </>
           )
       }
     </Container>

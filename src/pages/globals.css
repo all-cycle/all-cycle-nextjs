@@ -24,3 +24,7 @@ ul, dl, dt, dd {
 ul, li {
   list-style: none;
 }
+
+main {
+  margin-top: 10vh;
+}

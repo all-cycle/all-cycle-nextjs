@@ -52,6 +52,13 @@ export default async (req, res) => {
       });
     });
 
+    if (!productInfo) {
+      return res.json({
+        result: false,
+        error: "TRY AGAIN!!",
+      });
+    }
+
     const s3 = new AWS.S3();
     const buffer = getImgBuffer(body);
 
