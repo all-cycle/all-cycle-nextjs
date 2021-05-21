@@ -15,11 +15,15 @@ const Option = styled.li`
   & + & {
     margin-top: 0.3em;
   }
-`;
+  `;
 
 const OptionButton = styled(StyledButton)`
-  color: ${(props) => props.theme.white.color};
-  background-color: ${(props) => props.theme.primary.color};
+  color: ${(props) => props.theme.green.color};
+
+  &:focus {
+    color: ${(props) => props.theme.white.color};
+    background-color: ${(props) => props.theme.primary.color};
+  }
 `;
 
 const Picture = styled.img`
@@ -35,10 +39,15 @@ const Caption = styled.figcaption`
   font-size: 0.7em;
   font-weight: 600;
   text-align: start;
-  border: 1px solid ${(props) => props.theme.primary.color};
-  color: ${(props) => props.theme.primary.color};
-  background-color: ${(props) => props.color || props.theme.white.color};
+  border: 1px solid ${(props) => props.theme.green.color};
+  color: ${(props) => props.theme.green.color};
+  background-color: ${(props) => props.theme.white.color};
   z-index: 1;
+
+  &:hover {
+    color: ${(props) => props.theme.primary.color};
+    border: 1px solid ${(props) => props.theme.primary.color};
+  }
 `;
 
 const ImageOptionList = styled.div`
@@ -53,9 +62,13 @@ const ImageOptionList = styled.div`
 const ImageOption = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.primary.color};
+  border: 1px solid ${(props) => props.theme.green.color};
   padding: 0.4em;
   border-radius: 2vw;
+
+  &:hover {
+    background-color: ${(props) => props.theme.primary.color};
+  }
 `;
 
 const AnswerButton = styled(Toggle)`

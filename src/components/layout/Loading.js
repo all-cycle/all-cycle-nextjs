@@ -9,8 +9,11 @@ const Container = styled.div`
   top: 0;
   left: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1em;
+  color: ${(props) => props.theme.skyblue.color};
   background-color: ${(props) => props.theme.white.color};
   z-index: 10;
 `;
@@ -28,6 +31,7 @@ const RecycleMark = styled.div`
   color: ${(props) => props.theme.skyblue.color};
   animation: ${rotate} 3s infinite cubic-bezier(0.3, 0, 0.8, 1);
   z-index: 10;
+  margin-top: 1em;
 `;
 
 function Loading() {

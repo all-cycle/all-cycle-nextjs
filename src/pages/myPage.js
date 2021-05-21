@@ -4,35 +4,39 @@ import styled from "styled-components";
 import BadgeCollection from "@/components/common/BadgeCollection";
 import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
+import Loading from "@/components/layout/Loading";
+import ReviewItem from "@/components/layout/ReviewItem";
 
 const Container = styled.div`
   height: 90vh;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
   padding: 1em;
-  background-color: ${(props) => props.theme.graishGreen.color};
+  background-color: ${(props) => props.theme.font.color};
   font-family: ${(props) => props.theme.fontEng};
 `;
 
 const UserInfo = styled.span`
+  display: flex;
+  justify-content: space-between;
   padding: 0.5em 1em;
+  margin-bottom: 1.5em;
   border-radius: 2vw;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.3em;
   color: ${(props) => props.theme.white.color};
   text-align: end;
-  border: 0.2em solid ${(props) => props.theme.graishGreen.color};
   border-radius: 4vw;
-  margin-bottom: 2em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 `;
 
 const UserProfile = styled.div`
-  position: relative;
-  top: -5vh;
-  width: 100px;
-  height: 100px;
-  padding: 0.5em;
+  width: 90px;
+  height: 90px;
+  padding: 0.2em;
   border-radius: 50%;
+  background-color: ${(props) => props.theme.lightFont.color};
 `;
 
 const UserImage = styled.img`
@@ -46,18 +50,60 @@ const Email = styled.div`
 
 const Text = styled.span`
   font-size: 1em;
-  color: ${(props) => props.theme.lightGray.color};
+  font-weight: 600;
+  color: ${(props) => props.theme.badgeBg.color};
+  margin-left: 1em;
+  text-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
+`;
+
+const Footer = styled.p`
+  /* position: absolute;
+  bottom: 1em; */
+  color: ${(props) => props.theme.lightFont.color};
+  font-size: 0.3em;
+  margin-left: 1em;
+  font-style: italic;
+  text-align: center;
+`;
+
+const BadgeContainer = styled.section`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 0.5em;
+  padding: 1em;
+`;
+
+const ReviewList = styled.ul`
+  padding: 1em;
+  margin-bottom: 1.5em;
+`;
+
+const Content = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4em 1em;
+  border-radius: 2vw;
+  font-size: 0.5em;
+  color: white;
+  background-color: ${(props) => props.theme.darkGray.color};
+
+  & + & {
+    margin-top: 0.7em;
+  }
+`;
+
+const Score = styled.span`
+  font-size: 0.3em;
+  color: ${(props) => props.theme.gray.color};
 `;
 
 export default function MyPage({ userInfo }) {
   const [session, loading] = useSession();
 
   if (loading) {
-    return (
-      <Container>
-        로딩중~~
-      </Container>
-    );
+    return <Loading />;
   }
 
   const {
@@ -72,19 +118,38 @@ export default function MyPage({ userInfo }) {
     reviews,
   } = userInfo;
 
+  console.log(reviews);
+
   if (session) {
     return (
       <Container>
         <UserInfo>
-          {name}
-          <Email>{email}</Email>
           <UserProfile>
             <UserImage src={image} alt="user profile" />
           </UserProfile>
+          <div>
+            {name}
+            <Email>{email}</Email>
+          </div>
         </UserInfo>
 
+        <Text>My Reviews</Text>
+        <ReviewList>
+          {reviews?.map((review) => (
+            <Content key={review._id}>
+              {review.productId.name}
+              <Score>재활용 점수: {review.recycleScore}</Score>
+            </Content>
+          ))}
+        </ReviewList>
+
         <Text>My Badge Collections</Text>
-        <BadgeCollection userId={_id} badges={badges} />
+        <BadgeContainer>
+          <BadgeCollection userId={_id} badges={badges} />
+        </BadgeContainer>
+        <Footer>
+          <a href="https://www.freepik.com/vectors/badge">Badge vector created by pikisuperstar - www.freepik.com</a>
+        </Footer>
       </Container>
     );
   }
@@ -96,7 +161,7 @@ export default function MyPage({ userInfo }) {
   );
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   const { email } = session.user;
   const response = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/user/${email}`);

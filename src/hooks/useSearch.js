@@ -1,21 +1,46 @@
 import { useState } from "react";
 
 function useSearch(productList) {
-  const initialState = {
-    recycleType: "all",
-    productType: "all",
-  };
-  const [filter, setFilter] = useState(initialState);
+  const [sortFilter, setSortFilter] = useState({
+    recycleType: "",
+    productType: "",
+  });
   const [sortedList, setSortedList] = useState(productList);
 
   function sortWithTypes(type, value) {
-    setSortedList((prev) => prev.filter((product) => product[type] === value));
-  }
+    if (type === "recycleType") {
+      if (!sortFilter.productType) {
+        setSortedList(productList.filter((product) => product.recycleType === value));
+      } else {
+        setSortedList(productList.filter((product) => {
+          return product.recycleType === value
+            && product.productType === sortFilter.productType;
+        }));
+      }
 
-  function initializeFilter(e) {
-    e.stopPropagation();
-    setFilter(initialState);
-    setSortedList(productList);
+      setSortFilter((prev) => {
+        return {
+          ...prev,
+          recycleType: value,
+        };
+      });
+    } else {
+      if (!sortFilter.recycleType) {
+        setSortedList(productList.filter((product) => product.productType === value));
+      } else {
+        setSortedList(productList.filter((product) => {
+          return product.productType === value
+            && product.recycleType === sortFilter.recycleType;
+        }));
+      }
+
+      setSortFilter((prev) => {
+        return {
+          ...prev,
+          productType: value,
+        };
+      });
+    }
   }
 
   function sortWithKeyword(word) {
@@ -32,12 +57,18 @@ function useSearch(productList) {
     }));
   }
 
+  function initializeFilter(e) {
+    e.stopPropagation();
+    setSortFilter([]);
+    setSortedList(productList);
+  }
+
   return {
-    filter,
+    sortFilter,
     sortedList,
-    initializeFilter,
     sortWithKeyword,
     sortWithTypes,
+    initializeFilter,
   };
 }
 

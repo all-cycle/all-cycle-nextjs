@@ -7,9 +7,6 @@ import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-family: ${(props) => props.theme.fontKor};
 `;
 
@@ -19,6 +16,12 @@ const Toggle = styled.span`
   font-size: 0.7em;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.gray.color};
+  box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    color: ${(props) => props.theme.gray.color};
+    background-color: ${(props) => props.theme.primary.color};
+  }
 `;
 
 const ToggleContainer = styled.div`
@@ -29,21 +32,21 @@ const ToggleContainer = styled.div`
 `;
 
 const LetterContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  gap: 1em;
+  padding: 1em;
 `;
 
 const LetterBox = styled.article`
-  width: 90%;
+  width: 100%;
   display: flex;
   margin: auto;
   margin-bottom: 1vh;
   border-radius: 5vw;
   background-color: ${(props) => props.theme.lightGray.color};
+  box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
 `;
 
 const LetterImageContainer = styled(ImageContainer)`
@@ -77,7 +80,7 @@ const Plain = styled.div`
 `;
 
 export default function WebLetter({ letters }) {
-  if (!letters) {
+  if (!letters.length) {
     return <div>아직 로딩중</div>;
   }
 
@@ -99,7 +102,6 @@ export default function WebLetter({ letters }) {
               <LetterBox>
                 <LetterImageContainer>
                   <Image
-                    // src={`/_assets/${title.slice(7, 10)}.jpg`}
                     src={img}
                     alt={title.slice(13)}
                     width={200}
