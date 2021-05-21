@@ -122,7 +122,7 @@ export default function WebLetter({ letters }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter", {
     method: "get",
     headers: {
