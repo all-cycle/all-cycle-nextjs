@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import fetch from "node-fetch";
 
 async function callVisionAPI(uri) {
   const body = {
@@ -13,7 +14,7 @@ async function callVisionAPI(uri) {
 
   try {
     console.log("callVisionAPI 주소", process.env.GOOGLE_VISION_API_URL);
-    const res = await axios.post(process.env.GOOGLE_VISION_API_URL, body);
+    const res = await fetch(process.env.GOOGLE_VISION_API_URL, { method: "POST", body });
 
     console.log("callVisionAPI 다녀옴", res.data);
     if (!Object.entries(res.data.responses[0]).length) {
