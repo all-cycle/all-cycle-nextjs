@@ -27,7 +27,7 @@ export default async (req, res) => {
       console.log("session이 없음");
       return res.json({
         result: false,
-        error: "TRY AGAIN!!",
+        error: "session이 없음",
       });
     }
 
@@ -54,18 +54,13 @@ export default async (req, res) => {
     const parsed = await response.json();
 
     if (!Object.entries(parsed.responses[0]).length) {
-      return [];
-    }
-
-    const detectedText = parsed.responses[0].fullTextAnnotation.text;
-
-    if (!detectedText.length) {
       return res.json({
         result: false,
-        error: "TRY AGAIN!!",
+        error: "vision api에서 받은게 없음",
       });
     }
 
+    const detectedText = parsed.responses[0].fullTextAnnotation.text;
     const textList = detectedText.split(/\n/);
     const keywords = textList.filter((text) => text.length >= 2);
 
@@ -81,7 +76,7 @@ export default async (req, res) => {
     if (!productInfo) {
       return res.json({
         result: false,
-        error: "TRY AGAIN!!",
+        error: "일치하는 데이터가 없음",
       });
     }
 
