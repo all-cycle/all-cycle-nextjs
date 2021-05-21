@@ -42,9 +42,9 @@ const Message = styled.div`
 `;
 
 function Photo({ isMobile, idealResolution, handleClose }) {
+  const router = useRouter();
   const [dataUri, setDataUri] = useState("");
   const [isError, setIsError] = useState(false);
-  const router = useRouter();
   const [detected, setDetected] = useState("");
   const [startedCamera, setStartedCamera] = useState(true);
 
@@ -68,6 +68,8 @@ function Photo({ isMobile, idealResolution, handleClose }) {
     setTimeout(() => {
       setDataUri("");
       setIsError(false);
+      handleClose();
+      router.push("/");
     }, 1000);
   }
 
