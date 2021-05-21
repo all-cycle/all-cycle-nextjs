@@ -17,17 +17,17 @@ const Container = styled.div`
 `;
 
 export default function Main({ topScoreList }) {
-  const [session, isLoading] = useSession();
+  const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const setTimeoutId = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1500);
+  useEffect(() => {
+    const setTimeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
 
-  //   return () => clearTimeout(setTimeoutId);
-  // }, []);
+    return () => clearTimeout(setTimeoutId);
+  }, []);
 
-  if (!session && isLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
