@@ -87,6 +87,7 @@ function Quiz({ allQuizList }) {
       <QuizContainer>
         {allQuizList?.map((quiz) => {
           const { slug, question, category } = quiz;
+
           return (
             <NextLink key={slug} href={`/_quiz/${slug}`}>
               <QuizBox>

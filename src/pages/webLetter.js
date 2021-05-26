@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
+import { getAllLetterList } from "@/utils/letterAPI";
 import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
-import { getAllLetterList } from "@/utils/letterAPI";
 
 const Container = styled.div`
   font-family: ${(props) => props.theme.fontKor};
@@ -91,6 +91,7 @@ export default function WebLetter({ letters }) {
       <LetterContainer>
         {letters.map((letter) => {
           const { href, title, img } = letter;
+          const titleIndex = title.indexOf("]") + 1;
 
           return (
             <NextLink key={href} href={href}>
@@ -104,8 +105,8 @@ export default function WebLetter({ letters }) {
                   />
                 </LetterImageContainer>
                 <LetterTitle>
-                  <Strong>{title.slice(0, 13)}</Strong>
-                  <Plain>{title}</Plain>
+                  <Strong>{title.slice(0, titleIndex)}</Strong>
+                  <Plain>{title.slice(titleIndex)}</Plain>
                 </LetterTitle>
               </LetterBox>
             </NextLink>

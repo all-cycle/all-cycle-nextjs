@@ -15,6 +15,7 @@ function BadgeCollection({ userId = "userId", badges = [] }) {
     <>
       {BADGES.map((BADGE, index) => {
         const isinpocket = badges.includes(BADGE);
+
         return (
           <NextLink key={userId + BADGE} href={`/_quiz/${BADGE}`}>
             <Badge
@@ -22,7 +23,7 @@ function BadgeCollection({ userId = "userId", badges = [] }) {
               alt={BADGE}
               width={100}
               height={index === 1 || index === 3 ? 100 : 110}
-              isinpocket={isinpocket.toString()}
+              isinpocket={String(isinpocket)}
             />
           </NextLink>
         );

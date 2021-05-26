@@ -25,6 +25,7 @@ const Select = styled.select`
 
 const Option = styled.option`
   font-size: 2vw;
+
   &:focus {
     outline: none;
   }

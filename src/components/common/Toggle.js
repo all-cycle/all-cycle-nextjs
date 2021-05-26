@@ -8,7 +8,6 @@ const Toggle = styled.span`
   text-transform: uppercase;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.color};
-  /* box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15); */
 `;
 
 export default Toggle;

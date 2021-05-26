@@ -7,6 +7,7 @@ import StyledButton from "@/components/common/StyledButton";
 import Loading from "@/components/layout/Loading";
 import ReviewItem from "@/components/layout/ReviewItem";
 import StyledList from "@/components/common/StyledList";
+import StyledImageContainer from "@/components/common/StyledImageContainer";
 
 const Container = styled.div`
   height: 90vh;
@@ -23,7 +24,7 @@ const UserInfo = styled.span`
   display: flex;
   justify-content: space-between;
   padding: 0.5em 1em;
-  margin-bottom: 1.5em;
+  margin-bottom: 0.5em;
   border-radius: 2vw;
   font-weight: 400;
   font-size: 1.3em;
@@ -54,6 +55,7 @@ const Text = styled.span`
   font-size: 1em;
   font-weight: 600;
   color: ${(props) => props.theme.badgeBg.color};
+  margin-top: 1em;
   margin-left: 1em;
   text-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
 `;
@@ -75,11 +77,44 @@ const BadgeContainer = styled.section`
   padding: 1em;
 `;
 
-const ReviewList = styled.ul`
+const ReviewList = styled(StyledList)`
   padding: 1em;
   margin-bottom: 1.5em;
   max-height: 180px;
   overflow-y: scroll;
+`;
+
+const PhotoList = styled.ul`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-height: 100px;
+  grid-auto-columns: 1vw;
+  margin: 0.5em;
+  overflow-x: scroll;
+  overflow-y: hidden;
+`;
+
+const ImageContainer = styled.li`
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1em;
+  text-align: center;
+  padding: 0.5em;
+  background-color: ${(props) => props.theme.lightFont.color};
+
+  & + & {
+    margin-left: 0.5em;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+const Image = styled.img`
+  height: 100%;
+  border-radius: 10%;
 `;
 
 const Content = styled.li`
@@ -121,8 +156,6 @@ export default function MyPage({ userInfo }) {
     reviews,
   } = userInfo;
 
-  console.log(reviews);
-
   if (session) {
     return (
       <Container>
@@ -146,10 +179,20 @@ export default function MyPage({ userInfo }) {
           ))}
         </ReviewList>
 
+        <Text>My Photos</Text>
+        <PhotoList>
+          {pictures?.map((picture) => (
+            <ImageContainer>
+              <Image src={picture} alt={picture} />
+            </ImageContainer>
+          ))}
+        </PhotoList>
+
         <Text>My Badge Collections</Text>
         <BadgeContainer>
           <BadgeCollection userId={_id} badges={badges} />
         </BadgeContainer>
+
         <Footer>
           <a href="https://www.freepik.com/vectors/badge">Badge vector created by pikisuperstar - www.freepik.com</a>
         </Footer>

@@ -61,11 +61,11 @@ const ButtonContainer = styled.div`
 `;
 
 function AnswerModal({
+  slug,
   realAnswer,
   result,
   description,
   handleReset,
-  slug,
 }) {
   return (
     <Container>
@@ -86,7 +86,6 @@ function AnswerModal({
               <NextLink href="/quiz">다른 문제 풀어보러 가기</NextLink>
             </Toggle>
           </ButtonContainer>
-
           <Answer>
             <Toggle result={result}>
               오답
@@ -100,8 +99,8 @@ function AnswerModal({
       <Badge
         name={slug}
         alt={slug}
-        width={30}
-        height={50}
+        width={100}
+        height={slug === "plastic1" || slug === "glass1" ? 100 : 110}
         isinpocket={String(result)}
       />
     </Container>
