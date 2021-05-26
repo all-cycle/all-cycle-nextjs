@@ -7,12 +7,11 @@ export default async (req, res) => {
     await connectDB();
 
     const { productId } = req.query;
-    const product = await Product.findOne({ _id: productId });
-    const populatedProduct = await product.populate("reviews").execPopulate();
+    const product = await Product.findOne({ _id: productId }).populate("reviews");
 
     return res.json({
       result: true,
-      data: populatedProduct,
+      data: product,
     });
   } catch (err) {
     return res.json({

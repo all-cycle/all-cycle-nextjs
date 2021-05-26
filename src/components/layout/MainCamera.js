@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 function MainCamera() {
-  const { isMobile, idealResolution } = useWindowSize();
+  const { idealResolution } = useWindowSize();
   const [startCamera, setStartCamera] = useState(false);
 
   function toggleCamera() {
@@ -22,7 +22,6 @@ function MainCamera() {
       {startCamera
         ? (
           <Photo
-            isMobile={isMobile}
             idealResolution={idealResolution}
             handleClose={toggleCamera}
           />

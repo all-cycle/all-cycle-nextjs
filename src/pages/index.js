@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import fetchData from "@/utils/fetchData";
-import HeadingLine from "@/components/common/HeadingLine";
+import HeadingLine from "@/components/element/HeadingLine";
 import Loading from "@/components/layout/Loading";
 import MainCamera from "@/components/layout/MainCamera";
 import Slider from "@/components/layout/Slider";

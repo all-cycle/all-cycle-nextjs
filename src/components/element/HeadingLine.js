@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import NextLink from "@/components/common/NextLink";
+import NextLink from "@/components/element/NextLink";
 
 const Container = styled.div`
   width: 100%;

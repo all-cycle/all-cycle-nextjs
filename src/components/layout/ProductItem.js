@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import ScoreBar from "@/components/common/ScoreBar";
-import Toggle from "@/components/common/Toggle";
+import ScoreBar from "@/components/element/ScoreBar";
+import Toggle from "@/components/element/Toggle";
 
 const colorTheme = css`
   ${({ isEven }) => {

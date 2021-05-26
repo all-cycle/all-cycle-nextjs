@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import StyledButton from "@/components/common/StyledButton";
-import Toggle from "@/components/common/Toggle";
+import StyledButton from "@/components/element/StyledButton";
+import Toggle from "@/components/element/Toggle";
 
 const Container = styled.section`
   width: 100%;

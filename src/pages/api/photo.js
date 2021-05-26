@@ -12,7 +12,7 @@ import {
   CONTENT_ENCODING,
   CONTENT_TYPE,
 } from "@/constants/awsParams";
-// import callVisionAPI from "@/utils/callVisionAPI";
+import callVisionAPI from "@/utils/callVisionAPI";
 
 const { AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP } = process.env;
 AWS.config.credentials = new AWS.Credentials(AWS_ACCESS_ID_MYAPP, AWS_ACCESS_KEY_MYAPP);
@@ -32,35 +32,16 @@ export default async (req, res) => {
     }
 
     const { email } = session.user;
+    const result = await callVisionAPI(uri);
 
-    const body = {
-      requests: [
-        {
-          image: { content: uri.slice(23) },
-          features: [{ type: "DOCUMENT_TEXT_DETECTION", maxResults: 10 }],
-        },
-      ],
-    };
-
-    const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    const parsed = await response.json();
-
-    if (!Object.entries(parsed.responses[0]).length) {
+    if (!Object.entries(result.responses[0]).length) {
       return res.json({
         result: false,
         error: "vision api에서 받은게 없음",
       });
     }
 
-    const detectedText = parsed.responses[0].fullTextAnnotation.text;
+    const detectedText = result.responses[0].fullTextAnnotation.text;
     const textList = detectedText.split(/\n/);
     const keywords = textList.filter((text) => text.length >= 2);
 

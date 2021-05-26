@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 
-import StyledIcon from "@/components/common/StyledIcon";
+import StyledIcon from "@/components/element/StyledIcon";
 
 const Container = styled.div`
   text-align: center;

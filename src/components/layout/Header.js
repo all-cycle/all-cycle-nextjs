@@ -11,7 +11,7 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
-import LinkIcon from "@/components/common/LinkIcon";
+import LinkIcon from "@/components/element/LinkIcon";
 
 const Container = styled.header`
   position: fixed;
@@ -67,14 +67,14 @@ function Header() {
             iconName={faUserCircle}
             href="/myPage"
           />
-          {/* <LinkIcon
+          <LinkIcon
             iconName={faSignOutAlt}
             href="/api/auth/signout"
             onClick={(e) => {
               e.preventDefault();
               signOut();
             }}
-          /> */}
+          />
         </>
       )}
       {session

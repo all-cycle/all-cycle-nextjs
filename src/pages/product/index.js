@@ -1,71 +1,19 @@
-import styled, { css } from "styled-components";
+import { useState } from "react";
 
-import useSearch from "@/hooks/useSearch";
 import fetchData from "@/utils/fetchData";
 import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
-import SearchBar from "@/components/common/SearchBar";
 import ProductItem from "@/components/layout/ProductItem";
-import NextLink from "@/components/common/NextLink";
-import StyledList from "@/components/common/StyledList";
-
-const Container = styled.div`
-  margin: 0;
-  padding-top: 0.3em;
-`;
-
-const color = css`
-  ${({ isclicked }) => {
-    if (isclicked) {
-      return css`
-        color: ${(props) => props.theme.white.color};
-        background-color: ${(props) => props.theme.primary.color};
-      `;
-    }
-
-    return css`
-      color: ${(props) => props.theme.primary.color};
-      background-color: ${(props) => props.theme.white.color};
-    `;
-  }}
-`;
-
-const ToggleButton = styled.button`
-  border: 1px solid ${(props) => props.theme.primary.color};
-  border-radius: 10px;
-  padding: 0.5em 2em;
-  font-size: 0.3em;
-  margin: 0.5em;
-
-  ${color}
-`;
-
-const FilterContainer = styled.div`
-  padding: 1em;
-  /* margin: auto; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-  margin-left: 2em;
-`;
-
-const FilterName = styled.span`
-  display: inline-block;
-  width: 15vw;
-  font-size: 0.4em;
-  font-weight: 400;
-  color: ${(props) => props.theme.gray.color};
-`;
-
-const InitButton = styled(ToggleButton)`
-  color: ${(props) => props.theme.gray.color};
-  border: 1px solid ${(props) => props.theme.gray.color};
-
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    color: ${(props) => props.theme.white.color};
-    background-color: ${(props) => props.theme.gray.color};
-  }
-`;
+import SearchBar from "@/components/element/SearchBar";
+import StyledList from "@/components/element/StyledList";
+import useSearch from "@/hooks/useSearch";
+import {
+  Container,
+  ToggleButton,
+  FilterContainer,
+  FilterName,
+  InitButton,
+  NextLink,
+} from "./styled";
 
 function Search({ productList }) {
   const {
@@ -75,10 +23,16 @@ function Search({ productList }) {
     sortWithKeyword,
     initializeFilter,
   } = useSearch(productList);
+  const [message, setMessage] = useState("");
+
+  function handleError(message) {
+    setMessage(message);
+  }
 
   return (
     <Container>
-      <SearchBar sortWithKeyword={sortWithKeyword} />
+      <SearchBar sortWithKeyword={sortWithKeyword} handleError={handleError} />
+      {message && <div>{message}</div>}
       <FilterContainer>
         <div>
           <FilterName>CATEGORY</FilterName>

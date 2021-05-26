@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import styled from "styled-components";
 
-import fetchData from "@/utils/fetchData";
-import StyledButton from "@/components/common/StyledButton";
+import StyledButton from "@/components/element/StyledButton";
 import Loading from "@/components/layout/Loading";
 import FindIt from "@/components/layout/FindIt";
+import usePhoto from "@/hooks/usePhoto";
 
 const Container = styled.div`
   position: fixed;
@@ -41,54 +39,20 @@ const Message = styled.div`
   z-index: 2;
 `;
 
-function Photo({ isMobile, idealResolution, handleClose }) {
-  const router = useRouter();
-  const [dataUri, setDataUri] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [detected, setDetected] = useState("");
-  const [startedCamera, setStartedCamera] = useState(true);
-
-  useEffect(() => {
-    if (!isError) return;
-
-    const timeoutId = setTimeout(() => {
-      setDataUri("");
-      setIsError(false);
-      handleClose();
-      router.push("/");
-    }, 1000);
-
-    return () => clearTimeout(timeoutId);
-  }, [isError]);
-
-  async function handleTakePhoto(uri) {
-    console.log("takePhoto");
-    setDataUri(uri);
-
-    const response = await fetchData("POST", "/api/photo", uri);
-
-    if (response.result) {
-      const { _id, name } = response.data;
-      console.log("photo 분석 response.data");
-
-      setDetected(name);
-      setTimeout(() => {
-        router.push(`/product/${_id}`);
-      }, 500);
-      return;
-    }
-
-    setIsError(true);
-  }
-
-  function handleStart() {
-    setStartedCamera((prev) => !prev);
-  }
+function Photo({ idealResolution, handleClose }) {
+  const {
+    startedCamera,
+    isError,
+    detectedText,
+    dataUri,
+    handleTakePhoto,
+    handleStart,
+  } = usePhoto(handleClose);
 
   return (
     <Container>
       {startedCamera && <Loading />}
-      {detected && <FindIt detected={detected} />}
+      {detectedText && <FindIt detected={detectedText} />}
       {isError && <Message>TRY AGAIN!</Message>}
       {
         (dataUri)

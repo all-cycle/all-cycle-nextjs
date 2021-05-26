@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import ImageContainer from "@/components/common/StyledImageContainer";
-// import StyledListItem from "@/components/common/StyledListItem";
+import ImageContainer from "@/components/element/StyledImageContainer";
+// import StyledListItem from "@/components/element/StyledListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 

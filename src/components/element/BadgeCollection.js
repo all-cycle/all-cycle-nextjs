@@ -1,5 +1,5 @@
-import NextLink from "@/components/common/NextLink";
-import Badge from "@/components/common/Badge";
+import NextLink from "@/components/element/NextLink";
+import Badge from "@/components/element/Badge";
 
 function BadgeCollection({ userId = "userId", badges = [] }) {
   const BADGES = [

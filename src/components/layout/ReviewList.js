@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import StyledButton from "@/components/common/StyledButton";
+import StyledButton from "@/components/element/StyledButton";
 import ReviewItem from "@/components/layout/ReviewItem";
 
 const Container = styled.div`

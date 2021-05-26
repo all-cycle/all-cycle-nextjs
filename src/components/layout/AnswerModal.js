@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import NextLink from "@/components/common/NextLink";
-import Badge from "@/components/common/Badge";
+import NextLink from "@/components/element/NextLink";
+import Badge from "@/components/element/Badge";
 
 const Container = styled.section`
   height: 40%;
