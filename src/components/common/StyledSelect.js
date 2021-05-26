@@ -4,11 +4,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1vh;
+  width: 50vw;
 `;
 
 const Label = styled.label`
   padding: 0.4em;
-  font-size: 3vw;
+  font-size: 1em;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.fontEng};
 `;
@@ -16,13 +17,14 @@ const Label = styled.label`
 const Select = styled.select`
   padding: 0.3em;
   border-radius: 2vw;
-  font-size: 3vw;
+  font-size: 2vw;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.gray.color};
   font-family: ${(props) => props.theme.fontKor};
 `;
 
 const Option = styled.option`
+  font-size: 2vw;
   &:focus {
     outline: none;
   }

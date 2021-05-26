@@ -9,7 +9,6 @@ import ScoreBar from "@/components/common/ScoreBar";
 import ReviewForm from "@/components/layout/ReviewForm";
 
 const Container = styled.div`
-  height: 90vh;
   margin: auto;
   padding-bottom: 30px;
   overflow: auto;

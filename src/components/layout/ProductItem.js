@@ -22,16 +22,18 @@ const colorTheme = css`
 const Container = styled.section`
   display: flex;
   align-items: center;
-  height: 15vh;
+  justify-content: center;
+  height: 17vh;
   border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
   font-family: ${(props) => props.theme.fontKor};
   padding: 0.7em;
+  padding-left: 10vw;
 
   ${colorTheme}
 `;
 
 const InfoContainer = styled.dl`
-  width: 100%;
+  width: 70vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -41,6 +43,7 @@ const InfoContainer = styled.dl`
 
 const ItemImage = styled.img`
   height: 100%;
+  border-radius: 2vw;
 `;
 
 const Name = styled(Toggle)`

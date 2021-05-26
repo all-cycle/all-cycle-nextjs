@@ -9,7 +9,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const productList = await Product.find();
+        const productList = await Product.find().sort("-recycleScoreAvg");
 
         res.status(200).json({
           result: true,

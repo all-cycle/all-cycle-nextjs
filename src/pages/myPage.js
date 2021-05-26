@@ -6,6 +6,7 @@ import fetchData from "@/utils/fetchData";
 import StyledButton from "@/components/common/StyledButton";
 import Loading from "@/components/layout/Loading";
 import ReviewItem from "@/components/layout/ReviewItem";
+import StyledList from "@/components/common/StyledList";
 
 const Container = styled.div`
   height: 90vh;
@@ -15,6 +16,7 @@ const Container = styled.div`
   padding: 1em;
   background-color: ${(props) => props.theme.font.color};
   font-family: ${(props) => props.theme.fontEng};
+  overflow: hidden;
 `;
 
 const UserInfo = styled.span`
@@ -57,8 +59,6 @@ const Text = styled.span`
 `;
 
 const Footer = styled.p`
-  /* position: absolute;
-  bottom: 1em; */
   color: ${(props) => props.theme.lightFont.color};
   font-size: 0.3em;
   margin-left: 1em;
@@ -70,6 +70,7 @@ const BadgeContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
+  justify-content: center;
   gap: 0.5em;
   padding: 1em;
 `;
@@ -77,6 +78,8 @@ const BadgeContainer = styled.section`
 const ReviewList = styled.ul`
   padding: 1em;
   margin-bottom: 1.5em;
+  max-height: 180px;
+  overflow-y: scroll;
 `;
 
 const Content = styled.li`

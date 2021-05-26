@@ -1,11 +1,8 @@
-// import axios from "axios";
-import fetch from "node-fetch";
-import cheerio from "cheerio";
-import imgDownload from "image-downloader";
 import styled from "styled-components";
 
 import ImageContainer from "@/components/common/StyledImageContainer";
 import NextLink from "@/components/common/NextLink";
+import { getAllLetterList } from "@/utils/letterAPI";
 
 const Container = styled.div`
   font-family: ${(props) => props.theme.fontKor};
@@ -30,6 +27,7 @@ const ToggleContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-right: 1em;
+  padding-top: 0.5em;
 `;
 
 const LetterContainer = styled.div`
@@ -81,10 +79,6 @@ const Plain = styled.div`
 `;
 
 export default function WebLetter({ letters }) {
-  if (!letters.length) {
-    return <div>아직 로딩중</div>;
-  }
-
   return (
     <Container>
       <ToggleContainer>
@@ -104,14 +98,14 @@ export default function WebLetter({ letters }) {
                 <LetterImageContainer>
                   <Image
                     src={img}
-                    alt={title.slice(13)}
-                    width={200}
+                    alt={title}
+                    width={250}
                     height={200}
                   />
                 </LetterImageContainer>
                 <LetterTitle>
                   <Strong>{title.slice(0, 13)}</Strong>
-                  <Plain>{title.slice(13)}</Plain>
+                  <Plain>{title}</Plain>
                 </LetterTitle>
               </LetterBox>
             </NextLink>
@@ -122,43 +116,16 @@ export default function WebLetter({ letters }) {
   );
 }
 
-export async function getServerSideProps() {
-  const response = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter", {
-    method: "get",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  // const response = await fetch("http://ecoseoul.or.kr/archives/category/%ec%9e%90%eb%a3%8c/webletter");
-  const html = await response.text();
-
-  const $ = cheerio.load(html);
-  const $bodyList = $("ul.cat-list > li").children("a");
-  console.log("axios cheerio load", $bodyList);
-
-  // NOTE 비동기처리를 해서 아랫부분이 먼저 실행되버리게 하다니이이이!
-  const letterScraps = $bodyList.map(async (i, elem) => {
-    const { title, href } = elem.attribs;
-    const src = $(elem).find("img").attr("src");
-    const url = encodeURI(src);
-
-    await imgDownload.image({
-      url,
-      dest: `${process.cwd()}/public/_assets/${title.slice(7, 10)}.jpg`,
-    });
-
-    return {
-      href,
-      title,
-      img: `/_assets/${title.slice(7, 10)}.jpg`,
-    };
-  });
-
-  const letters = await Promise.all(letterScraps);
+export async function getStaticProps() {
+  const letters = getAllLetterList([
+    "slug",
+    "href",
+    "title",
+    "img",
+  ]);
 
   return {
-    props: { letters }, // will be passed to the page component as props
+    props: { letters },
     revalidate: 60 * 60 * 1000 * 7,
   };
 }

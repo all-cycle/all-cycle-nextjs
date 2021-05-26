@@ -21,7 +21,7 @@ const Textarea = styled.textarea`
   display: block;
   width: 100%;
   resize: none;
-  min-height: calc(1.5em + 5rem + 2px);
+  min-height: calc(1.5em + 2rem + 2px);
   padding: 0.375rem 0.75rem;
   margin-bottom: 1em;
   font-size: 1em;
@@ -46,7 +46,7 @@ const RangeSlider = styled.input`
   all: unset;
   width: 70vw;
   height: 3vh;
-  background-color: ${(props) => props.theme.lightGray.color};
+  background-color: ${(props) => props.theme.badgeBg.color};
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -75,6 +75,7 @@ const Label = styled.label`
 `;
 
 const FigCaption = styled.figcaption`
+  font-size: 0.7em;
   margin-bottom: 0.3em;
 `;
 
@@ -98,6 +99,12 @@ const Message = styled.span`
   font-size: 0.7em;
   font-weight: 400;
   color: ${(props) => props.theme.red.color};
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 0.7em;
 `;
 
 function ReviewForm({ productId, toggle }) {
@@ -192,8 +199,10 @@ function ReviewForm({ productId, toggle }) {
         </RangeDataList>
       </RangeFigure>
 
-      <StyledButton onClick={toggle}>취소</StyledButton>
-      <StyledButton type="submit">작성완료</StyledButton>
+      <ButtonWrapper>
+        <StyledButton onClick={toggle}>취소</StyledButton>
+        <StyledButton type="submit">작성완료</StyledButton>
+      </ButtonWrapper>
     </Form>
   );
 }

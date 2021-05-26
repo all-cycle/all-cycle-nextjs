@@ -45,14 +45,14 @@ const Container = styled.span`
   ${border}
 `;
 
-function Badge({ isinpocket, name }) {
+function Badge({ isinpocket, name, height }) {
   return (
     <Container isinpocket={isinpocket.toString()}>
       <BadgeImage
         src={`/badges/${name}.jpg`}
         alt={name}
-        width={80}
-        height={80}
+        width={100}
+        height={height}
         isinpocket={isinpocket.toString()}
       />
     </Container>

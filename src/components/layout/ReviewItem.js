@@ -1,7 +1,20 @@
 import styled from "styled-components";
 
 import ImageContainer from "@/components/common/StyledImageContainer";
-import StyledListItem from "@/components/common/StyledListItem";
+// import StyledListItem from "@/components/common/StyledListItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+
+const Container = styled.li`
+  width: 100%;
+  /* height: 100%; */
+  /* min-height: 10vh; */
+  display: flex;
+  align-items: center;
+  padding: 0.3em;
+
+  border-top: 1px solid ${(props) => props.theme.darkGreen.color};
+`;
 
 const Picture = styled.img`
   width: 100%;
@@ -17,22 +30,32 @@ const Content = styled.dl`
 const Info = styled.dt`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.7em;
   color: ${(props) => props.theme.green.color};
 `;
 
 const UserName = styled.span`
+  display: flex;
+  align-items: center;
   font-size: 1rem;
-  margin-bottom: 0.3em;
 `;
 
 const CreatedAt = styled.span`
+  display: flex;
+  align-items: center;
   color: ${(props) => props.theme.gray.color};
 `;
 
 const Comment = styled.dd`
   color: ${(props) => props.theme.gray.color};
 `;
+
+const Star = styled.span`
+  font-size: 0.7em;
+  margin-left: 1.5em;
+`;
+
 function ReviewItem({ review }) {
   const {
     _id,
@@ -46,21 +69,33 @@ function ReviewItem({ review }) {
     createdAt,
   } = review;
 
+  const scoreList = [1, 2, 3, 4, 5];
+
   return (
-    <StyledListItem key={_id}>
+    <Container>
       <Content>
         <Info>
-          <UserName>{username}</UserName>
+          <UserName>
+            {username}
+            <Star>평점: {" "}{recycleScore}(
+              {scoreList.map((score) => (
+                <FontAwesomeIcon
+                  icon={faStar}
+                  color={score <= recycleScore ? "#3DD97E" : "#A69E9E"}
+                />
+              ))})
+            </Star>
+          </UserName>
           <CreatedAt>{createdAt.slice(0, 13)}</CreatedAt>
         </Info>
-        <Comment>{comment}</Comment>
+        {comment && <Comment>{comment}</Comment>}
       </Content>
       {picture && (
         <ImageContainer>
           <Picture src={picture} alt="user photo" />
         </ImageContainer>
       )}
-    </StyledListItem>
+    </Container>
   );
 }
 

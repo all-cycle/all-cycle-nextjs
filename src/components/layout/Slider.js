@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import NextLink from "@/components/common/NextLink";
 
 const Container = styled.div`
-  width: 1000px;
+  width: 1500px;
   margin: auto;
 `;
 
@@ -12,12 +12,12 @@ const scroll = keyframes`
     transform: translateX(0);
    }
 	100% {
-    transform: translateX(calc(-100px * 6));
+    transform: translateX(calc(-100px * 8));
   }
 `;
 
 const SliderContainer = styled.div`
-  width: calc(100px * 10);
+  width: calc(100px * 16);
   position: relative;
   display: flex;
   animation: ${scroll} 20s linear infinite;
@@ -28,7 +28,7 @@ const ItemImage = styled.img`
   width: 100px;
   height: 100%;
 
-  &:focus {
+  &:hover {
     transform: scale(1.2);
   }
 `;
@@ -42,6 +42,9 @@ const ImageContainer = styled.div`
 
   /* NOTE 사진에서도 text-align 먹히는지 확인 */
   text-align: center;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 function Slider({ list }) {

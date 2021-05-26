@@ -100,7 +100,7 @@ function Photo({ isMobile, idealResolution, handleClose }) {
                 onTakePhotoAnimationDone={handleTakePhoto}
                 isImageMirror={false}
                 idealFacingMode={FACING_MODES.ENVIRONMENT}
-                isFullscreen={isMobile}
+                isFullscreen
                 imageCompression={0.9}
                 sizeFactor={0.9}
                 imageType={IMAGE_TYPES.JPG}

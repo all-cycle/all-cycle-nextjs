@@ -53,6 +53,8 @@ const ImageContainer = styled.div`
   object-fit: cover;
   border-top-left-radius: 5vw;
   border-bottom-left-radius: 5vw;
+  margin-left: 1em;
+  margin-right: 1em;
 `;
 
 const Image = styled.img`
@@ -63,6 +65,8 @@ const Image = styled.img`
 
 const SelectContainer = styled.section`
   width: 100%;
+  padding: 1em;
+  font-size: 2vw;
 `;
 
 const UpdateCount = styled.span`

@@ -35,18 +35,22 @@ function Header() {
       <LinkIcon
         iconName={faHome}
         href="/"
+        prefetch
       />
       <LinkIcon
         iconName={faSearch}
         href="/product"
+        prefetch
       />
       <LinkIcon
         iconName={faGraduationCap}
         href="/quiz"
+        prefetch
       />
       <LinkIcon
         iconName={faNewspaper}
         href="/webLetter"
+        prefetch
       />
       {!session ? (
         <LinkIcon
@@ -63,14 +67,14 @@ function Header() {
             iconName={faUserCircle}
             href="/myPage"
           />
-          <LinkIcon
+          {/* <LinkIcon
             iconName={faSignOutAlt}
             href="/api/auth/signout"
             onClick={(e) => {
               e.preventDefault();
               signOut();
             }}
-          />
+          /> */}
         </>
       )}
       {session
@@ -79,6 +83,7 @@ function Header() {
           <LinkIcon
             iconName={faCogs}
             href="/manager"
+            prefetch
           />
         )}
     </Container>
