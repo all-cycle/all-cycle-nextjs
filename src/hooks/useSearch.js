@@ -1,46 +1,32 @@
 import { useState } from "react";
 
 function useSearch(productList) {
-  const [sortFilter, setSortFilter] = useState({
+  const [sortedList, setSortedList] = useState(productList);
+  const initialFilter = {
     recycleType: "",
     productType: "",
-  });
-  const [sortedList, setSortedList] = useState(productList);
+  };
+  const [sortFilter, setSortFilter] = useState(initialFilter);
 
   function sortWithTypes(type, value) {
-    if (type === "recycleType") {
-      if (!sortFilter.productType) {
-        setSortedList(productList.filter((product) => product.recycleType === value));
-      } else {
-        setSortedList(productList.filter((product) => {
-          return product.recycleType === value
-            && product.productType === sortFilter.productType;
-        }));
-      }
+    const targetType = Object.keys(sortFilter)
+      .filter((filterType) => filterType === type)[0];
 
-      setSortFilter((prev) => {
-        return {
-          ...prev,
-          recycleType: value,
-        };
-      });
-    } else {
-      if (!sortFilter.recycleType) {
-        setSortedList(productList.filter((product) => product.productType === value));
-      } else {
-        setSortedList(productList.filter((product) => {
-          return product.productType === value
-            && product.recycleType === sortFilter.recycleType;
-        }));
-      }
+    const otherType = Object.keys(sortFilter)
+      .filter((filterType) => filterType !== type)[0];
 
-      setSortFilter((prev) => {
-        return {
-          ...prev,
-          productType: value,
-        };
-      });
+    if (sortFilter[otherType]) {
+      setSortedList(productList.filter((product) => product[otherType] === sortFilter[otherType]));
     }
+
+    setSortedList((prev) => prev.filter((product) => product[targetType] === value));
+
+    setSortFilter((prev) => {
+      return {
+        ...prev,
+        [type]: value,
+      };
+    });
   }
 
   function sortWithKeyword(word) {
@@ -59,7 +45,7 @@ function useSearch(productList) {
 
   function initializeFilter(e) {
     e.stopPropagation();
-    setSortFilter([]);
+    setSortFilter(initialFilter);
     setSortedList(productList);
   }
 

@@ -6,9 +6,11 @@ import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
 import SearchBar from "@/components/common/SearchBar";
 import ProductItem from "@/components/layout/ProductItem";
 import NextLink from "@/components/common/NextLink";
+import StyledList from "@/components/common/StyledList";
 
 const Container = styled.div`
   margin: 0;
+  padding-top: 0.3em;
 `;
 
 const color = css`
@@ -37,15 +39,18 @@ const ToggleButton = styled.button`
   ${color}
 `;
 
-const StyledList = styled.article`
-  width: 100%;
-`;
-
 const FilterContainer = styled.div`
   padding: 1em;
+  /* margin: auto; */
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  margin-left: 2em;
 `;
 
 const FilterName = styled.span`
+  display: inline-block;
+  width: 15vw;
   font-size: 0.4em;
   font-weight: 400;
   color: ${(props) => props.theme.gray.color};
@@ -105,7 +110,7 @@ function Search({ productList }) {
 
       <StyledList>
         {sortedList?.map((product, index) => (
-          <NextLink key={product._id} href={`/product/${product._id}`}>
+          <NextLink key={product._id} href={`/product/${product._id}`} prefetch>
             <ProductItem product={product} isEven={index % 2} />
           </NextLink>
         ))}
