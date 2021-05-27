@@ -1,22 +1,10 @@
 import styled from "styled-components";
 
-import NextLink from "@/components/element/NextLink";
-import Toggle from "@/components/element/Toggle";
-
 const Container = styled.div`
   width: 100%;
   height: 90vh;
   display: flex;
   color: ${(props) => props.theme.primary.color};
-  background-color:  ${(props) => props.theme.badgeBg.color};
-`;
-
-const QuizContainer = styled.ul`
-  width: 100%;
-  margin-top: 3.5em;
-  padding: 0.5em;
-  gap: 0.3em;
-  font-size: 1em;
   background-color:  ${(props) => props.theme.badgeBg.color};
 `;
 
@@ -43,32 +31,10 @@ const Text = styled.p`
   color: ${(props) => props.theme.darkGray.color};
 `;
 
-const Category = styled(Toggle)`
-  margin: auto;
-  font-size: 0.5em;
-  background-color: ${(props) => props.theme.yellow.color};
-  box-shadow: inset 0px 0px 11px rgba(0, 0, 0, 0.15);
-`;
-
-const QuizBox = styled.li`
-  margin-bottom: 1em;
-  padding: 0.3em;
-`;
-
-const Question = styled.div`
-  margin-top: 0.5em;
-  color: ${(props) => props.theme.lightFont.color};
-`;
-
 export {
   Container,
   Message,
   H3,
   Text,
   CreatedBy,
-  QuizContainer,
-  QuizBox,
-  Category,
-  Question,
-  NextLink,
 };

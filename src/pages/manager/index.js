@@ -11,11 +11,11 @@ import {
   ImageContainer,
   Image,
   SelectContainer,
-  StyledSelect,
+  ManagerOptions,
   UpdateCount,
   ProductName,
   Button,
-} from "@/pages/manager/styled";
+} from "./styled";
 
 function Manager({ productList }) {
   const {
@@ -25,6 +25,7 @@ function Manager({ productList }) {
     updateData,
     handleChange,
   } = useManager(productList);
+
   return (
     <Container>
       <Title>
@@ -66,14 +67,14 @@ function Manager({ productList }) {
                   </ImageContainer>
 
                   <SelectContainer>
-                    <StyledSelect
+                    <ManagerOptions
                       productId={_id}
                       name="productType"
                       types={PRODUCT_TYPES}
                       defaultType={productType}
                       onChange={handleChange}
                     />
-                    <StyledSelect
+                    <ManagerOptions
                       productId={_id}
                       name="recycleType"
                       types={RECYCLE_TYPES}

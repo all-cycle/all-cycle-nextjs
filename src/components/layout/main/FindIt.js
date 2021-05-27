@@ -18,10 +18,10 @@ const Message = styled.div`
   color: ${(props) => props.theme.primary.color};
 `;
 
-function FindIt({ detected }) {
+function FindIt({ result }) {
   return (
     <Container>
-      <Message>{detected}</Message>
+      <Message>{result}</Message>
     </Container>
   );
 }

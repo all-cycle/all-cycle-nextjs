@@ -1,20 +1,16 @@
 import { useState } from "react";
-import { useSession } from "next-auth/client";
 
 import connectDB from "@/utils/connectDB";
 import fetchData from "@/utils/fetchData";
-import ReviewList from "@/components/layout/ReviewList";
-import ScoreBar from "@/components/element/ScoreBar";
-import ReviewForm from "@/components/layout/ReviewForm";
+import ReviewForm from "@/components/layout/review/ReviewForm";
+import ReviewList from "@/components/layout/review/ReviewList";
+import ScoreContainer from "@/components/layout/product/ScoreContainer";
 import {
   Container,
   ProductContainer,
   Picture,
   ProductInfo,
   ProductName,
-  Title,
-  Figure,
-  Score,
 } from "./styled";
 
 function ProductItem({ product }) {
@@ -26,21 +22,12 @@ function ProductItem({ product }) {
     recycleScoreAvg,
     preferenceScoreAvg,
     reviews,
-    // searchCount,
-    // recycleType,
-    // productType,
-    reviewers,
   } = product;
 
   const [isList, setIsList] = useState(true);
-  const [session] = useSession();
 
   function toggle() {
     setIsList((prev) => !prev);
-  }
-
-  if (!session) {
-    return <div>Loading...</div>;
   }
 
   return (
@@ -54,23 +41,10 @@ function ProductItem({ product }) {
 
       {isList ? (
         <>
-          <div>
-            <Figure>
-              <Title>
-                재활용 점수
-                <Score>({recycleScoreAvg})</Score>
-              </Title>
-              <ScoreBar width={50} height={2} score={recycleScoreAvg} />
-            </Figure>
-
-            <Figure>
-              <Title>
-                선호도 점수
-                <Score>({recycleScoreAvg})</Score>
-              </Title>
-              <ScoreBar width={50} height={2} score={recycleScoreAvg} />
-            </Figure>
-          </div>
+          <ScoreContainer
+            recycleScoreAvg={recycleScoreAvg}
+            preferenceScoreAvg={preferenceScoreAvg}
+          />
           <ReviewList reviews={reviews} toggle={toggle} />
         </>
       ) : (

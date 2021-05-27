@@ -24,7 +24,6 @@ function usePhoto(handleClose) {
   }, [isError]);
 
   async function handleTakePhoto(uri) {
-    console.log("takePhoto");
     setDataUri(uri);
 
     const response = await fetchData("POST", "/api/photo", uri);

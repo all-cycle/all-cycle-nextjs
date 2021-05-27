@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import useWindowSize from "@/hooks/useWindowSize";
-import Photo from "@/components/layout/Photo";
-import AnimationCamera from "@/components/layout/AnimationCamera";
+import Photo from "@/components/layout/main/Photo";
+import AnimationCamera from "@/components/layout/main/AnimationCamera";
 
 const Container = styled.div`
   text-align: center;

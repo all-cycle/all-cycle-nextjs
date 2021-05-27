@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/index";
 import Layout from "@/components/layout/Layout";
 import THEME from "@/constants/theme";
 

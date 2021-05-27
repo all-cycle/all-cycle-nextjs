@@ -11,13 +11,14 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
-import LinkIcon from "@/components/element/LinkIcon";
+import LinkIcon from "./LinkIcon";
 
 const Container = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 510px;
   height: 10vh;
   display: flex;
   justify-content: space-evenly;
@@ -25,6 +26,7 @@ const Container = styled.header`
   font-size: larger;
   background-color: ${(props) => props.theme.white.color};
   border-bottom: 1px solid ${(props) => props.theme.badgeBg.color};
+  z-index: 10;
 `;
 
 function Header() {

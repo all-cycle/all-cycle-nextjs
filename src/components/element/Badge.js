@@ -32,12 +32,12 @@ const border = css`
 `;
 
 const Container = styled.span`
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5em;
+  padding: 1em;
   border-radius: 20%;
   background-color: ${(props) => props.theme.badgeBg.color};
   box-shadow: inset 0px 0px 11px rgba(0, 0, 0, 0.15);

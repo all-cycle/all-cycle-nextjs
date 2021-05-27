@@ -4,8 +4,8 @@ import styled from "styled-components";
 import fetchData from "@/utils/fetchData";
 import HeadingLine from "@/components/element/HeadingLine";
 import Loading from "@/components/layout/Loading";
-import MainCamera from "@/components/layout/MainCamera";
-import Slider from "@/components/layout/Slider";
+import MainCamera from "@/components/layout/main";
+import Slider from "@/components/layout/main/Slider";
 
 const Container = styled.div`
   width: 100vw;

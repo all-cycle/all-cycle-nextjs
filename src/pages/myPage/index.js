@@ -1,33 +1,22 @@
-import { useSession, signIn, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/client";
 
-import BadgeCollection from "@/components/element/BadgeCollection";
 import fetchData from "@/utils/fetchData";
-import Loading from "@/components/layout/Loading";
+import AccessDenied from "@/components/element/AccessDenied";
+import BadgeCollection from "@/components/layout/myPage/BadgeCollection";
+import ReviewList from "@/components/layout/myPage/Reviews";
+import PhotoList from "@/components/layout/myPage/Photos";
 import {
   Container,
-  StyledButton,
   UserInfo,
   UserProfile,
   UserImage,
   Email,
   Text,
-  ReviewList,
-  Content,
-  Image,
-  Score,
-  PhotoList,
-  ImageContainer,
   BadgeContainer,
   Footer,
 } from "./styled";
 
 export default function MyPage({ userInfo }) {
-  const [session, loading] = useSession();
-
-  if (loading) {
-    return <Loading />;
-  }
-
   const {
     _id,
     name,
@@ -35,19 +24,13 @@ export default function MyPage({ userInfo }) {
     image,
     badges,
     pictures,
-    recycleScore,
-    history,
     reviews,
   } = userInfo;
 
+  const [session] = useSession();
+
   if (!session) {
-    return (
-      <Container>
-        <StyledButton onClick={signIn}>
-          마이페이지, 로그인을 하세요
-        </StyledButton>
-      </Container>
-    );
+    return <AccessDenied />;
   }
 
   return (
@@ -63,25 +46,10 @@ export default function MyPage({ userInfo }) {
       </UserInfo>
 
       <Text>My Reviews</Text>
-      <ReviewList>
-        {reviews?.map((review) => (
-          <Content key={review._id}>
-            {review.productId.name}
-            <Score>
-              재활용 점수: {review.recycleScore}
-            </Score>
-          </Content>
-        ))}
-      </ReviewList>
+      <ReviewList reviews={reviews} />
 
       <Text>My Photos</Text>
-      <PhotoList>
-        {pictures?.map((picture) => (
-          <ImageContainer key={picture}>
-            <Image src={picture} alt={picture} />
-          </ImageContainer>
-        ))}
-      </PhotoList>
+      <PhotoList pictures={pictures} />
 
       <Text>My Badge Collections</Text>
       <BadgeContainer>

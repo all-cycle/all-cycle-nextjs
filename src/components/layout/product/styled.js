@@ -1,8 +1,5 @@
 import styled, { css } from "styled-components";
 
-import ScoreBar from "@/components/element/ScoreBar";
-import Toggle from "@/components/element/Toggle";
-
 const colorTheme = css`
   ${({ isEven }) => {
     if (isEven) {
@@ -46,7 +43,7 @@ const ItemImage = styled.img`
   border-radius: 2vw;
 `;
 
-const Name = styled(Toggle)`
+const Name = styled.span`
   margin: 0;
   padding: 0;
   font-size: 0.8em;
@@ -60,7 +57,7 @@ const Title = styled.dd`
   font-size: 0.5em;
 `;
 
-const Score = styled.span`
+const Number = styled.span`
   color: ${(props) => props.theme.gray.color};
 `;
 
@@ -77,51 +74,34 @@ const ScoreFigure = styled.figure`
   }
 `;
 
-const ScoreContainer = styled.section`
+const Form = styled.form`
+  width: 90%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  padding-left: 2vw;
+  border-radius: 2vw;
+  background-color: ${(props) => props.theme.lightGray.color};
 `;
 
-function ProductItem({ product, isEven }) {
-  const {
-    _id,
-    name,
-    imgUrl,
-    imgAlt,
-    recycleScoreAvg,
-    preferenceScoreAvg,
-  } = product;
+const Input = styled.input`
+  all: unset;
+  width: 100%;
 
-  return (
-    <Container isEven={isEven}>
-      <ItemImage src={imgUrl} alt={imgAlt} />
-      <InfoContainer>
-        <Name isEven={isEven} size={0.7}>{name}</Name>
-        <ScoreContainer>
-          <ScoreFigure>
-            <Title>
-              재활용 점수
-              <Score>({recycleScoreAvg})</Score>
-            </Title>
-            <ScoreBar
-              score={recycleScoreAvg}
-              width={30}
-              height={1.8}
-            />
-          </ScoreFigure>
-          <ScoreFigure>
-            <Title>
-              선호도 점수
-              <Score>({preferenceScoreAvg})</Score>
-            </Title>
-            <ScoreBar
-              score={preferenceScoreAvg}
-              width={30}
-              height={1.8}
-            />
-          </ScoreFigure>
-        </ScoreContainer>
-      </InfoContainer>
-    </Container>
-  );
-}
+  ::placeholder {
+    color: ${(props) => props.theme.gray.color};
+  }
+`;
 
-export default ProductItem;
+export {
+  Container,
+  ItemImage,
+  InfoContainer,
+  Name,
+  ScoreFigure,
+  Number,
+  Title,
+  Form,
+  Input,
+};

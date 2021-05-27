@@ -1,11 +1,11 @@
 import { getAllQuizList, getQuizBySlug } from "@/utils/quizAPI";
 import useQuiz from "@/hooks/useQuiz";
-import QuizOption from "@/components/layout/QuizOption";
+import QuizOptionList from "@/components/layout/quiz/OptionList";
 import Message from "@/components/element/Message";
 import {
   Container,
   Question,
-  Toggle,
+  Category,
   AnswerModal,
   StyledModal,
 } from "./styled";
@@ -35,10 +35,11 @@ function Quiz({ quiz }) {
 
   return (
     <Container>
-      <Toggle size={0.7}>{category}</Toggle>
+      <Category size={0.7}>{category}</Category>
       <Question>
         {question}
       </Question>
+
       {error && (
         <StyledModal>
           <Message>{error}</Message>
@@ -57,7 +58,7 @@ function Quiz({ quiz }) {
             />
           </StyledModal>
         ) : (
-          <QuizOption
+          <QuizOptionList
             slug={slug}
             examples={examples}
             images={images}

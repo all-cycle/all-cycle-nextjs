@@ -31,7 +31,7 @@ const Option = styled.option`
   }
 `;
 
-function StyledSelect({
+function ManagerOptions({
   productId,
   name,
   types,
@@ -59,4 +59,4 @@ function StyledSelect({
   );
 }
 
-export default StyledSelect;
+export default ManagerOptions;

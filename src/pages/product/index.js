@@ -1,19 +1,13 @@
 import { useState } from "react";
 
 import fetchData from "@/utils/fetchData";
-import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
-import ProductItem from "@/components/layout/ProductItem";
-import SearchBar from "@/components/element/SearchBar";
-import StyledList from "@/components/element/StyledList";
 import useSearch from "@/hooks/useSearch";
-import {
-  Container,
-  ToggleButton,
-  FilterContainer,
-  FilterName,
-  InitButton,
-  NextLink,
-} from "./styled";
+import FilterContainer from "@/components/layout/filter";
+import ProductItem from "@/components/layout/product";
+import SearchBar from "@/components/layout/product/SearchBar";
+import StyledList from "@/components/element/StyledList";
+import Message from "@/components/element/Message";
+import { Container, NextLink } from "./styled";
 
 function Search({ productList }) {
   const {
@@ -23,6 +17,7 @@ function Search({ productList }) {
     sortWithKeyword,
     initializeFilter,
   } = useSearch(productList);
+
   const [message, setMessage] = useState("");
 
   function handleError(message) {
@@ -32,35 +27,13 @@ function Search({ productList }) {
   return (
     <Container>
       <SearchBar sortWithKeyword={sortWithKeyword} handleError={handleError} />
-      {message && <div>{message}</div>}
-      <FilterContainer>
-        <div>
-          <FilterName>CATEGORY</FilterName>
-          {PRODUCT_TYPES.map((productType) => (
-            <ToggleButton
-              key={JSON.stringify(productType)}
-              isclicked={sortFilter.productType === productType[0]}
-              onClick={() => sortWithTypes("productType", productType[0])}
-            >
-              {productType[1]}
-            </ToggleButton>
-          ))}
-        </div>
+      {message && <Message>{message}</Message>}
 
-        <span>
-          <FilterName>PACKAGE</FilterName>
-          {RECYCLE_TYPES.map((recycleType) => (
-            <ToggleButton
-              key={JSON.stringify(recycleType)}
-              isclicked={sortFilter.recycleType === recycleType[0]}
-              onClick={() => sortWithTypes("recycleType", recycleType[0])}
-            >
-              {recycleType[1]}
-            </ToggleButton>
-          ))}
-        </span>
-        <InitButton onClick={initializeFilter}>필터 초기화</InitButton>
-      </FilterContainer>
+      <FilterContainer
+        sortFilter={sortFilter}
+        sortWithTypes={sortWithTypes}
+        initializeFilter={initializeFilter}
+      />
 
       <StyledList>
         {sortedList?.map((product, index) => (
