@@ -107,15 +107,3 @@ export async function getServerSideProps() {
     props: { productList: [] },
   };
 }
-
-// export async function getStaticProps() {
-//   const count = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/manager`);
-//   const productList = await fetchData("GET", `${process.env.HOMEPAGE_URL}/api/product`);
-
-//   return {
-//     props: {
-//       count: count.data || 0,
-//       productList: productList.data,
-//     },
-//   };
-// }
