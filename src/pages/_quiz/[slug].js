@@ -8,7 +8,7 @@ import {
   Category,
   AnswerModal,
   StyledModal,
-} from "./styled";
+} from "@/components/layout/quiz/styled/[slug]Styled";
 
 function Quiz({ quiz }) {
   const {

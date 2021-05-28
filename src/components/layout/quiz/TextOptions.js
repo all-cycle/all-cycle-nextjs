@@ -1,13 +1,12 @@
 import {
-  OptionList,
   Option,
   Caption,
   OptionButton,
-} from "./styled";
+} from "@/components/layout/quiz/styled/OptionsStyled";
 
 function Options({ list, handleSelectOption }) {
   return (
-    <OptionList>
+    <ul>
       {list.map((example, index) => (
         <Option key={example}>
           <Caption>{index + 1}</Caption>
@@ -20,7 +19,7 @@ function Options({ list, handleSelectOption }) {
           </OptionButton>
         </Option>
       ))}
-    </OptionList>
+    </ul>
   );
 }
 

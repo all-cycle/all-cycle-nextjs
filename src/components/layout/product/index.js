@@ -1,10 +1,10 @@
-import ScoreContainer from "./ScoreContainer";
+import ScoreContainer from "@/components/layout/product/ScoreContainer";
 import {
-  Container,
+  Section,
   ItemImage,
   InfoContainer,
   Name,
-} from "./styled";
+} from "@/components/layout/product/styled";
 
 function ProductItem({ product, isEven }) {
   const {
@@ -16,8 +16,9 @@ function ProductItem({ product, isEven }) {
   } = product;
 
   return (
-    <Container isEven={isEven}>
+    <Section isEven={isEven}>
       <ItemImage src={imgUrl} alt={imgAlt} />
+
       <InfoContainer>
         <Name isEven={isEven} size={0.7}>{name}</Name>
         <ScoreContainer
@@ -25,7 +26,7 @@ function ProductItem({ product, isEven }) {
           preferenceScoreAvg={preferenceScoreAvg}
         />
       </InfoContainer>
-    </Container>
+    </Section>
   );
 }
 

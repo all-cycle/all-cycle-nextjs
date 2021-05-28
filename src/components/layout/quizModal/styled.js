@@ -7,6 +7,7 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 1em;
 `;
 
 const color = css`

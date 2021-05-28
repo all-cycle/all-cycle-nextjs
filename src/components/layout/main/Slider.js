@@ -4,7 +4,7 @@ import {
   Wrapper,
   ItemImage,
   ImageContainer,
-} from "./styled";
+} from "@/components/layout/main/styled";
 
 function Slider({ list }) {
   const carouselList = list.concat(list[0]);

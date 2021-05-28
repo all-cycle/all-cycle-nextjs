@@ -1,6 +1,6 @@
-import { Container, AnswerButton, ButtonContainer } from "./styled";
-import TextOptions from "./TextOptions";
-import ImageOptions from "./ImageOptions";
+import { Container, AnswerButton, ButtonContainer } from "@/components/layout/quiz/styled/OptionsStyled";
+import TextOptions from "@/components/layout/quiz/TextOptions";
+import ImageOptions from "@/components/layout/quiz/ImageOptions";
 
 function QuizOption({
   examples,

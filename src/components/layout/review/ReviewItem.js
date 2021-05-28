@@ -1,4 +1,4 @@
-import StarScore from "./StarScore";
+import StarScore from "@/components/layout/review/StarScore";
 import {
   Li,
   Picture,
@@ -6,7 +6,7 @@ import {
   CreatedAt,
   Comment,
   ImageContainer,
-} from "./styled";
+} from "@/components/layout/review/styled";
 
 function ReviewItem({ review }) {
   const {
@@ -25,6 +25,7 @@ function ReviewItem({ review }) {
         <CreatedAt>{createdAt.slice(0, 13)}</CreatedAt>
         {comment && <Comment>{comment}</Comment>}
       </Info>
+
       {picture && (
         <ImageContainer>
           <Picture src={picture} alt="user photo" />

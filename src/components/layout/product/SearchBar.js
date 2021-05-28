@@ -1,5 +1,5 @@
 import useKeyword from "@/hooks/useKeyword";
-import { Form, Input } from "./styled";
+import { Form, Input } from "@/components/layout/product/styled";
 
 function SearchBar({ sortWithKeyword, handleError }) {
   const { keyword, handleChange, handleSubmit } = useKeyword(sortWithKeyword, handleError);

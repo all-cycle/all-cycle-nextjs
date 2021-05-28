@@ -2,7 +2,7 @@ import {
   Container,
   Name,
   ToggleButton,
-} from "./styled";
+} from "@/components/layout/filter/styled";
 
 function Filter({ TYPES, sortFilter, sortWithTypes }) {
   return (

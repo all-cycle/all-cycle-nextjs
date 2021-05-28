@@ -7,7 +7,7 @@ import ProductItem from "@/components/layout/product";
 import SearchBar from "@/components/layout/product/SearchBar";
 import StyledList from "@/components/element/StyledList";
 import Message from "@/components/element/Message";
-import { Container, NextLink } from "./styled";
+import { Container, NextLink } from "@/components/layout/product/styled";
 
 function Search({ productList }) {
   const {

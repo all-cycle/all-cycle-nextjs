@@ -11,7 +11,7 @@ import {
   Picture,
   ProductInfo,
   ProductName,
-} from "./styled";
+} from "@/components/layout/product/styled";
 
 function ProductItem({ product }) {
   const {

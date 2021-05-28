@@ -1,5 +1,5 @@
-import ScoreBar from "./ScoreBar";
-import { ScoreFigure, Number, Title } from "./styled";
+import ScoreBar from "@/components/layout/product/ScoreBar";
+import { ScoreFigure, Number, Title } from "@/components/layout/product/styled/ScoreStyled";
 
 function Score({ name, score }) {
   return (

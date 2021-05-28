@@ -4,7 +4,7 @@ import {
   Container,
   ToggleContainer,
   Toggle,
-} from "./styled";
+} from "@/components/layout/webLetter/styled";
 
 export default function WebLetter({ letters }) {
   return (
@@ -14,6 +14,7 @@ export default function WebLetter({ letters }) {
           <a href="http://ecoseoul.or.kr/">@서울환경연합</a>
         </Toggle>
       </ToggleContainer>
+
       <LetterContainer letters={letters} />
     </Container>
   );

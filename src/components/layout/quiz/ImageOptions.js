@@ -3,7 +3,7 @@ import {
   ImageOption,
   Caption,
   Picture,
-} from "./styled";
+} from "@/components/layout/quiz/styled/OptionsStyled";
 
 function ImageOptions({ list, alts, handleSelectOption }) {
   return (

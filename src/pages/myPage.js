@@ -14,7 +14,7 @@ import {
   Text,
   BadgeContainer,
   Footer,
-} from "./styled";
+} from "@/components/layout/myPage/styled/index";
 
 export default function MyPage({ userInfo }) {
   const {
@@ -53,7 +53,7 @@ export default function MyPage({ userInfo }) {
 
       <Text>My Badge Collections</Text>
       <BadgeContainer>
-        <BadgeCollection userId={_id} badges={badges} />
+        <BadgeCollection userId={_id} myBadges={badges} />
       </BadgeContainer>
 
       <Footer>

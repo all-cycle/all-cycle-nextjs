@@ -11,7 +11,7 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
-import LinkIcon from "./LinkIcon";
+import LinkIcon from "@/components/layout/header/LinkIcon";
 
 const Container = styled.header`
   position: fixed;

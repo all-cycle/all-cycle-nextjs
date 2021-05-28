@@ -1,5 +1,42 @@
 import styled, { css } from "styled-components";
 
+import NextLink from "@/components/element/NextLink";
+
+const Container = styled.div`
+  margin: 0;
+  padding-top: 0.3em;
+  padding-bottom: 30px;
+`;
+
+const ProductContainer = styled.div`
+  padding: 3vw;
+
+  border-top: 3px solid ${(props) => props.theme.lightGray.color};
+`;
+
+const Picture = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 3vw;
+  box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1em;
+`;
+
+const ProductInfo = styled.div`
+  width: 100%;
+  position: relative;
+  padding: 3vw;
+
+  background-color: ${(props) => props.theme.lightGray.color};
+`;
+
+const ProductName = styled.div`
+  color: ${(props) => props.theme.darkGray.color};
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+`;
+
 const colorTheme = css`
   ${({ isEven }) => {
     if (isEven) {
@@ -16,7 +53,7 @@ const colorTheme = css`
   }}
 `;
 
-const Container = styled.section`
+const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,28 +89,6 @@ const Name = styled.span`
   ${colorTheme}
 `;
 
-const Title = styled.dd`
-  all: unset;
-  font-size: 0.5em;
-`;
-
-const Number = styled.span`
-  color: ${(props) => props.theme.gray.color};
-`;
-
-const ScoreFigure = styled.figure`
-  all: unset;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1em;
-
-  & + & {
-    margin-top: 0.5em;
-  }
-`;
-
 const Form = styled.form`
   width: 90%;
   height: 5vh;
@@ -96,12 +111,15 @@ const Input = styled.input`
 
 export {
   Container,
+  NextLink,
+  ProductContainer,
+  Picture,
+  ProductInfo,
+  ProductName,
+  Section,
   ItemImage,
   InfoContainer,
   Name,
-  ScoreFigure,
-  Number,
-  Title,
   Form,
   Input,
 };

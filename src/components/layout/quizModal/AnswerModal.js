@@ -8,7 +8,7 @@ import {
   Toggle,
   Answer,
   Description,
-} from "./styled";
+} from "@/components/layout/quizModal/styled";
 
 function AnswerModal({
   slug,
@@ -43,10 +43,10 @@ function AnswerModal({
 
       <Answer>
         <Toggle result={result?.toString()}>
-          {result ? "정답입니다" : "오답입니다"}
+          {result ? "정답" : "오답"}
         </Toggle>
         {" "}
-        [정답] {realAnswer}
+        {realAnswer}
       </Answer>
 
       <Description>{description}</Description>

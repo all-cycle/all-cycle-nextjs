@@ -1,7 +1,7 @@
 import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
+import Filter from "@/components/layout/filter/Filter";
+import { Container, InitButton } from "@/components/layout/filter/styled";
 import StyledList from "@/components/element/StyledList";
-import Filter from "./Filter";
-import { Container, InitButton } from "./styled";
 
 function FilterContainer({ sortFilter, sortWithTypes, initializeFilter }) {
   return (

@@ -3,11 +3,7 @@ import { useRouter } from "next/router";
 import NextLink from "@/components/element/NextLink";
 import StyledIcon from "@/components/element/StyledIcon";
 
-function LinkIcon({
-  iconName,
-  href,
-  size,
-}) {
+function LinkIcon({ iconName, href, size }) {
   const router = useRouter();
 
   if (href === "/") {

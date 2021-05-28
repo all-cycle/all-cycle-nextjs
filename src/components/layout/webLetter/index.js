@@ -1,5 +1,5 @@
 import {
-  Container,
+  ListContainer,
   LetterBox,
   LetterImageContainer,
   Image,
@@ -7,11 +7,11 @@ import {
   Strong,
   Plain,
   NextLink,
-} from "./styled";
+} from "@/components/layout/webLetter/styled";
 
-function WebLetter({ letters }) {
+function List({ letters }) {
   return (
-    <Container>
+    <ListContainer>
       {letters.map((letter) => {
         const { href, title, img } = letter;
         const titleIndex = title.indexOf("]") + 1;
@@ -35,8 +35,8 @@ function WebLetter({ letters }) {
           </NextLink>
         );
       })}
-    </Container>
+    </ListContainer>
   );
 }
 
-export default WebLetter;
+export default List;

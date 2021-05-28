@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import ManagerOptions from "@/components/layout/ManagerOptions";
+import ButtonContainer from "@/components/element/ButtonContainer";
 
 const Container = styled.div`
   padding-top: 1em;
@@ -8,7 +9,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.lightGray.color};
 `;
 
-const Title = styled.div`
+const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,12 +67,6 @@ const SelectContainer = styled.section`
   font-size: 2vw;
 `;
 
-const UpdateCount = styled.span`
-  font-size: 0.3em;
-  font-weight: 400;
-  margin-left: 2vw;
-`;
-
 const ProductName = styled.div`
   padding: 0.3em 0.7em;
   border: 1px solid ${(props) => props.theme.skyblue.color};
@@ -93,8 +88,9 @@ const Button = styled.button`
 
 export {
   Container,
-  Title,
+  Info,
   Strong,
+  ButtonContainer,
   Ul,
   Li,
   Wrapper,
@@ -102,7 +98,6 @@ export {
   Image,
   SelectContainer,
   ManagerOptions,
-  UpdateCount,
   ProductName,
   Button,
 };

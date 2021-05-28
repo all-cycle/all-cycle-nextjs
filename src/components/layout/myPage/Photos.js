@@ -1,4 +1,4 @@
-import { PhotoList, ImageContainer, Image } from "./styled";
+import { PhotoList, ImageContainer, Image } from "@/components/layout/myPage/styled/ReviewsStyled";
 
 function Photos({ pictures }) {
   return (

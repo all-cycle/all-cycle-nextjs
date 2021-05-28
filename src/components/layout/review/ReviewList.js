@@ -3,7 +3,7 @@ import {
   Container,
   Title,
   ReviewButton,
-} from "./styled";
+} from "@/components/layout/review/styled";
 
 function ReviewList({ reviews, toggle }) {
   return (

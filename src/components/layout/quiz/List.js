@@ -4,7 +4,7 @@ import {
   Category,
   Question,
   NextLink,
-} from "./styled";
+} from "@/components/layout/quiz/styled/ListStyled";
 
 function List({ quizList }) {
   return (

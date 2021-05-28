@@ -1,20 +1,12 @@
-import NextLink from "@/components/element/NextLink";
 import Badge from "@/components/element/Badge";
+import BADGES from "@/constants/badges";
+import NextLink from "@/components/element/NextLink";
 
-function BadgeCollection({ userId = "userId", badges = [] }) {
-  const BADGES = [
-    "etc",
-    "glass1",
-    "paper1",
-    "plastic1",
-    "plastic2",
-    "plastic3",
-  ];
-
+function BadgeCollection({ userId = "userId", myBadges = [] }) {
   return (
     <>
       {BADGES.map((BADGE, index) => {
-        const isinpocket = badges.includes(BADGE);
+        const isinpocket = myBadges.includes(BADGE);
 
         return (
           <NextLink key={userId + BADGE} href={`/_quiz/${BADGE}`}>

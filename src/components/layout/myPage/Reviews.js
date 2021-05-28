@@ -1,4 +1,4 @@
-import { ReviewList, Content, Score } from "./styled";
+import { ReviewList, Content, Score } from "@/components/layout/myPage/styled/ReviewsStyled";
 
 function Reviews({ reviews }) {
   return (

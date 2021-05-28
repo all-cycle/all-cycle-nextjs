@@ -6,7 +6,7 @@ import {
   H3,
   Text,
   CreatedBy,
-} from "./styled";
+} from "@/components/layout/quiz/styled/index";
 
 function Quiz({ allQuizList }) {
   return (

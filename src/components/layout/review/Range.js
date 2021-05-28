@@ -7,7 +7,7 @@ import {
   RangeSlider,
   SadIcon,
   RangeDataList,
-} from "./styledForm";
+} from "@/components/layout/review/styled/FormStyled";
 
 function Range({ name, value, onChange }) {
   return (

@@ -9,7 +9,7 @@ import {
   ImagePreview,
   ToggleButton,
   Message,
-} from "./styled";
+} from "@/components/layout/main/styled";
 
 function Photo({ idealResolution, handleClose }) {
   const {

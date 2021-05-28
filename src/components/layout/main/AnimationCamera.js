@@ -10,7 +10,7 @@ import {
   Bubble,
   ShakeCamera,
   Comment,
-} from "./styled";
+} from "@/components/layout/main/styled";
 
 function AnimationCamera({ onClick }) {
   return (

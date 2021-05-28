@@ -3,6 +3,7 @@ import { useSession } from "next-auth/client";
 import AccessDenied from "@/components/element/AccessDenied";
 import useReviewForm from "@/hooks/useReviewForm";
 import StyledButton from "@/components/element/StyledButton";
+import Range from "@/components/layout/review/Range";
 import {
   Form,
   FormGroup,
@@ -10,8 +11,7 @@ import {
   FigCaption,
   Message,
   ButtonWrapper,
-} from "./styledForm";
-import Range from "./Range";
+} from "@/components/layout/review/styled/FormStyled";
 
 function ReviewForm({ productId, toggle }) {
   const [session] = useSession();
