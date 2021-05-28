@@ -116,7 +116,7 @@ const shake = keyframes`
 const ShakeCamera = styled.div`
   position: absolute;
   top: 35%;
-  right: 10%;
+  right: 25%;
   display: inline-block;
   border-radius: 5vw;
   animation: ${shake} 2s ease-in-out infinite;
@@ -128,15 +128,15 @@ const ShakeCamera = styled.div`
 const Bubble = styled.div`
   position: absolute;
   top: 24%;
-  right: 20%;
+  right: 35%;
   font-size: 5em;
   transform: rotateY(180deg);
 `;
 
 const BubbleText = styled.span`
   position: absolute;
-  top: 27%;
-  right: 23%;
+  top: 28%;
+  right: 36%;
   color: ${(props) => props.theme.gray.color};
   font-size: 1.3em;
   font-weight: 600;

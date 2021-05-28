@@ -14,9 +14,8 @@ import {
 import LinkIcon from "@/components/layout/header/LinkIcon";
 
 const Container = styled.header`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
   max-width: 510px;
   height: 10vh;
