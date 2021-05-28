@@ -10,8 +10,6 @@ function useQuiz(answer, slug) {
 
   async function checkAnswer(e) {
     e.preventDefault();
-    // 정답이면 축하합니다, 뱃지 획득 모달 띄우기
-    // 유저데이터 업데이트
 
     if (!answer === selectedOption) {
       setResult(false);

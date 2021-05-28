@@ -1,29 +1,33 @@
-// import axios from "axios";
 import fetch from "node-fetch";
 
 async function callVisionAPI(uri) {
   const body = {
-    requests: [{
-      image: { content: uri.slice(23) },
-      features: [{
-        type: "DOCUMENT_TEXT_DETECTION",
-        maxResults: 10,
-      }],
-    }],
+    requests: [
+      {
+        image: { content: uri.slice(23) },
+        features: [{ type: "DOCUMENT_TEXT_DETECTION", maxResults: 10 }],
+      },
+    ],
   };
 
   try {
-    console.log("callVisionAPI 주소", process.env.GOOGLE_VISION_API_URL);
-    const res = await fetch(process.env.GOOGLE_VISION_API_URL, { method: "POST", body });
+    const response = await fetch(process.env.GOOGLE_VISION_API_URL, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
 
-    console.log("callVisionAPI 다녀옴", res.data);
-    if (!Object.entries(res.data.responses[0]).length) {
-      return [];
-    }
+    const parsed = await response.json();
 
-    return res.data.responses[0].fullTextAnnotation.text;
+    return parsed;
   } catch (err) {
-    return err.message;
+    return {
+      result: false,
+      error: err.message,
+    };
   }
 }
 

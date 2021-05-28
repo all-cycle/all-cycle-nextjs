@@ -57,6 +57,9 @@ export default async (req, res) => {
       const newRecycleScore = (Number(recycleScore) + product.recycleScoreAvg) / 2;
       const newPreferenceScore = (Number(preferenceScore) + product.preferenceScoreAvg) / 2;
 
+      const parsedRecycleScore = Number.parseFloat(newRecycleScore).toFixed(1);
+      const parsedPreferenceScore = Number.parseFloat(newPreferenceScore).toFixed(1);
+
       await Product.findOneAndUpdate(
         { _id: productId },
         {
@@ -65,8 +68,8 @@ export default async (req, res) => {
             reviews: review._id,
           },
           $set: {
-            recycleScoreAvg: newRecycleScore,
-            preferenceScoreAvg: newPreferenceScore,
+            recycleScoreAvg: parsedRecycleScore,
+            preferenceScoreAvg: parsedPreferenceScore,
           },
         },
         { new: true },
@@ -78,7 +81,7 @@ export default async (req, res) => {
       });
     }
     default:
-      res.setHeader("Allow", ["GET", "POST"]);
+      res.setHeader("Allow", ["POST"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 };

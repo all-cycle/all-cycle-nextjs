@@ -1,66 +1,13 @@
-import styled, { css } from "styled-components";
+import { useState } from "react";
 
-import useSearch from "@/hooks/useSearch";
 import fetchData from "@/utils/fetchData";
-import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
-import SearchBar from "@/components/common/SearchBar";
-import ProductItem from "@/components/layout/ProductItem";
-import NextLink from "@/components/common/NextLink";
-
-const Container = styled.div`
-  margin: 0;
-`;
-
-const color = css`
-  ${({ isclicked }) => {
-    if (isclicked) {
-      return css`
-        color: ${(props) => props.theme.white.color};
-        background-color: ${(props) => props.theme.primary.color};
-      `;
-    }
-
-    return css`
-      color: ${(props) => props.theme.primary.color};
-      background-color: ${(props) => props.theme.white.color};
-    `;
-  }}
-`;
-
-const ToggleButton = styled.button`
-  border: 1px solid ${(props) => props.theme.primary.color};
-  border-radius: 10px;
-  padding: 0.5em 2em;
-  font-size: 0.3em;
-  margin: 0.5em;
-
-  ${color}
-`;
-
-const StyledList = styled.article`
-  width: 100%;
-`;
-
-const FilterContainer = styled.div`
-  padding: 1em;
-`;
-
-const FilterName = styled.span`
-  font-size: 0.4em;
-  font-weight: 400;
-  color: ${(props) => props.theme.gray.color};
-`;
-
-const InitButton = styled(ToggleButton)`
-  color: ${(props) => props.theme.gray.color};
-  border: 1px solid ${(props) => props.theme.gray.color};
-
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    color: ${(props) => props.theme.white.color};
-    background-color: ${(props) => props.theme.gray.color};
-  }
-`;
+import useSearch from "@/hooks/useSearch";
+import FilterContainer from "@/components/layout/filter";
+import ProductItem from "@/components/layout/product";
+import SearchBar from "@/components/layout/product/SearchBar";
+import StyledList from "@/components/element/StyledList";
+import Message from "@/components/element/Message";
+import { Container, NextLink } from "@/components/layout/product/styled";
 
 function Search({ productList }) {
   const {
@@ -71,41 +18,26 @@ function Search({ productList }) {
     initializeFilter,
   } = useSearch(productList);
 
+  const [message, setMessage] = useState("");
+
+  function handleError(message) {
+    setMessage(message);
+  }
+
   return (
     <Container>
-      <SearchBar sortWithKeyword={sortWithKeyword} />
-      <FilterContainer>
-        <div>
-          <FilterName>CATEGORY</FilterName>
-          {PRODUCT_TYPES.map((productType) => (
-            <ToggleButton
-              key={JSON.stringify(productType)}
-              isclicked={sortFilter.productType === productType[0]}
-              onClick={() => sortWithTypes("productType", productType[0])}
-            >
-              {productType[1]}
-            </ToggleButton>
-          ))}
-        </div>
+      <SearchBar sortWithKeyword={sortWithKeyword} handleError={handleError} />
+      {message && <Message>{message}</Message>}
 
-        <span>
-          <FilterName>PACKAGE</FilterName>
-          {RECYCLE_TYPES.map((recycleType) => (
-            <ToggleButton
-              key={JSON.stringify(recycleType)}
-              isclicked={sortFilter.recycleType === recycleType[0]}
-              onClick={() => sortWithTypes("recycleType", recycleType[0])}
-            >
-              {recycleType[1]}
-            </ToggleButton>
-          ))}
-        </span>
-        <InitButton onClick={initializeFilter}>필터 초기화</InitButton>
-      </FilterContainer>
+      <FilterContainer
+        sortFilter={sortFilter}
+        sortWithTypes={sortWithTypes}
+        initializeFilter={initializeFilter}
+      />
 
       <StyledList>
         {sortedList?.map((product, index) => (
-          <NextLink key={product._id} href={`/product/${product._id}`}>
+          <NextLink key={product._id} href={`/product/${product._id}`} prefetch>
             <ProductItem product={product} isEven={index % 2} />
           </NextLink>
         ))}

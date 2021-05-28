@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
-function useReviewForm(productId) {
+import fetchData from "@/utils/fetchData";
+
+function useReviewForm(productId, toggle) {
+  const [message, setMessage] = useState("");
+  const router = useRouter();
+
   const [reviewData, setReviewData] = useState({
     productId,
     comment: "",
@@ -19,9 +25,25 @@ function useReviewForm(productId) {
     }));
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const response = await fetchData("POST", "/api/review", reviewData);
+
+    if (response.result) {
+      toggle();
+      router.replace(router.asPath);
+      return;
+    }
+
+    setMessage("다시 시도해주세요.");
+  }
+
   return {
+    message,
     reviewData,
     handleChange,
+    handleSubmit,
   };
 }
 

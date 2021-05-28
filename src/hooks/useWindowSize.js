@@ -1,29 +1,18 @@
 import { useEffect, useState } from "react";
 
 function useWindowSize() {
-  // TODO windowSize 다른데에서 안쓰면 지우기
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-  function handleResize() {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  }
-
-  const [isMobile, setIsMobile] = useState(false);
-  const [idealResolution, setIdealResolution] = useState({ width: 375, height: 812 });
+  const [idealResolution, setIdealResolution] = useState({ width: 529, height: 833 });
 
   function handleSetResolution() {
-    if (window.innerWidth <= 450) {
-      setIsMobile(true);
+    if (window.innerWidth <= 400) {
       setIdealResolution({ width: 375, height: 812 });
       return;
     }
+    if (window.innerWidth <= 550) {
+      setIdealResolution({ width: 529, height: 833 });
+      return;
+    }
 
-    setIsMobile(false);
     setIdealResolution({ width: 640, height: 480 });
   }
 
@@ -40,11 +29,7 @@ function useWindowSize() {
     return () => window.removeEventListener("resize", handleSetResolution);
   }, []);
 
-  return {
-    windowSize,
-    isMobile,
-    idealResolution,
-  };
+  return { idealResolution };
 }
 
 export default useWindowSize;

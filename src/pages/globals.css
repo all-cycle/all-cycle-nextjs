@@ -3,9 +3,7 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   width: 100vw;
-  max-width: 500px;
-  height: 100vh;
-  max-height: 780px;
+  max-width: 550px;
 }
 
 a {
@@ -27,4 +25,5 @@ ul, li {
 
 main {
   margin-top: 10vh;
+  height: 90vh;
 }

@@ -6,7 +6,7 @@ export default async (req, res) => {
     await connectDB();
 
     const topScoreProducts = await Product
-      .aggregate([{ $sample: { size: 10 } }])
+      .aggregate([{ $sample: { size: 16 } }])
       .sort("-recycleScoreAvg");
 
     return res.json({

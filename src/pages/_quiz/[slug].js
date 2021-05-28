@@ -1,27 +1,14 @@
-import styled from "styled-components";
-
-import AnswerModal from "@/components/layout/AnswerModal";
 import { getAllQuizList, getQuizBySlug } from "@/utils/quizAPI";
 import useQuiz from "@/hooks/useQuiz";
-import Toggle from "@/components/common/Toggle";
-import StyledModal from "@/components/common/StyledModal";
-import QuizOption from "@/components/layout/QuizOption";
-import Message from "@/components/common/Message";
-
-const Container = styled.section`
-  width: 100%;
-  margin-top: 1.5em;
-`;
-
-const Question = styled.div`
-  padding: 1em;
-  font-size: 1.1em;
-  border-radius: 2vw;
-  border: 1px solid ${(props) => props.theme.green.color};
-
-  margin: 1em;
-  margin-bottom: auto;
-`;
+import QuizOptionList from "@/components/layout/quiz/OptionList";
+import Message from "@/components/element/Message";
+import {
+  Container,
+  Question,
+  Category,
+  AnswerModal,
+  StyledModal,
+} from "@/components/layout/quiz/styled/[slug]Styled";
 
 function Quiz({ quiz }) {
   const {
@@ -48,10 +35,11 @@ function Quiz({ quiz }) {
 
   return (
     <Container>
-      <Toggle size={0.7}>{category}</Toggle>
+      <Category size={0.7}>{category}</Category>
       <Question>
         {question}
       </Question>
+
       {error && (
         <StyledModal>
           <Message>{error}</Message>
@@ -70,7 +58,7 @@ function Quiz({ quiz }) {
             />
           </StyledModal>
         ) : (
-          <QuizOption
+          <QuizOptionList
             slug={slug}
             examples={examples}
             images={images}
@@ -104,8 +92,6 @@ export async function getStaticProps({ params }) {
   };
 }
 
-// 이게 꼭 필요하다고 한다 dynamic SSG page일 경우에 한해서
-// https://nextjs.org/docs/messages/invalid-getstaticpaths-value
 export async function getStaticPaths() {
   const quizList = getAllQuizList(["slug"]);
 
