@@ -1,6 +1,5 @@
 import AWS from "aws-sdk";
 import { getSession } from "next-auth/client";
-import fetch from "node-fetch";
 
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
@@ -24,7 +23,6 @@ export default async (req, res) => {
     const session = await getSession({ req });
 
     if (!session) {
-      console.log("session이 없음");
       return res.json({
         result: false,
         error: "session이 없음",
