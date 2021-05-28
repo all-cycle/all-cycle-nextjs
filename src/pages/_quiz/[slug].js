@@ -35,10 +35,14 @@ function Quiz({ quiz }) {
 
   return (
     <Container>
-      <Category size={0.7}>{category}</Category>
-      <Question>
-        {question}
-      </Question>
+      {!showAnswer && (
+        <>
+          <Category size={0.7}>{category}</Category>
+          <Question>
+            {question}
+          </Question>
+        </>
+      )}
 
       {error && (
         <StyledModal>

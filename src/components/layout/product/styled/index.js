@@ -4,18 +4,27 @@ import NextLink from "@/components/element/NextLink";
 
 const Container = styled.div`
   margin: 0;
-  padding-top: 0.3em;
-  padding-bottom: 30px;
+  max-width: 510px;
+  padding: 0.3em;
+  padding-bottom: 2em;
+`;
+
+const ProductItemContainer = styled.div`
+  margin: 0;
+  max-width: 510px;
+  padding: 0.3em;
+  padding-bottom: 2em;
 `;
 
 const ProductContainer = styled.div`
-  padding: 3vw;
-
-  border-top: 3px solid ${(props) => props.theme.lightGray.color};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3vw;
 `;
 
 const Picture = styled.img`
-  width: 100%;
+  width: 300px;
   height: 100%;
   object-fit: contain;
   border-radius: 3vw;
@@ -24,10 +33,10 @@ const Picture = styled.img`
 `;
 
 const ProductInfo = styled.div`
-  width: 100%;
+  width: 500px;
   position: relative;
   padding: 3vw;
-
+  text-align: center;
   background-color: ${(props) => props.theme.lightGray.color};
 `;
 
@@ -57,17 +66,17 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 510px;
   height: 17vh;
   border-bottom: 2px solid ${(props) => props.theme.lightGray.color};
   font-family: ${(props) => props.theme.fontKor};
   padding: 0.7em;
-  padding-left: 10vw;
 
   ${colorTheme}
 `;
 
 const InfoContainer = styled.dl`
-  width: 70vw;
+  width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -85,8 +94,6 @@ const Name = styled.span`
   padding: 0;
   font-size: 0.8em;
   font-weight: 600;
-
-  ${colorTheme}
 `;
 
 const Form = styled.form`
@@ -109,10 +116,15 @@ const Input = styled.input`
   }
 `;
 
+const List = styled.ul`
+  width: 100%;
+`;
+
 export {
   Container,
   NextLink,
   ProductContainer,
+  ProductItemContainer,
   Picture,
   ProductInfo,
   ProductName,
@@ -122,4 +134,5 @@ export {
   Name,
   Form,
   Input,
+  List,
 };

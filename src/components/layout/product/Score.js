@@ -10,8 +10,8 @@ function Score({ name, score }) {
       </Title>
       <ScoreBar
         score={score}
-        width={30}
-        height={1.8}
+        width={20}
+        height={2}
       />
     </ScoreFigure>
   );

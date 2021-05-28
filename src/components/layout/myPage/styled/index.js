@@ -3,10 +3,10 @@ import styled from "styled-components";
 import StyledButton from "@/components/element/StyledButton";
 
 const Container = styled.div`
-  width: 100%;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 1em 1.5em;
   background-color: ${(props) => props.theme.font.color};
   font-family: ${(props) => props.theme.fontEng};
   overflow-y: visible;

@@ -3,7 +3,7 @@ import { useSession } from "next-auth/client";
 import NextLink from "@/components/element/NextLink";
 import Badge from "@/components/element/Badge";
 import {
-  Container,
+  ModalContainer,
   ButtonContainer,
   Toggle,
   Answer,
@@ -20,7 +20,7 @@ function AnswerModal({
   const [session] = useSession();
 
   return (
-    <Container>
+    <ModalContainer>
       <ButtonContainer>
         {result ? (
           <>
@@ -57,7 +57,7 @@ function AnswerModal({
         height={slug === "plastic1" || slug === "glass1" ? 100 : 110}
         isinpocket={result?.toString()}
       />
-    </Container>
+    </ModalContainer>
   );
 }
 

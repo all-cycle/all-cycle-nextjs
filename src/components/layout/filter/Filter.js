@@ -4,10 +4,15 @@ import {
   ToggleButton,
 } from "@/components/layout/filter/styled";
 
-function Filter({ TYPES, sortFilter, sortWithTypes }) {
+function Filter({
+  name,
+  TYPES,
+  sortFilter,
+  sortWithTypes,
+}) {
   return (
     <Container>
-      <Name>CATEGORY</Name>
+      <Name>{name}</Name>
 
       {TYPES.map((type) => (
         <ToggleButton

@@ -4,6 +4,7 @@ import ImageContainer from "@/components/element/StyledImageContainer";
 import NextLink from "@/components/element/NextLink";
 
 const Container = styled.div`
+  width: 500px;
   font-family: ${(props) => props.theme.fontKor};
 `;
 
@@ -60,19 +61,18 @@ const Image = styled.img`
 
 const LetterTitle = styled.div`
   flex-basis: 50%;
-  padding: 1em 0.2EM;
   overflow: hidden;
 `;
 
 const Strong = styled.div`
-  font-size: 2vw;
   padding: 1em;
+  font-size: 0.7em;
+  color: ${(props) => props.theme.lightFont.color};
 `;
 
 const Plain = styled.div`
   border-radius: 2vw;
   padding: 0.5em;
-  font-size: 3vw;
   word-spacing: 1px;
   line-height: 2em;
 `;

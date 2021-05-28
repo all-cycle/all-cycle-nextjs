@@ -2,22 +2,23 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   margin: 1vh;
-  width: 50vw;
+  font-size: 0.8em;
 `;
 
 const Label = styled.label`
-  padding: 0.4em;
+  padding: 0.4em 1em;
   font-size: 1em;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.fontEng};
 `;
 
 const Select = styled.select`
-  padding: 0.3em;
+  width: 30vw;
+  max-width: 150px;
+  padding: 0.3em 1em;
   border-radius: 2vw;
-  font-size: 2vw;
+  font-size: 0.8em;
   color: ${(props) => props.theme.white.color};
   background-color: ${(props) => props.theme.gray.color};
   font-family: ${(props) => props.theme.fontKor};
@@ -40,7 +41,7 @@ function ManagerOptions({
 }) {
   return (
     <Container>
-      <Label htmlFor={name}>{name}</Label>
+      <Label htmlFor={name}>{name === "productType" ? "제품타입" : "용기타입"}</Label>
       <Select
         name={name}
         defaultValue={defaultType}

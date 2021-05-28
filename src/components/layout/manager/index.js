@@ -1,6 +1,5 @@
 import { PRODUCT_TYPES, RECYCLE_TYPES } from "@/constants/productTypes";
 import {
-  Ul,
   Li,
   Wrapper,
   ImageContainer,
@@ -12,7 +11,7 @@ import {
 
 function ProductList({ list = [], handleChange }) {
   return (
-    <Ul>
+    <ul>
       {list.length > 0
         && (list.map((product) => {
           const {
@@ -56,7 +55,7 @@ function ProductList({ list = [], handleChange }) {
           );
         })
         )}
-    </Ul>
+    </ul>
   );
 }
 
