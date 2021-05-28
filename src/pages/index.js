@@ -8,7 +8,8 @@ import MainCamera from "@/components/layout/main";
 import Slider from "@/components/layout/main/Slider";
 
 const Container = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
+  width: 550px;
   height: 90vh;
   margin: 0;
   background-color: ${(props) => props.theme.primary.color};

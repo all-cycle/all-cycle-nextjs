@@ -1,9 +1,8 @@
 body {
+  width: 100vw;
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  width: 100vw;
-  max-width: 550px;
 }
 
 a {
@@ -24,6 +23,8 @@ ul, li {
 }
 
 main {
+  display: flex;
+  justify-content: center;
   margin-top: 10vh;
   height: 90vh;
 }
