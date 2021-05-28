@@ -29,6 +29,7 @@ const Question = styled(ToggleButton)`
   margin-top: 0.5em;
   padding: 0.5em 1em;
   border: none;
+  border-radius: 0.8em;
   text-align: start;
   color: ${(props) => props.theme.lightFont.color};
   font-size: 0.8em;

@@ -3,12 +3,13 @@ import styled from "styled-components";
 import ToggleButton from "@/components/element/ToggleButton";
 
 const Container = styled.li`
-  margin-left: 2em;
+  width: 100%;
+  margin: 0 2em;
 `;
 
 const Name = styled.span`
   display: inline-block;
-  width: 15vw;
+  width: 10vw;
   font-size: 0.4em;
   font-weight: 400;
   color: ${(props) => props.theme.gray.color};

@@ -1,5 +1,7 @@
 body {
   width: 100vw;
+  display: flex;
+  justify-content: center;
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -25,6 +27,6 @@ ul, li {
 main {
   display: flex;
   justify-content: center;
+  max-width: 550px;
   margin-top: 10vh;
-  height: 90vh;
 }

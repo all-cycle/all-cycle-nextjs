@@ -5,7 +5,7 @@ import ToggleButton from "@/components/element/ToggleButton";
 import StyledModal from "@/components/element/StyledModal";
 
 const Container = styled.section`
-  width: 100%;
+  width: 500px;
   margin-top: 1.5em;
   padding: 1em;
 `;

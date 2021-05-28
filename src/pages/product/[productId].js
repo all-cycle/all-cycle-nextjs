@@ -6,7 +6,7 @@ import ReviewForm from "@/components/layout/review/ReviewForm";
 import ReviewList from "@/components/layout/review/ReviewList";
 import ScoreContainer from "@/components/layout/product/ScoreContainer";
 import {
-  Container,
+  ProductItemContainer,
   ProductContainer,
   Picture,
   ProductInfo,
@@ -31,7 +31,7 @@ function ProductItem({ product }) {
   }
 
   return (
-    <Container>
+    <ProductItemContainer>
       <ProductContainer>
         <Picture src={imgUrl} alt={imgAlt} width={100} height={100} />
         <ProductInfo>
@@ -50,7 +50,7 @@ function ProductItem({ product }) {
       ) : (
         <ReviewForm productId={_id} toggle={toggle} />
       )}
-    </Container>
+    </ProductItemContainer>
   );
 }
 

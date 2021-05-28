@@ -4,6 +4,7 @@ import ManagerOptions from "@/components/layout/ManagerOptions";
 import ButtonContainer from "@/components/element/ButtonContainer";
 
 const Container = styled.div`
+  width: 500px;
   padding-top: 1em;
   font-family: ${(props) => props.theme.fontEng};
   background-color: ${(props) => props.theme.lightGray.color};
@@ -22,9 +23,6 @@ const Strong = styled.strong`
   all: unset;
   font-size: 1.2rem;
   font-weight: 600;
-`;
-
-const Ul = styled.ul`
 `;
 
 const Li = styled.li`
@@ -62,6 +60,7 @@ const Image = styled.img`
 `;
 
 const SelectContainer = styled.section`
+  all: unset;
   width: 100%;
   padding: 1em;
   font-size: 2vw;
@@ -91,7 +90,6 @@ export {
   Info,
   Strong,
   ButtonContainer,
-  Ul,
   Li,
   Wrapper,
   ImageContainer,

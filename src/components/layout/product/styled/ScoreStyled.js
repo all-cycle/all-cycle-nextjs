@@ -2,10 +2,9 @@ import styled, { css } from "styled-components";
 
 const ScoreFigure = styled.figure`
   all: unset;
-  width: 80%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0 1em;
 
   & + & {
@@ -13,7 +12,7 @@ const ScoreFigure = styled.figure`
   }
 `;
 
-const Title = styled.dd`
+const Title = styled.dt`
   all: unset;
   font-size: 0.5em;
 `;
@@ -22,7 +21,7 @@ const Number = styled.span`
   color: ${(props) => props.theme.gray.color};
 `;
 
-const Container = styled.div`
+const Container = styled.dd`
   width: ${(props) => `${props.width}vw`};
   height: ${(props) => `${props.height}vh`};
   border-radius: 3vw;

@@ -5,9 +5,8 @@ import useSearch from "@/hooks/useSearch";
 import FilterContainer from "@/components/layout/filter";
 import ProductItem from "@/components/layout/product";
 import SearchBar from "@/components/layout/product/SearchBar";
-import StyledList from "@/components/element/StyledList";
 import Message from "@/components/element/Message";
-import { Container, NextLink } from "@/components/layout/product/styled";
+import { Container, NextLink, List } from "@/components/layout/product/styled";
 
 function Search({ productList }) {
   const {
@@ -35,13 +34,13 @@ function Search({ productList }) {
         initializeFilter={initializeFilter}
       />
 
-      <StyledList>
+      <List>
         {sortedList?.map((product, index) => (
           <NextLink key={product._id} href={`/product/${product._id}`} prefetch>
             <ProductItem product={product} isEven={index % 2} />
           </NextLink>
         ))}
-      </StyledList>
+      </List>
     </Container>
   );
 }

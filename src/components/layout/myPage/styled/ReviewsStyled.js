@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-import StyledList from "@/components/element/StyledList";
-
-const ReviewList = styled(StyledList)`
+const ReviewList = styled.ul`
   max-height: 180px;
-  margin-bottom: 1.5em;
+  padding: 1em;
   overflow-y: scroll;
 `;
 

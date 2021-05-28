@@ -2,11 +2,9 @@ import styled from "styled-components";
 
 const ModalContainer = styled.div`
   position: fixed;
-  top: -10vh;
-  left: 0;
-  width: 100%;
+  top: 10vh;
+  width: 450px;
   height: 100%;
-  top: 10%;
   display: flex;
   flex-direction: column;
   padding: 1em 2em;
