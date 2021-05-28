@@ -4,7 +4,7 @@ import {
   OptionButton,
 } from "@/components/layout/quiz/styled/OptionsStyled";
 
-function Options({ list, handleSelectOption }) {
+function TextOptions({ list, handleSelectOption }) {
   return (
     <ul>
       {list.map((example, index) => (
@@ -23,4 +23,4 @@ function Options({ list, handleSelectOption }) {
   );
 }
 
-export default Options;
+export default TextOptions;

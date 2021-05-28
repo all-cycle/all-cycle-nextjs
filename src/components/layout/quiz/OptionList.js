@@ -2,7 +2,7 @@ import { Container, AnswerButton, ButtonContainer } from "@/components/layout/qu
 import TextOptions from "@/components/layout/quiz/TextOptions";
 import ImageOptions from "@/components/layout/quiz/ImageOptions";
 
-function QuizOption({
+function OptionList({
   examples,
   images,
   alts,
@@ -35,4 +35,4 @@ function QuizOption({
   );
 }
 
-export default QuizOption;
+export default OptionList;
