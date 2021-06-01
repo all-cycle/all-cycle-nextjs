@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import fetchData from "@/utils/fetchData";
 import HeadingLine from "@/components/element/HeadingLine";
+import fetchData from "@/utils/fetchData";
 import Loading from "@/components/layout/Loading";
 import MainCamera from "@/components/layout/main";
 import Slider from "@/components/layout/main/Slider";
 
 const Container = styled.div`
-  /* width: 100vw; */
   width: 550px;
   height: 90vh;
   margin: 0;
@@ -34,7 +33,7 @@ export default function Main({ topScoreList }) {
   return (
     <Container>
       <MainCamera />
-      <HeadingLine title="TOP LANK ITEMS" />
+      <HeadingLine />
       <Slider list={topScoreList} />
     </Container>
   );
