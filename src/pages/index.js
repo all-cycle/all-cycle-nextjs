@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import HeadingLine from "@/components/element/HeadingLine";
 import fetchData from "@/utils/fetchData";
+import HeadingLine from "@/components/element/HeadingLine";
 import Loading from "@/components/layout/Loading";
 import MainCamera from "@/components/layout/main";
 import Slider from "@/components/layout/main/Slider";
