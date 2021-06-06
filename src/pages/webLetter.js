@@ -10,7 +10,7 @@ import {
   Toggle,
 } from "@/components/layout/webLetter/styled";
 
-export default function WebLetter({ letters, message }) {
+export default function WebLetter({ letters }) {
   return (
     <Container>
       <ToggleContainer>
