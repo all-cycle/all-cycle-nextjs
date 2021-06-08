@@ -3,13 +3,13 @@
 const { defaults } = require("jest-config");
 
 module.exports = {
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   transform: {
     "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
@@ -30,6 +30,6 @@ module.exports = {
     "^@/_quiz(.*)$": "<rootDir>_quiz/$1",
     "^@/public(.*)$": "<rootDir>public/$1",
   },
-  snapshotSerializers: ["enzyme-to-json/serializer"],
+  // snapshotSerializers: ["enzyme-to-json/serializer"],
   moduleFileExtensions: [...defaults.moduleFileExtensions],
 };
