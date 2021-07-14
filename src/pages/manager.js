@@ -24,7 +24,6 @@ function Manager({ list = [] }) {
         <Strong data-testid="manager">관리자페이지 </Strong>
         {message && <span>{message}</span>}
         {count && <span data-testid="updatedCount">업데이트 된 제품 수: {count}</span>}
-        {/* <span data-testid="updatedCount">업데이트 된 제품 수: {count}</span> */}
         <ButtonContainer>
           <Button onClick={crawlData} name="crawlButton">
             NEW 크롤링
