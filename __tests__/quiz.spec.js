@@ -1,21 +1,14 @@
-import { render, unmountComponentAtNode } from "react-dom";
+import {
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+} from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { ThemeProvider } from "styled-components";
 
 import Quiz from "@/pages/quiz";
 import THEME from "@/constants/theme";
-
-let container = null;
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
 
 it("should render contact information", () => {
   const allQuizList = [
@@ -35,15 +28,10 @@ it("should render contact information", () => {
       <ThemeProvider theme={THEME}>
         <Quiz allQuizList={allQuizList} />
       </ThemeProvider>,
-      container,
     );
   });
 
   expect(
-    container.querySelector("[data-testid='title']").textContent,
+    screen.getByTestId("title").textContent,
   ).toEqual("재활용 상식퀴즈");
-
-  // expect(
-  //   container.querySelector("[data-testid='slug']").getAttribute("href"),
-  // ).toEqual("/_quiz/paper1");
 });

@@ -1,7 +1,7 @@
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+// import { configure } from "enzyme";
+// import Adapter from "enzyme-adapter-react-16";
 
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 
 // put this in your setupTests.js or some other file that runs before your tests
 // jest.mock("next/link", () => ({
@@ -10,3 +10,8 @@ configure({ adapter: new Adapter() });
 //     <children.type {...children.props} href={href} />
 //   ),
 // }));
+
+// import "@testing-library/react";
+// import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/extend-expect";
+// import "next";

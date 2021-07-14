@@ -1,7 +1,3 @@
-// import { defaults } from "jest-config";
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { defaults } = require("jest-config");
-
 module.exports = {
   testEnvironment: "jsdom",
   collectCoverageFrom: [
@@ -30,6 +26,4 @@ module.exports = {
     "^@/_quiz(.*)$": "<rootDir>_quiz/$1",
     "^@/public(.*)$": "<rootDir>public/$1",
   },
-  // snapshotSerializers: ["enzyme-to-json/serializer"],
-  moduleFileExtensions: [...defaults.moduleFileExtensions],
 };
